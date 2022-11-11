@@ -47,6 +47,7 @@ jobs:
       token: ${{ secrets.GITHUB_TOKEN }}
       # VAULT: ${{ secrets.VAULT }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      TEST_SECRET: ${{ secrets.TEST_SECRET }}
 
   # deploy-successful:
   #   runs-on: ubuntu-latest
