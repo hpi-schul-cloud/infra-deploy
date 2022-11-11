@@ -1,0 +1,7 @@
+nextcloud_secret_name: nextcloud
+nextcloud_postgresql_pvc_name: nextcloud-postgresql-pvc
+nextcloud_postgresql_pvc_size: 15Gi
+nextcloud_pvc_size: 10Gi
+nextcloud_data_pvc_size: 10Gi
+# 
+NAMESPACE: "github-actions-test"

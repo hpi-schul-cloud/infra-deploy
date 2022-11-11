@@ -1,0 +1,42 @@
+name: Deploy Edusharing Crawler
+on: push
+  # paths:
+  #   - 'edusharing/**'
+
+jobs:
+  # edusharing_approval:
+  #   # stages have to be adjusted
+  #   environment: dev_edusharing_crawler_approve
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Approval from authorized dev_edusharing_crawler_approve Group has been given!"
+
+  branch_name:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    steps:
+      - name: Extract branch name
+        shell: bash
+        # this is outdated may want to upgrade
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+
+  edusharing_deployment:
+    needs:
+      - branch_name
+    uses: ./.github/workflows/deploy.yml
+    with:
+      # branch: ${{ needs.branch_name.outputs.branch }}
+      # BRANCH: ${{ needs.branch_name.outputs.branch }}
+      BRANCH: ${{ needs.branch_name.outputs.branch }}
+      NAMESPACE: "github-actions-test"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      # VAULT: ${{ secrets.VAULT }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+  # deploy-successful:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Deployment was successful"

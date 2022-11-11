@@ -1,0 +1,33 @@
+---
+- name: Crawler Deploy
+  hosts:
+    - edusharing
+  connection: local
+  roles:
+    - kubeconfig
+  tasks:
+  - name: Create a namespace for branch
+    kubernetes.core.k8s:
+      name: "{{ NAMESPACE }}"
+      kind: Namespace
+      state: present
+      kubeconfig: ~/.kube/config
+      api_version: v1
+
+
+# - name: App Deploy
+#   hosts:
+#     -nextcloud
+#   connection: local
+#   roles:
+#     - kubeconfig
+
+#   tasks:
+  # - name: Create a Secret
+  #   kubernetes.core.k8s:
+  #     kubeconfig: ~/.kube/config
+  #     namespace: "{{ NAMESPACE }}"
+  #     template: namespace.yml.j2
+
+
+    # create kubernetes secret

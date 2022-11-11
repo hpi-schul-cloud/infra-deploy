@@ -1,0 +1,11 @@
+
+[edusharing]
+infra-dev-edusharing-1
+
+[nextcloud]
+sc-dev-nextcloud
+
+
+
+[test]
+sc-dev-nextcloud
