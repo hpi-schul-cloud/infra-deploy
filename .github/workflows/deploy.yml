@@ -15,7 +15,7 @@ on:
         required: true
       # VAULT:
       #   required: true
-      TEST_SECRET: 
+      TEST_SECRET:
         required: true
       KUBECONFIG:
         required: true
@@ -54,7 +54,7 @@ jobs:
         working-directory: ${{github.workspace }}/ansible/group_vars
         run: |
           echo "NAMESPACE: ${{ inputs.branch }}" > edusharing.yml
-          echo "Test-secret: ${{ secrets.TEST_SECRET }}" > edusharing.yml
+          # echo "Test-secret: ${{ secrets.TEST_SECRET }}" > edusharing.yml | sed 's/./& /g'
           cat edusharing.yml
 
       # Failed to load kubeconfig due to Invalid kube-config. /home/runner/.kube/config file is empty
@@ -62,6 +62,7 @@ jobs:
         working-directory: ${{github.workspace }}/ansible
         run: ansible-playbook ./playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -vvv
 
+      # make it so that this steps always runs
       - name: Delete config files
         working-directory: ${{github.workspace }}/ansible/roles/sys/files
         run: rm -rf /config
