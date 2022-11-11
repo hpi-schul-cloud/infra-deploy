@@ -3,6 +3,18 @@ on: push
   # paths:
   #   - 'edusharing/**'
 
+
+  # workflow_dispatch:
+  #   inputs:
+  #     config_tag_name:
+  #       description: 'Tag from the dof_app_deploy'
+  #       required: true
+  #     instance_group:
+  #       description: "All Instances, Instance group or Host"
+  #       required: true
+  #       default: all
+
+
 jobs:
   # edusharing_approval:
   #   # stages have to be adjusted

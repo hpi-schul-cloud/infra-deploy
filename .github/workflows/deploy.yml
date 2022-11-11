@@ -21,8 +21,6 @@ on:
 jobs:
   run_ansible_playbook:
     environment: infra-dev-edusharing-1
-    env:
-      test-secret: ${{ secrets.TEST_SECRET }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -54,9 +52,10 @@ jobs:
         working-directory: ${{github.workspace }}/ansible/group_vars
         run: |
           echo "NAMESPACE: ${{ inputs.branch }}" > edusharing.yml
-          echo "Test-secret: ${{ env.test-secret }}" > edusharing.yml
-          cat develop.yml
+          echo "Test-secret: ${{ secrets.test-secret }}" > edusharing.yml
+          cat edusharing.yml
 
+      # Failed to load kubeconfig due to Invalid kube-config. /home/runner/.kube/config file is empty
       - name: Execute Ansible Playbook
         working-directory: ${{github.workspace }}/ansible
         run: ansible-playbook ./playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -vvv
