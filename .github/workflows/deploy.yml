@@ -66,11 +66,10 @@ jobs:
 
 
       - name: Set further ENVs in config.yml file
-        working-directory: ${{github.workspace }}/ansible/group_vars
+        working-directory: ${{ github.workspace }}/ansible/group_vars
         # cat only for development
         run: |
-          # namespace only as long as sc-dev-cluster not existent 
-          echo "namespace:  ${{ inputs.BRANCH }}" >> config.yml
+          echo "namespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "edusharing_crawler_helm_chart_version: ${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}" >> config.yml
           echo "edusharing_crawler_image_name: ${{ inputs.EDUSHARING_CRAWLER_IMAGE_NAME }}" >> config.yml
           echo "edusharing_crawler_image_tag: ${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}" >> config.yml
@@ -82,7 +81,7 @@ jobs:
 
       - name: Delete config files
         if: always()
-        working-directory: ${{github.workspace }}/ansible/roles/kubeconfig
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
         run: rm -rf /config
 
 
