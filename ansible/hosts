@@ -1,6 +1,3 @@
-[config]
-edusharing
-
 [edusharing]
 infra-dev-edusharing-1
 sc-staging-edusharing

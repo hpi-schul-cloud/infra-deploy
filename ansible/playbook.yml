@@ -16,13 +16,13 @@
       kubeconfig: ~/.kube/config
       api_version: v1
 
-  # im Refinement haben wir besprochen existing secrets zu benutzen 
+  # im Refinement haben wir besprochen existing secrets zu benutzen
   # da es OS sein soll, keine CRD
 
   - name: Add Helm Chart Repo
-      kubernetes.core.helm_repository:
-        name: dbildungscloud
-        repo_url: "https://hpi-schul-cloud.github.io/helm-charts/"
+    kubernetes.core.helm_repository:
+      name: dbildungscloud
+      repo_url: "https://hpi-schul-cloud.github.io/helm-charts/"
 
   - name: Install Helm Chart
     kubernetes.core.helm:
