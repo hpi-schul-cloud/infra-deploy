@@ -45,8 +45,9 @@ jobs:
     with:
       HOST: "infra-dev-edusharing-1"
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "0.1.0"
-      EDUSHARING_CRAWLER_IMAGE_NAME: "ghademo-0.1.0"
-      EDUSHARING_CRAWLER_IMAGE_TAG: ""
+      EDUSHARING_CRAWLER_IMAGE_NAME: "ghademo"
+      # not used yeet
+      EDUSHARING_CRAWLER_IMAGE_TAG: "0.1.0"
       BRANCH: ${{ needs.branch_name.outputs.branch }}
       # for development process use this branch name, since name of branch is too long, after that use branch name trimmed?
       # https://github.com/marketplace/actions/truncate-string
