@@ -30,7 +30,7 @@ on:
 
 jobs:
   run_ansible_playbook_edusharing:
-    environment: ${{ inputs.BRANCH }}
+    environment: ${{ inputs.HOST }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -82,7 +82,7 @@ jobs:
 
       - name: Delete config files
         if: always()
-        working-directory: ${{github.workspace }}/ansible/roles/kubeconfig/files
+        working-directory: ${{github.workspace }}/ansible/roles/kubeconfig
         run: rm -rf /config
 
 

@@ -57,6 +57,8 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
   deployment_successful:
+    needs:
+      - deploy_edusharing_crawlers
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deployment was successful"
