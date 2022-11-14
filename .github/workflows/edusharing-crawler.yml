@@ -40,7 +40,7 @@ jobs:
   deploy_edusharing_crawlers:
     #if: inputs.execute_group == inputs.host_name || inputs.execute_group == inputs.host_group || inputs.execute_group == inputs.host_stage || inputs.execute_group == 'all'
     needs:
-      - branch_name
+      - get_branch_name
     uses: ./.github/workflows/deploy.yml
     with:
       HOST: "infra-dev-edusharing-1"
