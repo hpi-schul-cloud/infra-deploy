@@ -1,9 +1,3 @@
-- name: bash 1
-  shell: pwd
-
-- name: bash 2
-  shell: ls -la
-
 - name: create dir ".kube"
   file:
     path: "{{ ansible_env.HOME }}/.kube/"

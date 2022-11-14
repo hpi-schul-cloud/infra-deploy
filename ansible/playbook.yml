@@ -1,33 +1,37 @@
 ---
-- name: Crawler Deploy
+
+- name: Edusharing Crawler Deploy
   hosts:
     - edusharing
   connection: local
   roles:
     - kubeconfig
   tasks:
-  - name: Create a namespace for branch
+
+  - name: Create a namespace based on branch
     kubernetes.core.k8s:
-      name: "{{ NAMESPACE }}"
+      name: "{{ namespace }}"
       kind: Namespace
       state: present
       kubeconfig: ~/.kube/config
       api_version: v1
 
+  # im Refinement haben wir besprochen existing secrets zu benutzen 
+  # da es OS sein soll, keine CRD
 
-# - name: App Deploy
-#   hosts:
-#     -nextcloud
-#   connection: local
-#   roles:
-#     - kubeconfig
+  - name: Add Helm Chart Repo
+      kubernetes.core.helm_repository:
+        name: dbildungscloud
+        repo_url: "https://hpi-schul-cloud.github.io/helm-charts/"
 
-#   tasks:
-  # - name: Create a Secret
-  #   kubernetes.core.k8s:
-  #     kubeconfig: ~/.kube/config
-  #     namespace: "{{ NAMESPACE }}"
-  #     template: namespace.yml.j2
-
-
-    # create kubernetes secret
+  - name: Install Helm Chart
+    kubernetes.core.helm:
+      name: "edusharing-crawler"
+      chart_ref: dbildungscloud/{{ edusharing_crawler_image_name }}
+      update_repo_cache: yes
+      wait: yes
+      chart_version: "{{ edusharing_crawler_helm_chart_version }}"
+      kubeconfig: ~/.kube/config
+      release_namespace: "{{ namespace }}"
+      # values:
+      #   "{{ edusharing_crawler_values }}"

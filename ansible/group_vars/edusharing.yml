@@ -1,0 +1,10 @@
+# namespace:
+# vault:
+# edusharing_crawler_helm_chart_version:
+# edusharing_crawler_image_name:
+# edusharing_crawler_image_tag:
+edusharing_crawler_values:
+  image:
+    name: "some-image-name"
+    tag: "{{ edusharing_crawler_image_tag }}"
+
