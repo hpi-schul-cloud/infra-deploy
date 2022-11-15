@@ -33,9 +33,10 @@ jobs:
         shell: bash
         run: |
           echo "Set namespace!"
-          if {{ inputs.CLUSTER }} == "sc-staging-edusharing"
+          if ${{ inputs.CLUSTER }} == "sc-staging-edusharing"
           then
             echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
+            echo "namespace set to dev-edusahring"
           else
             echo "namespace=edusharing" >> $GITHUB_OUTPUT
           fi
@@ -49,11 +50,11 @@ jobs:
     # needs:
     #   - edusharing_approval
     with:
-      CLUSTER: "{{ inputs.CLUSTER }}"
+      CLUSTER: "${{ inputs.CLUSTER }}"
       NAMESPACE: "github-actions-test" # ${{ needs.set_namespace.outputs.branch }}
-      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "{{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
+      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       # not used yet - set in Ansible vars
-      EDUSHARING_CRAWLER_IMAGE_TAG: "{{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
+      EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
