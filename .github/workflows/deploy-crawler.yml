@@ -13,7 +13,7 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         required: false
         type: string
-      HOST:
+      CLUSTER:
         required: true
         type: string
     secrets:
@@ -24,7 +24,7 @@ on:
 
 jobs:
   run_ansible_playbook_edusharing:
-    environment: ${{ inputs.HOST }}
+    environment: ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -35,7 +35,7 @@ jobs:
         run: |
           python3 -m pip install kubernetes
 
-      - name: install requirements ansible-galaxy
+      - name: Install requirements ansible-galaxy
         run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file in config folder
@@ -54,7 +54,7 @@ jobs:
 
       - name: Execute Ansible Edusharing Crawler Playbook
         working-directory: ${{ github.workspace }}/ansible
-        run: ansible-playbook ./edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
+        run: ansible-playbook ./edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 
       - name: Delete config files
         if: always()

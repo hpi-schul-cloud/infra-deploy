@@ -1,39 +1,58 @@
 name: Deploy Edusharing Crawler
-on: push
+on: 
+  # decide if default valuee should be set or not
+  workflow_dispatch:
+    inputs:
+      CLUSTER:
+        description: "Select Edusharing cluster"
+        required: true
+      EDUSHARING_CRAWLER_HELM_CHART_VERSION:
+        description: "Select Edusharing crawler Helm Chart version"
+        required: true
+        default: "0.1.0"
+      EDUSHARING_CRAWLER_IMAGE_TAG:
+        description: "Select Edusharing crawler Image Tag"
+        required: true
+        default: "0.1.0"
   # paths:
   #   - 'edusharing/**'
 
-  workflow_dispatch:
-    inputs:
-      EDUSHARING_CRAWLER_HELM_CHART_VERSION:
-        description: "Edusharing crawler Helm Chart version"
-        required: true
-      EDUSHARING_CRAWLER_IMAGE_TAG:
-        description: "Edusharing crawler Image Tag"
-        required: true
-      HOST:
-        description: "Select Edusharing cluster"
-        required: true
-
 jobs:
-  edusharing_approval:
-    environment: edusharing_crawler_approve
+  # edusharing_approval:
+  #   environment: edusharing_crawler_approve
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Approval from authorized edusharing_crawler_approve Group has been given!"
+
+  set_namespace:
+      # needs:
+      # - edusharing_approval
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Approval from authorized edusharing_crawler_approve Group has been given!"
+      - run: echo "Set namespace!"
+        shell: bash
+        run: |
+          if {{ inputs.CLUSTER }} == "sc-staging-edusharing"
+          then
+            echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
+          else
+            echo "namespace=edusharing" >> $GITHUB_OUTPUT
+          fi
+        # id: set_namespace
 
-  # deployment to all cluster except sc-dev-edusharing
+  # should we limit this to clusters, or should it also be able to rollot to sc-dev?
+  # deployment to all cluster possible except sc-dev-edusharing
   deploy_edusharing_crawlers:
-    if: "{{ inputs.HOST }}" != "sc-dev-edusharing"
+    if: "{{ inputs.CLUSTER }}" != "sc-dev-edusharing"
     uses: ./.github/workflows/deploy-crawler.yml
-    needs:
-      - deploy_edusharing_crawlers
+    # needs:
+    #   - edusharing_approval
     with:
-      HOST: "{{ inputs.HOST }}"
-      NAMESPACE: "github-actions-test" # edusharing
-      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "0.1.0" # "{{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
+      CLUSTER: "{{ inputs.CLUSTER }}"
+      NAMESPACE: "github-actions-test" #${{ needs.set_namespace.outputs.branch }}
+      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "{{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       # not used yet - set in Ansible vars
-      EDUSHARING_CRAWLER_IMAGE_TAG: "0.1.0"  # "{{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
+      EDUSHARING_CRAWLER_IMAGE_TAG: "{{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
