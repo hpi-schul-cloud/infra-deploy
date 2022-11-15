@@ -1,5 +1,4 @@
 name: Deploy Edusharing Crawler
-# decide if default valuee should be set or not
 on:
   workflow_dispatch:
     inputs:
@@ -14,8 +13,6 @@ on:
         description: "Select Edusharing crawler Image Tag"
         required: true
         default: "0.1.0"
-  # paths:
-  #   - 'edusharing/**'
 
 jobs:
   # edusharing_approval:
@@ -42,10 +39,7 @@ jobs:
           fi
         id: set_namespace
 
-  # should we limit this to clusters, or should it also be able to rollot to sc-dev?
-  # deployment to all cluster possible except sc-dev-edusharing
   deploy_edusharing_crawlers:
-    # if: "{{ inputs.CLUSTER }}" != "sc-dev-edusharing"
     uses: ./.github/workflows/deploy-crawler.yml
     # needs:
     #   - edusharing_approval
@@ -53,7 +47,6 @@ jobs:
       CLUSTER: "${{ inputs.CLUSTER }}"
       NAMESPACE: "github-actions-test" # ${{ needs.set_namespace.outputs.branch }}
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
-      # not used yet - set in Ansible vars
       EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}

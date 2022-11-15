@@ -1,14 +1,12 @@
-# namespace:
-# vault:
+# values set via Github Action
 # edusharing_crawler_helm_chart_version:
-# edusharing_crawler_image_name:
-# edusharing_crawler_image_tag:
 # edusharing_crawler_name: "crawler_a"
 edusharing_crawler_image_name: "edusharing-crawler"
+
 edusharing_crawler_values:
   image:
     name: hpi-schul-cloud/"{{ edusharing_crawler_image_name }}"
     # value set via Github Action
     tag: "{{ edusharing_crawler_image_tag }}"
-  enabled_crawler: "{{ edusharing_crawler_name }}"
+  # enabled_crawler: "{{ edusharing_crawler_name }}"
 

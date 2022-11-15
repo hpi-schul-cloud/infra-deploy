@@ -4,6 +4,9 @@ name: Update Edusharing Crawler
 on:
   workflow_call:
     inputs:
+      CLUSTER:
+        required: true
+        type: string
       NAMESPACE:
         required: true
         type: string
@@ -12,9 +15,6 @@ on:
         type: string
       EDUSHARING_CRAWLER_IMAGE_TAG:
         required: false
-        type: string
-      CLUSTER:
-        required: true
         type: string
     secrets:
       token:
