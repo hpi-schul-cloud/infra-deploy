@@ -1,24 +1,11 @@
 ---
-
-- name: Edusharing Crawler Deploy
+- name: Deploy to Edusharing Clusters
   hosts:
     - edusharing
   connection: local
   roles:
     - kubeconfig
   tasks:
-
-  - name: Create a namespace based on branch
-    kubernetes.core.k8s:
-      name: "{{ namespace }}"
-      kind: Namespace
-      state: present
-      kubeconfig: ~/.kube/config
-      api_version: v1
-
-  # im Refinement haben wir besprochen existing secrets zu benutzen
-  # da es OS sein soll, keine CRD
-
   - name: Add Helm Chart Repo
     kubernetes.core.helm_repository:
       name: dbildungscloud
@@ -27,7 +14,7 @@
   - name: Install Helm Chart
     kubernetes.core.helm:
       name: "edusharing-crawler"
-      chart_ref: dbildungscloud/{{ edusharing_crawler_image_name }}
+      chart_ref: "dbildungscloud/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
       chart_version: "{{ edusharing_crawler_helm_chart_version }}"

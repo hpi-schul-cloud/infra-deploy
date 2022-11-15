@@ -1,26 +1,20 @@
 ---
-name: Deploy Action
+name: Update Edusharing Crawler
 
 on:
   workflow_call:
     inputs:
-      BRANCH:
-        required: true
-        type: string
       NAMESPACE:
-        required: true
-        type: string
-      HOST:
         required: true
         type: string
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
         required: false
         type: string
-      EDUSHARING_CRAWLER_IMAGE_NAME:
-        required: false
-        type: string
       EDUSHARING_CRAWLER_IMAGE_TAG:
         required: false
+        type: string
+      HOST:
+        required: true
         type: string
     secrets:
       token:
@@ -50,34 +44,17 @@ jobs:
           mkdir files
           echo "${{ secrets.KUBECONFIG }}" > files/config
 
-      # # namespace on sc-dev-edusahring cluster should equal branch name
-      # - name: Set namespace env if dev deployment
-      #   if: ${{ inputs.HOST }} == "sc-dev-edusharing"
-      #   working-directory: ${{github.workspace }}/ansible/group_vars
-      #   run: |
-      #     echo "namespace: ${{ inputs.BRANCH }}" >> config.yml
-
-      # # namespace of other clusters should eqaul "edusharing"
-      # - name: Set namespace env if dev deployment
-      #   if: ${{ inputs.HOST }} != "sc-dev-edusharing"
-      #   working-directory: ${{github.workspace }}/ansible/group_vars
-      #   run: |
-      #     echo "namespace: edusharing" >> config.yml
-
-
-      - name: Set further ENVs in config.yml file
+      - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/ansible/group_vars
-        # cat only for development
         run: |
           echo "namespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "edusharing_crawler_helm_chart_version: ${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}" >> config.yml
-          echo "edusharing_crawler_image_name: ${{ inputs.EDUSHARING_CRAWLER_IMAGE_NAME }}" >> config.yml
           echo "edusharing_crawler_image_tag: ${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}" >> config.yml
           cat config.yml
 
-      - name: Execute Ansible Playbook
+      - name: Execute Ansible Edusharing Crawler Playbook
         working-directory: ${{ github.workspace }}/ansible
-        run: ansible-playbook ./playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
+        run: ansible-playbook ./edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.HOST }}
 
       - name: Delete config files
         if: always()
