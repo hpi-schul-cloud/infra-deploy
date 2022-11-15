@@ -47,7 +47,7 @@ jobs:
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/ansible/group_vars
         run: |
-          echo -e "\n namespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "edusharing_crawler_helm_chart_version: ${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}" >> config.yml
           echo "edusharing_crawler_image_tag: ${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}" >> config.yml
           cat config.yml
