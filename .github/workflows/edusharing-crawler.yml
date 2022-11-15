@@ -1,6 +1,6 @@
 name: Deploy Edusharing Crawler
-on: 
-  # decide if default valuee should be set or not
+# decide if default valuee should be set or not
+on:
   workflow_dispatch:
     inputs:
       CLUSTER:
