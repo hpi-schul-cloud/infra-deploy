@@ -6,6 +6,9 @@
 edusharing_crawler_repository: ghcr.io/hpi-schul-cloud/oeh-search-etl
 edusharing_crawler_image_name: "edusharing-crawler"
 
+edusharing_instance_secret_name: edusharing-instance
+sodix_secret_name: sodix-secret
+
 # sgrink down without values
 edusharing_crawler_list:
 hello_world_values:
@@ -18,23 +21,139 @@ hello_world_values:
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value:  '*-*-10:48'
-  service:
-    internalPort: 8080
-# - values:
-#     crawler:
-#       name: hello-world2
-#       enabled: true
-#       schedule: '*-*-10:50'
-#     image:
-#       tag: "{{ edusharing_crawler_image_tag }}"
-#     env:
-#     - name: test-env
-#       value: "my test env"
-# - values:
-#     crawler:
-#       name: hello_world2
-#       enabled: true
-#     schedule: '*-*-14:30'
-#     image:
-#       tag: "{{ edusharing_crawler_image_tag }}"
+    value: "*-*-10:48"
+
+
+mediothek_pixiothek_spider_values:
+  crawler:
+    name: mediothek-pixiothek-spider
+    enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: mediothek_pixiothek_spider
+  - name: SCHEDULE
+    value: "*-Sa-0:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://localhost:3000"
+  - name: DRY_RUN
+    value: False
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: website
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: edu-sharing-password
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
+
+merlin_spider_values:
+  crawler:
+    name: merlin-spider
+    enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: merlin_spider
+  - name: SCHEDULE
+    value: "*-Sa-0:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: MODE
+    value: "edu-sharing"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://localhost:3000"
+  - name: DRY_RUN
+    value: False
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: website
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
+
+sodix_spider_values:
+  crawler:
+    name: sodix-spider
+    enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: sodix_spider
+  - name: SCHEDULE
+    value: "*-Sa-0:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: MODE
+    value: "edu-sharing"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://localhost:3000"
+  - name: DRY_RUN
+    value: False
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: website
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
+  - name: SODIX_USER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
+  - name: SODIX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
+
+
+# CRAWLER="sodix_permissions"
+# SCHEDULE="*-Sa-0:00"
+# LOG_LEVEL="INFO"
+# EDU_SHARING_BASE_URL="https://host/edu-sharing/"
+# EDU_SHARING_USERNAME=""
+# EDU_SHARING_PASSWORD=""
+
+
+# CRAWLER="h5p_upload"
+# SCHEDULE="*-Sa-0:00"
+# LOG_LEVEL="INFO"
+# EDU_SHARING_BASE_URL="https://host/edu-sharing/"
+# EDU_SHARING_USERNAME=""
+# EDU_SHARING_PASSWORD=""
+# S3_ACCESS_KEY=""
+# S3_SECRET_KEY=""
+# S3_ENDPOINT_URL="http://s3-eu-central-1.ionoscloud.com/"
+# S3_BUCKET_NAME="lernstore-content"
+# S3_DOWNLOAD_DIRECTORY="s3_download"

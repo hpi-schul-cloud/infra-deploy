@@ -11,6 +11,32 @@
       name: dbildungscloud
       repo_url: "https://hpi-schul-cloud.github.io/helm-charts/"
 
+  - name: Create edusharing-instance secret
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ edusharing_instance_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ edusharing_instance_secret_name }}"
+
+  - name: Create sodix secret
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ sodix_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ sodix_secret_name }}"
+
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
       name: "crawler-{{ hello_world_values.crawler.name}}"
@@ -25,9 +51,9 @@
     # when: item.values.crawler.enabled
     # loop: "{{ edusharing_crawler_list }}"
 
-  - name: Install Crawler for Edusharing
+  - name: Install Crawler for Edusharing - Mediothek
     kubernetes.core.helm:
-      name: "crawler-{{ hello_world_values.crawler.name}}"
+      name: "crawler-{{ mediothek_pixiothek_spider_values.crawler.name}}"
       chart_ref: "dbildungscloud/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
@@ -35,6 +61,6 @@
       kubeconfig: "{{ kubeconfig }}"
       release_namespace: "{{ namespace }}"
       values:
-        "{{ hello_world_values }}"
+        "{{ mediothek_pixiothek_spider_values }}"
     # when: item.values.crawler.enabled
     # loop: "{{ edusharing_crawler_list }}"
