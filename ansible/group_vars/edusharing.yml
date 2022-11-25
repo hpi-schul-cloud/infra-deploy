@@ -8,12 +8,15 @@ edusharing_crawler_image_name: "edusharing-crawler"
 
 edusharing_instance_secret_name: edusharing-instance
 sodix_secret_name: sodix-secret
+# decide a name and create secret in infra-dev vault
+h5p_s3_bucket: s3_web_bucket
+
+# does this change or should be dynamic?
 pyppeter_ws_endpoint: "ws://localhost:3000"
 
-# sgrink down without values
+# shrink down without values
 edusharing_crawler_list:
-hello_world_values:
-  crawler:
+- crawler:
     name: hello-world
     enabled: true
   image:
@@ -137,23 +140,78 @@ sodix_spider_values:
         name: "{{ sodix_secret_name }}"
         key: password
 
+sodix_permissions_values:
+  crawler:
+    name: sodix-permissions
+    enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: sodix_permissions
+  - name: SCHEDULE
+    value: "*-Sa-0:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "{{ pyppeter_ws_endpoint }}"
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: url
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
 
-# CRAWLER="sodix_permissions"
-# SCHEDULE="*-Sa-0:00"
-# LOG_LEVEL="INFO"
-# EDU_SHARING_BASE_URL="https://host/edu-sharing/"
-# EDU_SHARING_USERNAME=""
-# EDU_SHARING_PASSWORD=""
-
-
-# CRAWLER="h5p_upload"
-# SCHEDULE="*-Sa-0:00"
-# LOG_LEVEL="INFO"
-# EDU_SHARING_BASE_URL="https://host/edu-sharing/"
-# EDU_SHARING_USERNAME=""
-# EDU_SHARING_PASSWORD=""
-# S3_ACCESS_KEY=""
-# S3_SECRET_KEY=""
-# S3_ENDPOINT_URL="http://s3-eu-central-1.ionoscloud.com/"
-# S3_BUCKET_NAME="lernstore-content"
-# S3_DOWNLOAD_DIRECTORY="s3_download"
+h5p_uploads_values:
+  crawler:
+    name: h5p-upload
+    enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: h5p_upload
+  - name: SCHEDULE
+    value: "*-Sa-0:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: url
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
+  - name: S3_ACCESS_KEY
+    valueFrom:
+      secretKeyRef:
+        name: "{{ h5p_s3_bucket }}"
+        key: s3_access_key
+  - name: S3_SECRET_KEY
+    valueFrom:
+      secretKeyRef:
+        name: "{{ h5p_s3_bucket }}"
+        key: s3_access_secret
+  - name: S3_ENDPOINT_URL
+    value: "http://s3-eu-central-1.ionoscloud.com/"
+  - name: "S3_BUCKET_NAME"
+    value: "lernstore-content"
+  - name: S3_DOWNLOAD_DIRECTORY
+    value: "s3_download"

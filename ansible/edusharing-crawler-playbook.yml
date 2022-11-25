@@ -37,9 +37,22 @@
         spec:
           itemPath: "vaults/{{ vault }}/items/{{ sodix_secret_name }}"
 
+  # - name: Create h5p s3 bucket secret
+  #   kubernetes.core.k8s:
+  #     state: present
+  #     kubeconfig: "{{ kubeconfig }}"
+  #     definition:
+  #       apiVersion: onepassword.com/v1
+  #       kind: OnePasswordItem
+  #       metadata:
+  #         name: "{{ h5p_s3_bucket }}"
+  #         namespace: "{{ namespace }}"
+  #       spec:
+  #         itemPath: "vaults/{{ vault }}/items/{{ h5p_s3_bucket }}"
+
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
-      name: "crawler-{{ hello_world_values.crawler.name}}"
+      name: "crawler-{{item.crawler.name}}"
       chart_ref: "dbildungscloud/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
@@ -47,20 +60,23 @@
       kubeconfig: "{{ kubeconfig }}"
       release_namespace: "{{ namespace }}"
       values:
-        "{{ hello_world_values }}"
+        "{{ item }}"
     # when: item.values.crawler.enabled
-    # loop: "{{ edusharing_crawler_list }}"
+    loop: "{{ edusharing_crawler_list }}"
 
-  - name: Install Crawler for Edusharing - Mediothek
-    kubernetes.core.helm:
-      name: "crawler-{{ mediothek_pixiothek_spider_values.crawler.name}}"
-      chart_ref: "dbildungscloud/edusharing-crawler"
-      update_repo_cache: yes
-      wait: yes
-      chart_version: "{{ edusharing_crawler_helm_chart_version }}"
-      kubeconfig: "{{ kubeconfig }}"
-      release_namespace: "{{ namespace }}"
-      values:
-        "{{ mediothek_pixiothek_spider_values }}"
-    # when: item.values.crawler.enabled
-    # loop: "{{ edusharing_crawler_list }}"
+
+
+
+  # - name: Install Crawler for Edusharing - Mediothek
+  #   kubernetes.core.helm:
+  #     name: "crawler-{{ mediothek_pixiothek_spider_values.crawler.name}}"
+  #     chart_ref: "dbildungscloud/edusharing-crawler"
+  #     update_repo_cache: yes
+  #     wait: yes
+  #     chart_version: "{{ edusharing_crawler_helm_chart_version }}"
+  #     kubeconfig: "{{ kubeconfig }}"
+  #     release_namespace: "{{ namespace }}"
+  #     values:
+  #       "{{ mediothek_pixiothek_spider_values }}"
+  #   # when: item.values.crawler.enabled
+  #   # loop: "{{ edusharing_crawler_list }}"

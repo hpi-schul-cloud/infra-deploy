@@ -13,7 +13,7 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.0.5"
+        default: "0.0.8"
 
 jobs:
   # edusharing_approval:
