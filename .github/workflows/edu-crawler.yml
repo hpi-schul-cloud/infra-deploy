@@ -5,14 +5,15 @@ on:
       CLUSTER:
         description: "Select Edusharing cluster"
         required: true
+        default: infra-dev-edusharing-1
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
         description: "Select Edusharing crawler Helm Chart version"
         required: true
-        default: "0.1.0"
+        default: "0.1.2"
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.1.0"
+        default: "0.0.8"
 
 jobs:
   # edusharing_approval:
@@ -29,6 +30,7 @@ jobs:
       - name: Set namespace
         shell: bash
         run: |
+          # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
           echo "Set namespace!"
           if ${{ inputs.CLUSTER }} == "sc-staging-edusharing"
           then
@@ -45,7 +47,7 @@ jobs:
     #   - edusharing_approval
     with:
       CLUSTER: "${{ inputs.CLUSTER }}"
-      NAMESPACE: "github-actions-test" # ${{ needs.set_namespace.outputs.branch }}
+      NAMESPACE: "github-actions-test" # ${{ needs.set_namespace.outputs.namespace }}
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:

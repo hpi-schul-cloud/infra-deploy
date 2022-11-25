@@ -1,4 +1,4 @@
-name: Deploy Edusharing Crawler
+name: Deploy Edusharing Crawler on Dev
 on:
   workflow_dispatch:
     inputs:
@@ -13,11 +13,12 @@ on:
         required: true
 
 jobs:
-  dev_edusharing_approval:
-    environment: dev_edusharing_crawler_approve
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Approval from authorized dev_edusharing_crawler_approve Group has been given!"
+# ask if wanted
+  # dev_edusharing_approval:
+  #   environment: dev_edusharing_crawler_approve
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - run: echo "Approval from authorized dev_edusharing_crawler_approve Group has been given!"
 
   # deployment to sc-dev-edusharing cluster
   dev_deploy_edusharing_crawlers:

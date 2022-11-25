@@ -1,12 +1,27 @@
 # values set via Github Action
 # edusharing_crawler_helm_chart_version:
-# edusharing_crawler_name: "crawler_a"
+#edusharing_crawler_image_tag:
+
+# not used - defaults
+edusharing_crawler_repository: ghcr.io/hpi-schul-cloud/oeh-search-etl
 edusharing_crawler_image_name: "edusharing-crawler"
 
-edusharing_crawler_values:
-  image:
-    name: hpi-schul-cloud/"{{ edusharing_crawler_image_name }}"
-    # value set via Github Action
-    tag: "{{ edusharing_crawler_image_tag }}"
-  # enabled_crawler: "{{ edusharing_crawler_name }}"
-
+# sgrink down without values
+edusharing_crawler_list:
+- values:
+    crawler:
+      name: hello-world
+      enabled: true
+      schedule: '*-*-10:40'
+    image:
+      tag: "{{ edusharing_crawler_image_tag }}"
+    env:
+    - name: test-env
+      value: "my test env"
+# - values:
+#     crawler:
+#       name: hello_world2
+#       enabled: true
+#     schedule: '*-*-14:30'
+#     image:
+#       tag: "{{ edusharing_crawler_image_tag }}"

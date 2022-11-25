@@ -11,10 +11,10 @@ on:
         required: true
         type: string
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
-        required: false
+        required: true
         type: string
       EDUSHARING_CRAWLER_IMAGE_TAG:
-        required: false
+        required: true
         type: string
     secrets:
       token:
