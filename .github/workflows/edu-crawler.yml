@@ -43,7 +43,7 @@ jobs:
         id: set_namespace
 
   deploy_edusharing_crawlers:
-    uses: ./.github/workflows/deploy-crawler.yml
+    uses: ./.github/workflows/edu-deploy-crawler.yml
     # needs:
     #   - edusharing_approval
     with:

@@ -23,7 +23,7 @@ jobs:
   # deployment to sc-dev-edusharing cluster
   dev_deploy_edusharing_crawlers:
     # if: "{{ inputs.CLUSTER }}" == "sc-dev-edusharing"
-    uses: ./.github/workflows/deploy-crawler.yml
+    uses: ./.github/workflows/edu-deploy-crawler.yml
     needs:
       - dev_deploy_edusharing_crawlers
     with:
