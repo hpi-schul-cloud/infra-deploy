@@ -44,7 +44,7 @@ jobs:
   deploy_edusharing_crawlers:
     uses: ./.github/workflows/edu-deploy-crawler.yml
     # needs:
-    #   - edusharing_approval
+    #   - set_namespace
     with:
       CLUSTER: "${{ inputs.CLUSTER }}"
       NAMESPACE: "github-actions-test" # ${{ needs.set_namespace.outputs.namespace }}

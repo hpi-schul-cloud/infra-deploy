@@ -1,10 +1,6 @@
 # values set via Github Action
 # edusharing_crawler_helm_chart_version:
-#edusharing_crawler_image_tag:
-
-# not used - defaults
-edusharing_crawler_repository: ghcr.io/hpi-schul-cloud/oeh-search-etl
-edusharing_crawler_image_name: "edusharing-crawler"
+# edusharing_crawler_image_tag:
 
 edusharing_instance_secret_name: edusharing-instance
 sodix_secret_name: sodix-secret
@@ -14,7 +10,6 @@ h5p_s3_bucket: s3_web_bucket
 # does this change or should be dynamic?
 pyppeter_ws_endpoint: "ws://localhost:3000"
 
-# shrink down without values
 edusharing_crawler_list:
 - name: hello-world
   enabled: false
@@ -55,11 +50,8 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
-
-merlin_spider_values:
-  crawler:
-    name: merlin-spider
-    enabled: true
+- name: merlin-spider
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -90,11 +82,8 @@ merlin_spider_values:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
-
-sodix_spider_values:
-  crawler:
-    name: sodix-spider
-    enabled: true
+- name: sodix-spider
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -135,11 +124,8 @@ sodix_spider_values:
       secretKeyRef:
         name: "{{ sodix_secret_name }}"
         key: password
-
-sodix_permissions_values:
-  crawler:
-    name: sodix-permissions
-    enabled: true
+- name: sodix-permissions
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -166,11 +152,8 @@ sodix_permissions_values:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
-
-h5p_uploads_values:
-  crawler:
-    name: h5p-upload
-    enabled: true
+- name: h5p-upload
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
