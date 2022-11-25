@@ -45,7 +45,7 @@ mediothek_pixiothek_spider_values:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: website
+        key: url
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -80,7 +80,7 @@ merlin_spider_values:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: website
+        key: url
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -115,7 +115,7 @@ sodix_spider_values:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: website
+        key: url
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
