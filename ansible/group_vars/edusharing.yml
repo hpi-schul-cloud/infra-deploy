@@ -16,9 +16,8 @@ pyppeter_ws_endpoint: "ws://localhost:3000"
 
 # shrink down without values
 edusharing_crawler_list:
-- crawler:
-    name: hello-world
-    enabled: true
+- name: hello-world
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -26,9 +25,8 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-13:38"
-- crawler:
-    name: mediothek-pixiothek-spider
-    enabled: true
+- name: mediothek-pixiothek-spider
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
