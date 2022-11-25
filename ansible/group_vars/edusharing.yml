@@ -18,6 +18,8 @@ hello_world_values:
   env:
   - name: test-env
     value: "my test env"
+  service:
+    internalPort: 8080
 # - values:
 #     crawler:
 #       name: hello-world2
