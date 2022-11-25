@@ -10,7 +10,7 @@ edusharing_crawler_image_name: "edusharing-crawler"
 edusharing_crawler_list:
 hello_world_values:
   crawler:
-    name: hello_world
+    name: hello-world
     enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
@@ -18,7 +18,7 @@ hello_world_values:
   - name: test-env
     value: "my test env"
   - name: CRAWLER
-    value: hello-world
+    value: hello_world
   - name: SCHEDULE
     value:  '*-*-11:42'
   service:
