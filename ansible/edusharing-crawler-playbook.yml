@@ -13,7 +13,7 @@
 
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
-      name: "crawler-{{ item.crawler.name}}"
+      name: "crawler-{{ item.values.crawler.name}}"
       chart_ref: "dbildungscloud/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
