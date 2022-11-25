@@ -8,8 +8,7 @@ edusharing_crawler_image_name: "edusharing-crawler"
 
 edusharing_instance_secret_name: edusharing-instance
 sodix_secret_name: sodix-secret
-# pyppeter_ws_endpoint: "ws://localhost:3000"
-pyppeter_ws_endpoint: "test"
+pyppeter_ws_endpoint: "ws://localhost:3000"
 
 # sgrink down without values
 edusharing_crawler_list:
@@ -24,7 +23,6 @@ hello_world_values:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-10:48"
-
 
 mediothek_pixiothek_spider_values:
   crawler:
@@ -42,7 +40,7 @@ mediothek_pixiothek_spider_values:
   - name: PYPPETEER_WS_ENDPOINT
     value: "{{ pyppeter_ws_endpoint }}"
   - name: DRY_RUN
-    value: False
+    value: "False"
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
@@ -77,7 +75,7 @@ merlin_spider_values:
   - name: PYPPETEER_WS_ENDPOINT
     value: "{{ pyppeter_ws_endpoint }}"
   - name: DRY_RUN
-    value: False
+    value: "False"
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
@@ -112,7 +110,7 @@ sodix_spider_values:
   - name: PYPPETEER_WS_ENDPOINT
     value: "{{ pyppeter_ws_endpoint }}"
   - name: DRY_RUN
-    value: False
+    value: "False"
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
