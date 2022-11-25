@@ -25,10 +25,8 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value: "*-*-10:48"
-
-mediothek_pixiothek_spider_values:
-  crawler:
+    value: "*-*-13:38"
+- crawler:
     name: mediothek-pixiothek-spider
     enabled: true
   image:
