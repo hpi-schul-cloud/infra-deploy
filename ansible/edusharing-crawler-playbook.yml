@@ -22,5 +22,5 @@
       release_namespace: "{{ namespace }}"
       values:
         "{{ item.values }}"
-    when: item.values.crawler.enabled
+    # when: item.values.crawler.enabled
     loop: "{{ edusharing_crawler_list }}"
