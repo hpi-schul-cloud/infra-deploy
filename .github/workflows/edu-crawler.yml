@@ -1,6 +1,5 @@
 name: Deploy Edusharing Crawler
 on:
-  push:
   workflow_dispatch:
     inputs:
       CLUSTER:

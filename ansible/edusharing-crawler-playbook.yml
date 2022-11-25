@@ -23,4 +23,4 @@
       values:
         "{{ item.values }}"
     when: "{{ item.values.crawler.enabled }}"
-    loop: edusharing_crawler_list
+    loop: "{{ edusharing_crawler_list }}"

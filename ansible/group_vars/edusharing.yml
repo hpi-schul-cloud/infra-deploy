@@ -12,12 +12,22 @@ edusharing_crawler_list:
     crawler:
       name: hello-world
       enabled: true
-      schedule: '*-*-10:40'
+      schedule: '*-*-10:48'
     image:
       tag: "{{ edusharing_crawler_image_tag }}"
     env:
     - name: test-env
       value: "my test env"
+# - values:
+#     crawler:
+#       name: hello-world2
+#       enabled: true
+#       schedule: '*-*-10:50'
+#     image:
+#       tag: "{{ edusharing_crawler_image_tag }}"
+#     env:
+#     - name: test-env
+#       value: "my test env"
 # - values:
 #     crawler:
 #       name: hello_world2
