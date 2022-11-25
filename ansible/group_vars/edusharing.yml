@@ -10,14 +10,17 @@ edusharing_crawler_image_name: "edusharing-crawler"
 edusharing_crawler_list:
 hello_world_values:
   crawler:
-    name: hello-world
+    name: hello_world
     enabled: true
-    schedule: '*-*-10:48'
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: test-env
     value: "my test env"
+  - name: CRAWLER
+    value: hello-world
+  - name: SCHEDULE
+    value:  '*-*-11:42'
   service:
     internalPort: 8080
 # - values:
