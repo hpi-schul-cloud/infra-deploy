@@ -8,16 +8,16 @@ edusharing_crawler_image_name: "edusharing-crawler"
 
 # sgrink down without values
 edusharing_crawler_list:
-- values:
-    crawler:
-      name: hello-world
-      enabled: true
-      schedule: '*-*-10:48'
-    image:
-      tag: "{{ edusharing_crawler_image_tag }}"
-    env:
-    - name: test-env
-      value: "my test env"
+hello_world_values:
+  crawler:
+    name: hello-world
+    enabled: true
+    schedule: '*-*-10:48'
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: test-env
+    value: "my test env"
 # - values:
 #     crawler:
 #       name: hello-world2
