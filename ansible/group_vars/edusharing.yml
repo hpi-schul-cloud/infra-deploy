@@ -15,12 +15,10 @@ hello_world_values:
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
-  - name: test-env
-    value: "my test env"
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value:  '*-*-11:42'
+    value:  '*-*-10:48'
   service:
     internalPort: 8080
 # - values:
