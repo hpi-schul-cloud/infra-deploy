@@ -1,0 +1,28 @@
+name: NC Deploy to Dev (nbc-main)
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  nextcloud_approval:
+    environment: approve_dev_nextcloud
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Approval from authorized approve_dev_nextcloud Group has been given!"
+
+  deploy_nextcloud_from_main:
+    needs:
+      - nextcloud_approval
+    uses: ./.github/workflows/nextcloud-deploy.yml
+    with:
+      CLUSTER: "sc-dev-nextcloud"
+      BUCKET_NAME: "sc-dev-cd-nextcloud-txl-bucket-0000"
+      NAMESPACE: "nbc-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "nbc-main"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
+      SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}

@@ -1,0 +1,40 @@
+---
+- name: Nextcloud Deployment
+  hosts:
+    - sc-dev-nextcloud
+  connection: local
+  roles:
+  - kubeconfig
+  tasks:
+  - name: Add nextcloud chart repo
+    kubernetes.core.helm_repository:
+      name: nextcloud
+      repo_url: "https://nextcloud.github.io/helm/"
+
+  - name: Create a namespace based on branch
+    kubernetes.core.k8s:
+      name: "{{ namespace }}"
+      kind: Namespace
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      api_version: v1
+    when:  namespace !=  "nbc-main"
+
+  - name: Create s3 bucket
+    amazon.aws.aws_s3:
+      aws_access_key: "{{ s3_access_key }}"
+      aws_secret_key: "{{ s3_access_secret }}"
+      bucket: "{{ namespace }}"
+      mode: create
+      s3_url: "{{ s3_url_berlin }}"
+      region: "{{ s3_region_berlin }}"
+    when:  namespace !=  "nbc-main"
+
+  - name: Create Nextcloud instances
+    include_tasks: multi-instance-nextcloud.yml
+    vars:
+      instance_vault: "{%if item.vault is defined%}{{item.vault}}{%else%}{{project}}-{{stage}}-{{item.name}}{%endif%}"
+    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true)}}"
+    tags:
+      - nextcloud
+      - nextcloud-cron

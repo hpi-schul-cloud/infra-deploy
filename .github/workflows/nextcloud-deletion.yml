@@ -1,0 +1,64 @@
+---
+name: Delete Namespace
+
+on:
+  workflow_call:
+    inputs:
+      CLUSTER:
+        required: true
+        type: string
+      BUCKET_NAME:
+        required: true
+        type: string
+      NAMESPACE:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+      KUBECONFIG:
+        required: true
+      S3ACCESSKEY:
+        required: true
+      S3ACCESSSECRET:
+        required: true
+
+jobs:
+  run_delete_ansible_playbook:
+    environment:  ${{ inputs.CLUSTER }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Install requirements python3
+        shell: bash
+        run: |
+          python3 -m pip install -r requirements.txt
+
+      - name: Install requirements ansible-galaxy
+        run: ansible-galaxy install -r ansible/collections/requirements.yml
+
+      - name: Create Kubeconfig file in config folder
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: |
+          mkdir files
+          echo "${{ secrets.KUBECONFIG }}" > files/config
+
+      - name: Set ENVs in config.yml file
+        working-directory: ${{ github.workspace }}/ansible/group_vars
+        run: |
+          echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo "s3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
+          echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
+          echo "s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
+          cat config.yml
+
+      - name: Execute Ansible Delete Playbook
+        working-directory: ${{ github.workspace }}/ansible
+        run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER}}
+
+      - name: Delete config files
+        if: always()
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: rm -rf /config
