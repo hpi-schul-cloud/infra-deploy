@@ -2,11 +2,11 @@ name: NC Deploy to Dev (nbc-main)
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    # branches:
+    #   - main
 
 jobs:
-  nextcloud_approval:
+  approve_dev_nextcloud:
     environment: approve_dev_nextcloud
     runs-on: ubuntu-latest
     steps:
@@ -14,7 +14,7 @@ jobs:
 
   deploy_nextcloud_from_main:
     needs:
-      - nextcloud_approval
+      - approve_dev_nextcloud
     uses: ./.github/workflows/nextcloud-deploy.yml
     with:
       CLUSTER: "sc-dev-nextcloud"
