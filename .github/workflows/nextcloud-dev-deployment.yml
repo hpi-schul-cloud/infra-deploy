@@ -4,8 +4,8 @@ on:
   # gh workflow run nextcloud-dev-deployment.yml
   workflow_dispatch:
   push:
-    # branches:
-    #   - main
+    branches:
+      - main
 
 jobs:
   approve_dev_nextcloud:
