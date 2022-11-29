@@ -1,4 +1,4 @@
-name: Deploy Edusharing Crawler
+name: EDU Deploy Crawler
 on:
   workflow_dispatch:
     inputs:
@@ -17,15 +17,15 @@ on:
         default: "0.0.8"
 
 jobs:
-  # edusharing_approval:
-  #   environment: edusharing_cluster_approve
+  # approve_edusharing:
+  #   environment: approve_edusharing
   #   runs-on: ubuntu-latest
   #   steps:
-  #     - run: echo "Approval from authorized edusharing_crawler_approve Group has been given!"
+  #     - run: echo "Approval from authorized approve_edusharing Group has been given!"
 
   set_namespace:
       # needs:
-      # - edusharing_approval
+      # - approve_edusharing
     runs-on: ubuntu-latest
     steps:
       - name: Set namespace
@@ -48,7 +48,7 @@ jobs:
       - set_namespace
     with:
       CLUSTER: "${{ inputs.CLUSTER }}"
-      NAMESPACE:  ${{ needs.set_namespace.outputs.namespace }} #  github-actions-test
+      NAMESPACE:  ${{ needs.set_namespace.outputs.namespace }} #github-actions-test
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:

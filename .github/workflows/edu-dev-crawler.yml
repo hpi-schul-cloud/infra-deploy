@@ -1,4 +1,4 @@
-name: Deploy Edusharing Crawler on Dev
+name: EDU Deploy Crawler to Dev
 on:
   #gh workflow run edu-dev-crawler.yml --ref <branch-name>
   workflow_dispatch:

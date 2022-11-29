@@ -1,5 +1,5 @@
 ---
-name: Update Edusharing Crawler
+name: EDU Update Crawler
 
 on:
   workflow_call:

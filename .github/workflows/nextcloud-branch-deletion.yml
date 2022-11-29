@@ -2,6 +2,8 @@ name: NC Delete Namespace on Branch Deletion
 
 # cd schulcloud-nextcloud
 # gh workflow run nextcloud-branch-deletion.yml --ref <branch-name>
+
+# Option: Limit on delete or make it only via workflow_dispatch possible?
 on: [delete, workflow_dispatch]
 
 jobs:
@@ -24,6 +26,7 @@ jobs:
 
   delete_namespace:
     # protect nbc-main namespace from accidental deletion
+    # wie erkennt man, dass ein Branch für nextcloud ist 
     if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
     needs:
       - get_branch_name
