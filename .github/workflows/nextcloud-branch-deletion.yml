@@ -8,8 +8,6 @@ jobs:
   delete_namespace_and_buckets:
     # protect nbc-main namespace from accidental deletion
     if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
-    needs:
-      - get_branch_name
     uses: ./.github/workflows/nextcloud-deletion.yml
     with:
       CLUSTER: sc-dev-nextcloud
