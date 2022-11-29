@@ -5,9 +5,28 @@ name: NC Delete Namespace on Branch Deletion
 on: [delete, workflow_dispatch]
 
 jobs:
+  get_branch_name:
+    runs-on: ubuntu-latest
+    outputs:
+      branch: ${{ steps.extract_branch.outputs.branch }}
+    envs:
+      EVENT_REF: ${{ github.event.ref }}
+    steps:
+      - name: Extract branch name
+        shell: bash
+        run: |
+          # renames branch to valid namespace name
+          # namespaces name constraints: at most 63 characters(only lowercase alphanumeric) or '-'
+          namespace_name=$(echo $EVENT-REF | sed 's/^[^\.]\+\///' | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
+          echo "before regex:" $branch_name "after regex:" $namespace_name
+          echo "$namespace_name" >> $GITHUB_OUTPUT
+        id: extract_branch
+
   delete_namespace_and_buckets:
     # protect nbc-main namespace from accidental deletion
     if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
+    needs:
+      - get_branch_name
     uses: ./.github/workflows/nextcloud-deletion.yml
     with:
       CLUSTER: sc-dev-nextcloud
