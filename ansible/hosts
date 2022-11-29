@@ -1,9 +1,18 @@
-[edusharing]
-infra-dev-edusharing-1
-sc-staging-edusharing
-sc-prod-edusharing
 
 [config]
 infra-dev-edusharing-1
 sc-staging-edusharing
 sc-prod-edusharing
+sc-dev-nextcloud
+
+[nextcloud]
+sc-dev-nextcloud
+
+[edusharing]
+infra-dev-edusharing-1
+sc-staging-edusharing
+sc-prod-edusharing
+
+
+[dev]
+sc-dev-nextcloud

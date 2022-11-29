@@ -1,0 +1,75 @@
+---
+name: Deploy Nextcloud
+
+on:
+  workflow_call:
+    inputs:
+      CLUSTER:
+        required: true
+        type: string
+      BUCKET_NAME:
+        required: true
+        type: string
+      NAMESPACE:
+        required: true
+        type: string
+      NAMESPACE_SCHULCLOUD_INSTANCE:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+      KUBECONFIG:
+        required: true
+      SOCIALLOGINCLIENTID:
+        required: true
+      SOCIALLOGINSECRET:
+        required: true
+      S3ACCESSKEY:
+        required: false
+      S3ACCESSSECRET:
+        required: false
+
+jobs:
+  run_ansible_playbook_nextcloud:
+    environment: ${{ inputs.CLUSTER }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v1
+
+      - name: Install requirements python3
+        shell: bash
+        run: |
+          # python3 -m pip install kubernetes
+          python3 -m pip install -r requirements.txt
+
+      - name: Install requirements ansible-galaxy
+        run: ansible-galaxy install -r ansible/collections/requirements.yml
+
+      - name: Create Kubeconfig file in config folder
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: |
+          mkdir files
+          echo "${{ secrets.KUBECONFIG }}" > files/config
+
+      - name: Set ENVs in config.yml file
+        working-directory: ${{ github.workspace }}/ansible/group_vars
+        run: |
+          echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
+          echo "schulcloud_namespace: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
+          echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
+          echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
+          echo "s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
+          echo "s3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
+          echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
+          cat config.yml
+
+      - name: Execute Ansible Nextcloud Playbook
+        working-directory: ${{ github.workspace }}/ansible
+        run: ansible-playbook ./nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
+
+      - name: Delete config files
+        if: always()
+        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+        run: rm -rf /config
