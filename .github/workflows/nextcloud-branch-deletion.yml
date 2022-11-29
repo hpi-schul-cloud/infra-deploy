@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.extract_branch.outputs.branch }}
-    envs:
+    env:
       EVENT_REF: ${{ github.event.ref }}
     steps:
       - name: Extract branch name
