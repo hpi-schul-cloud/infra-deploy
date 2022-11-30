@@ -24,6 +24,13 @@ edusharing_crawler_list:
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   env:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
