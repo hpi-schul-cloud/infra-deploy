@@ -52,7 +52,6 @@ jobs:
           echo "s3_access_key: ${{ secrets.S3ACCESSKEY }}" >> config.yml
           echo "s3_access_secret: ${{ secrets.S3ACCESSSECRET }}" >> config.yml
           echo "s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
-          echo "cluster_name: ${{ inputs.CLUSTER }}" >> config.yml
           cat config.yml
 
       - name: Execute Ansible Delete Bucket
