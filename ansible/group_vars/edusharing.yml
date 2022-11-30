@@ -59,6 +59,13 @@ edusharing_crawler_list:
         key: password
 - name: merlin-spider
   enabled: true
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -90,6 +97,13 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: sodix-spider
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
@@ -132,6 +146,13 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
 - name: sodix-permissions
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
@@ -162,6 +183,13 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: h5p-upload
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
