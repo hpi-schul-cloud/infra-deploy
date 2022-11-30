@@ -1,7 +1,7 @@
 name: NC Delete Namespace and Bucket
 
 # cd schulcloud-nextcloud
-# gh workflow run nextcloud-branch-deletion.yml -f NAMESPACE_NAME=ops-3853-ingress-test-2
+# gh workflow run nextcloud-branch-deletion.yml -f NAMESPACE_NAME=""
 on:
   workflow_dispatch:
     inputs:
