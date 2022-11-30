@@ -1,6 +1,6 @@
 name: EDU Deploy Crawler to Dev
 on:
-  #gh workflow run edu-dev-crawler.yml --ref <branch-name>
+  #gh workflow run edu-dev-crawler.yml --ref <branch-name> (-f EDUSHARING_CRAWLER_HELM_CHART_VERSION=<version> -f EDUSHARING_CRAWLER_IMAGE_TAG=<version>)
   workflow_dispatch:
     inputs:
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
@@ -14,7 +14,7 @@ on:
 
 jobs:
   dev_deploy_edusharing_crawlers:
-    if: "${{ inputs.CLUSTER }}" == "sc-dev-edusharing"
+    if: ${{ inputs.CLUSTER }} == "sc-dev-edusharing"
     uses: ./.github/workflows/edu-deploy-crawler.yml
     with:
       CLUSTER: sc-dev-edusharing

@@ -29,13 +29,15 @@ jobs:
       # needs:
       # - approve_edusharing
     runs-on: ubuntu-latest
+    env: ${{ inputs.CLUSTER }}
+      CLUSTER: 
     steps:
       - name: Set namespace
         shell: bash
         run: |
           # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
           echo "Set namespace!"
-          if ${{ inputs.CLUSTER }} == "sc-staging-edusharing"
+          if $CLUSTER == "sc-staging-edusharing"
           then
             echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
             echo "namespace set to dev-edusahring"
