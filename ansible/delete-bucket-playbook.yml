@@ -1,0 +1,16 @@
+---
+- name: Delete Bucket
+  hosts:
+    - "{{ cluster_name }}"
+  connection: local
+  roles:
+  - kubeconfig
+  tasks:
+  - name: Delete s3 bucket
+    amazon.aws.aws_s3:
+      aws_access_key: "{{ s3_access_key }}"
+      aws_secret_key: "{{ s3_access_secret }}"
+      bucket: "{{ s3_bucket_name }}"
+      mode: delete
+      s3_url: "{{ s3_url_berlin }}"
+      region: "{{ s3_region_berlin }}"
