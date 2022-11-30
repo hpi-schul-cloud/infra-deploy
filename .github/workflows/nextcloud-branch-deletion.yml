@@ -1,40 +1,22 @@
-name: NC Delete Namespace on Branch Deletion
+name: NC Delete Namespace
 
 # cd schulcloud-nextcloud
-# gh workflow run nextcloud-branch-deletion.yml --ref <branch-name>
-on: [delete, workflow_dispatch]
+# gh workflow run nextcloud-branch-deletion.yml -f namespace_name=ops-3853-ingress-test-2
+on:
+  workflow_dispatch: 
+    inputs:
+      NAMESPACE_NAME:
+        description: "Select namespace to delete"
+        required: true
 
 jobs:
-  get_branch_name:
-    runs-on: ubuntu-latest
-    outputs:
-      branch: ${{ steps.extract_branch.outputs.branch }}
-    env:
-      EVENT_REF: ${{ github.event.ref }}
-    steps:
-      - name: Extract branch name
-        shell: bash
-        run: |         
-          branch_name=$(echo "branch=${GITHUB_REF#refs/heads/}")
-          echo "$branch_name"
-          echo "branch_name=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
-          # renames branch to valid namespace name
-          # namespaces name constraints: at most 63 characters(only lowercase alphanumeric) or '-'
-          namespace_name=$(echo $EVENT-REF | sed 's/^[^\.]\+\///' | sed 's@.*/@@' | tr [A-Z] [a-z] | tr _ - | tr \. -)
-          echo "before regex:" $branch_name "after regex:" $namespace_name
-          echo "$namespace_name" >> $GITHUB_OUTPUT
-        id: extract_branch
-
   delete_namespace_and_buckets:
-    # protect nbc-main namespace from accidental deletion
-    if: ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
-    needs:
-      - get_branch_name
+    if: ${{ inputs.NAMESPACE_NAME }} != 'nbc-main'
     uses: ./.github/workflows/nextcloud-deletion.yml
     with:
       CLUSTER: sc-dev-nextcloud
-      BUCKET_NAME: ${{ needs.get_branch_name.outputs.branch }}
-      NAMESPACE: ${{ github.event.ref }}
+      BUCKET_NAME: ${{inputs.NAMESPACE_NAME }}
+      NAMESPACE: ${{inputs.NAMESPACE_NAME }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
