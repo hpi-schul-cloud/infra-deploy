@@ -41,18 +41,19 @@ jobs:
             echo "namespace set to dev-edusahring"
           else
             echo "namespace=edusharing" >> $GITHUB_OUTPUT
+            echo "namespace set to edusharing"
           fi
         id: set_namespace
 
-  deploy_edusharing_crawlers:
-    uses: ./.github/workflows/edu-deploy-crawler.yml
-    needs:
-      - set_namespace
-    with:
-      CLUSTER: "${{ inputs.CLUSTER }}"
-      NAMESPACE:  dev-edusharing # ${{ needs.set_namespace.outputs.namespace }} #github-actions-test
-      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
-      EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+  # deploy_edusharing_crawlers:
+  #   uses: ./.github/workflows/edu-deploy-crawler.yml
+  #   needs:
+  #     - set_namespace
+  #   with:
+  #     CLUSTER: "${{ inputs.CLUSTER }}"
+  #     NAMESPACE:  dev-edusharing # ${{ needs.set_namespace.outputs.namespace }} #github-actions-test
+  #     EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
+  #     EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
+  #   secrets:
+  #     token: ${{ secrets.GITHUB_TOKEN }}
+  #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
