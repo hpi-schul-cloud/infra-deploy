@@ -1,22 +1,11 @@
 ---
-- name: Delete Namespace and Bucket
+- name: Delete Namespace
   hosts:
-    - sc-dev-nextcloud
+    - nextcloud
   connection: local
   roles:
   - kubeconfig
   tasks:
-
-  - name: Delete s3 bucket
-    amazon.aws.aws_s3:
-      aws_access_key: "{{ s3_access_key }}"
-      aws_secret_key: "{{ s3_access_secret }}"
-      bucket: "{{ s3_bucket_name }}"
-      mode: delete
-      s3_url: "{{ s3_url_berlin }}"
-      region: "{{ s3_region_berlin }}"
-    when: inventory_hostname == "sc-dev-nextcloud" and namespace !=  "nbc-main"
-
   - name: Delete Namespace
     kubernetes.core.k8s:
       name: "{{ namespace }}"
@@ -24,5 +13,3 @@
       state: absent
       kubeconfig: "{{ kubeconfig }}"
       api_version: v1
-    # skip this if edusharing cluster
-    when: not inventory_hostname is search("edusharing"))
