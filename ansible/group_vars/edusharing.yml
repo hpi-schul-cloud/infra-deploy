@@ -19,7 +19,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value: "*-*-13:38"
+    value: "*-*-9:34"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -28,7 +28,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
   - name: SCHEDULE
-    value: "*-Sa-0:00"
+    value: "*-*-9:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: PYPPETEER_WS_ENDPOINT
@@ -51,14 +51,14 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: merlin-spider
-  enabled: false
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: merlin_spider
   - name: SCHEDULE
-    value: "*-Sa-0:00"
+    value: "*-*-9:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: MODE
@@ -83,14 +83,14 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: sodix-spider
-  enabled: false
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: sodix_spider
   - name: SCHEDULE
-    value: "*-Sa-0:00"
+    value: "*-*-9:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: MODE
@@ -125,14 +125,14 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
 - name: sodix-permissions
-  enabled: false
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: sodix_permissions
   - name: SCHEDULE
-    value: "*-Sa-0:00"
+    value: "*-*-9:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: PYPPETEER_WS_ENDPOINT
@@ -155,14 +155,14 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: h5p-upload
-  enabled: false
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: h5p_upload
   - name: SCHEDULE
-    value: "*-Sa-0:00"
+    value: "*-*-9:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
