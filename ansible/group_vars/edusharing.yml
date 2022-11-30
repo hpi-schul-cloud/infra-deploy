@@ -137,6 +137,8 @@ edusharing_crawler_list:
     value: "INFO"
   - name: PYPPETEER_WS_ENDPOINT
     value: "{{ pyppeter_ws_endpoint }}"
+  - name: SODIX_BLACKLIST_PATH
+    value: "/oeh-search-etl/schulcloud/sodix/blacklist.json"
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
