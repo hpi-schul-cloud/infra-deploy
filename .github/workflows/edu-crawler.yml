@@ -1,5 +1,6 @@
 name: EDU Deploy Crawler
 on:
+  push:
   workflow_dispatch:
     inputs:
       CLUSTER:
