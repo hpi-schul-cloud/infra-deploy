@@ -1,6 +1,5 @@
 name: EDU Deploy Crawler
 on:
-  push:
   workflow_dispatch:
     inputs:
       CLUSTER:
@@ -30,8 +29,8 @@ jobs:
       # needs:
       # - approve_edusharing
     runs-on: ubuntu-latest
-    env: ${{ inputs.CLUSTER }}
-      CLUSTER: 
+    env:
+      CLUSTER: ${{ inputs.CLUSTER }}
     steps:
       - name: Set namespace
         shell: bash
