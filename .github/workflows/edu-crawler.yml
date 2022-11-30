@@ -36,26 +36,26 @@ jobs:
         shell: bash
         run: |
           # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
-          echo "Set namespace!"
+          echo "Set namespace to:"
           if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
           then
             echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
-            echo "namespace set to dev-edusahring"
+            echo "dev-edusharing"
           else
             echo "namespace=edusharing" >> $GITHUB_OUTPUT
-            echo "namespace set to edusharing"
+            echo "edusharing"
           fi
         id: set_namespace
 
-  # deploy_edusharing_crawlers:
-  #   uses: ./.github/workflows/edu-deploy-crawler.yml
-  #   needs:
-  #     - set_namespace
-  #   with:
-  #     CLUSTER: "${{ inputs.CLUSTER }}"
-  #     NAMESPACE:  dev-edusharing # ${{ needs.set_namespace.outputs.namespace }} #github-actions-test
-  #     EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
-  #     EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
-  #   secrets:
-  #     token: ${{ secrets.GITHUB_TOKEN }}
-  #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
+  deploy_edusharing_crawlers:
+    uses: ./.github/workflows/edu-deploy-crawler.yml
+    needs:
+      - set_namespace
+    with:
+      CLUSTER: "${{ inputs.CLUSTER }}"
+      NAMESPACE:  ${{ needs.set_namespace.outputs.namespace }}
+      EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
+      EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
