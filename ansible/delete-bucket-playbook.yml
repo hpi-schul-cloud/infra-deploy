@@ -1,7 +1,7 @@
 ---
 - name: Delete Bucket
   hosts:
-    - all
+    - nextcloud
   connection: local
   roles:
   - kubeconfig
