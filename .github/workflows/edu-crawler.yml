@@ -37,7 +37,7 @@ jobs:
         run: |
           # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
           echo "Set namespace!"
-          if ${{ env.CLUSTER }} == sc-staging-edusharing
+          if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
           then
             echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
             echo "namespace set to dev-edusahring"
