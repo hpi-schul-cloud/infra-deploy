@@ -9,12 +9,12 @@
   - name: Add Helm Chart Repo dbildungscloud
     kubernetes.core.helm_repository:
       name: dbildungscloud
-      repo_url: "https://github.com/hpi-schul-cloud/helm-charts-registry"
+      repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
 
   - name: Add Helm Chart Repo ntppool
     kubernetes.core.helm_repository:
       name: ntppool
-      repo_url: https://charts.ntppool.org/
+      repo_url: "https://charts.ntppool.org/"
 
   - name: Create edusharing-instance secret
     kubernetes.core.k8s:
