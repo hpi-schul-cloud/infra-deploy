@@ -58,7 +58,7 @@ jobs:
         working-directory: ${{ github.workspace }}/ansible
         run: ansible-playbook ./delete-bucket-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 
-      - name: Execute Ansible Delete Namepspace
+      - name: Execute Ansible Delete Namespace
         working-directory: ${{ github.workspace }}/ansible
         run: ansible-playbook ./delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 

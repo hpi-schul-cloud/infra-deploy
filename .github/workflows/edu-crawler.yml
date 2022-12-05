@@ -23,8 +23,6 @@ jobs:
   #   steps:
   #     - run: echo "Approval from authorized approve_edusharing Group has been given!"
 
-
-# this doesn't work yet
   set_namespace:
       # needs:
       # - approve_edusharing
