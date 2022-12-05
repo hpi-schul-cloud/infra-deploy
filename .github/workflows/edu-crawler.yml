@@ -1,5 +1,7 @@
 name: EDU Deploy Crawler
 on:
+  # cd schulcloud-nextcloud
+  # gh workflow run edu-dev-crawler.yml --ref <branch-name> (-f EDUSHARING_CRAWLER_HELM_CHART_VERSION=<version> -f EDUSHARING_CRAWLER_IMAGE_TAG=<version>)
   workflow_dispatch:
     inputs:
       CLUSTER:
@@ -14,7 +16,7 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.0.14"
+        default: "0.0.15"
 
 jobs:
   # approve_edusharing:
@@ -41,10 +43,10 @@ jobs:
           echo "Set namespace to:"
           if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
           then
-            echo "namespace=dev-edusharing" >> $GITHUB_OUTPUT
+            echo "dev-edusharing" >> $GITHUB_OUTPUT
             echo "dev-edusharing"
           else
-            echo "namespace=edusharing" >> $GITHUB_OUTPUT
+            echo "edusharing" >> $GITHUB_OUTPUT
             echo "edusharing"
           fi
         id: set_namespace
