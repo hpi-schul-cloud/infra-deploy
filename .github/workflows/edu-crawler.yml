@@ -43,10 +43,16 @@ jobs:
           echo "Set namespace..."
           if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
           then
+            # namespace_name=$(echo "namespace=dev-edusharing")
+            # echo "namespace_name=dev-edusharing" >> $GITHUB_ENV
+            # echo "$namespace_name" >> $GITHUB_OUTPUT
+            # echo "namespace is set to $namespace_name"
+
             namespace_name=$(echo "namespace=dev-edusharing")
-            echo "namespace_name=dev-edusharing" >> $GITHUB_ENV
+            echo "namespace=dev-edusharing" >> $GITHUB_ENV
+            echo "after regex:" $namespace_name
             echo "$namespace_name" >> $GITHUB_OUTPUT
-            echo "namespace is set to $namespace_name"
+
           else
             echo "edusharing" >> $GITHUB_OUTPUT
             echo "edusharing"
