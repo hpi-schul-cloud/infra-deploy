@@ -22,7 +22,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -38,13 +38,23 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
     value: "False"
+  - name: SODIX_USER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
+  - name: SODIX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
@@ -75,13 +85,23 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: merlin_spider
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
     value: "False"
+  - name: SODIX_USER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
+  - name: SODIX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
@@ -112,7 +132,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_spider
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -159,7 +179,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_permissions
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: SODIX_BLACKLIST_PATH
@@ -194,7 +214,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: h5p_upload
   - name: SCHEDULE
-    value: "*-*-11:44"
+    value: "*-*-12:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
