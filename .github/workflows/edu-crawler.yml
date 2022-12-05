@@ -47,10 +47,10 @@ jobs:
             echo "namespace_name=dev-edusharing" >> $GITHUB_ENV
             echo "$namespace_name" >> $GITHUB_OUTPUT
             echo "namespace is set to $namespace_name"
-          # else
-          #   echo "edusharing" >> $GITHUB_OUTPUT
-          #   echo "edusharing"
-          # fi
+          else
+            echo "edusharing" >> $GITHUB_OUTPUT
+            echo "edusharing"
+          fi
         id: set_namespace
 
   deploy_edusharing_crawlers:
