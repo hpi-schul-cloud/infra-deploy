@@ -34,7 +34,7 @@ jobs:
     env:
       CLUSTER: ${{ inputs.CLUSTER }}
     outputs:
-      branch: ${{ steps.set_namespace.outputs.namespace }}
+      namespace: ${{ steps.set_namespace.outputs.namespace }}
     steps:
       - name: Set namespace
         shell: bash
