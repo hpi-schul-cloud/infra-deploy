@@ -16,67 +16,67 @@
       name: ntppool
       repo_url: "https://charts.ntppool.org/"
 
-  # - name: Create edusharing-instance secret
-  #   kubernetes.core.k8s:
-  #     state: present
-  #     kubeconfig: "{{ kubeconfig }}"
-  #     definition:
-  #       apiVersion: onepassword.com/v1
-  #       kind: OnePasswordItem
-  #       metadata:
-  #         name: "{{ edusharing_instance_secret_name }}"
-  #         namespace: "{{ namespace }}"
-  #       spec:
-  #         itemPath: "vaults/{{ vault }}/items/{{ edusharing_instance_secret_name }}"
+  - name: Create edusharing-instance secret
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ edusharing_instance_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ edusharing_instance_secret_name }}"
 
-  # - name: Create sodix secret
-  #   kubernetes.core.k8s:
-  #     state: present
-  #     kubeconfig: "{{ kubeconfig }}"
-  #     definition:
-  #       apiVersion: onepassword.com/v1
-  #       kind: OnePasswordItem
-  #       metadata:
-  #         name: "{{ sodix_secret_name }}"
-  #         namespace: "{{ namespace }}"
-  #       spec:
-  #         itemPath: "vaults/{{ vault }}/items/{{ sodix_secret_name }}"
+  - name: Create sodix secret
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ sodix_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ sodix_secret_name }}"
 
-  # - name: Create h5p s3 bucket secret
-  #   kubernetes.core.k8s:
-  #     state: present
-  #     kubeconfig: "{{ kubeconfig }}"
-  #     definition:
-  #       apiVersion: onepassword.com/v1
-  #       kind: OnePasswordItem
-  #       metadata:
-  #         name: "{{ h5p_s3_bucket }}"
-  #         namespace: "{{ namespace }}"
-  #       spec:
-  #         itemPath: "vaults/{{ vault }}/items/{{ h5p_s3_bucket }}"
+  - name: Create h5p s3 bucket secret
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ h5p_s3_bucket }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ h5p_s3_bucket }}"
 
-  # - name: Install Splash - Javascript rendering engine
-  #   kubernetes.core.helm:
-  #     name: "splash"
-  #     chart_ref: "ntppool/splash"
-  #     update_repo_cache: yes
-  #     wait: yes
-  #     chart_version: "{{ splash_helm_chart_version }}"
-  #     kubeconfig: "{{ kubeconfig }}"
-  #     release_namespace: "{{ namespace }}"
-  #     values:
-  #       "{{ splash_helm_chart_values }}"
+  - name: Install Splash - Javascript rendering engine
+    kubernetes.core.helm:
+      name: "splash"
+      chart_ref: "ntppool/splash"
+      update_repo_cache: yes
+      wait: yes
+      chart_version: "{{ splash_helm_chart_version }}"
+      kubeconfig: "{{ kubeconfig }}"
+      release_namespace: "{{ namespace }}"
+      values:
+        "{{ splash_helm_chart_values }}"
 
-  # - name: Install Crawler for Edusharing
-  #   kubernetes.core.helm:
-  #     name: "crawler-{{item.name}}"
-  #     chart_ref: "dbildungscloud/edusharing-crawler"
-  #     update_repo_cache: yes
-  #     wait: yes
-  #     chart_version: "{{ edusharing_crawler_helm_chart_version }}"
-  #     kubeconfig: "{{ kubeconfig }}"
-  #     release_namespace: "{{ namespace }}"
-  #     values:
-  #       "{{ item }}"
-  #   when: item.enabled
-  #   loop: "{{ edusharing_crawler_list }}"
+  - name: Install Crawler for Edusharing
+    kubernetes.core.helm:
+      name: "crawler-{{item.name}}"
+      chart_ref: "dbildungscloud/edusharing-crawler"
+      update_repo_cache: yes
+      wait: yes
+      chart_version: "{{ edusharing_crawler_helm_chart_version }}"
+      kubeconfig: "{{ kubeconfig }}"
+      release_namespace: "{{ namespace }}"
+      values:
+        "{{ item }}"
+    when: item.enabled
+    loop: "{{ edusharing_crawler_list }}"

@@ -40,15 +40,17 @@ jobs:
         shell: bash
         run: |
           # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
-          echo "Set namespace to:"
-          if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
-          then
-            echo "dev-edusharing" >> $GITHUB_OUTPUT
-            echo "dev-edusharing"
-          else
-            echo "edusharing" >> $GITHUB_OUTPUT
-            echo "edusharing"
-          fi
+          echo "Set namespace to:hello"
+          # if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
+          # then
+          #   namespace_name=$(echo "namespace=dev-edusharing")
+          #   echo namespace_name="dev-edusharing">> $GITHUB_ENV
+          #   echo "dev-edusharing" >> $GITHUB_OUTPUT
+          #   echo "dev-edusharing"
+          # else
+          #   echo "edusharing" >> $GITHUB_OUTPUT
+          #   echo "edusharing"
+          # fi
         id: set_namespace
 
   deploy_edusharing_crawlers:
