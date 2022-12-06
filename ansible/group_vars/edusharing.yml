@@ -11,6 +11,9 @@ splash_helm_chart_version: "1.0.2"
 splash_helm_chart_values:
   service:
     port: 8050
+  # github deployments kubeconfig has no right to create a serviceAccount
+  serviceAccount:
+    create: false
 splash_url: "splash:8050"
 
 edusharing_crawler_list:
