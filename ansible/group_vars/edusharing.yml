@@ -135,7 +135,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_spider
   - name: SCHEDULE
-    value: "*-*-12:05"
+    value: "*-*-17:30"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
