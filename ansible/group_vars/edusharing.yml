@@ -6,6 +6,7 @@ edusharing_instance_secret_name: edusharing-instance
 sodix_secret_name: sodix-secret
 h5p_s3_bucket: s3-web-bucket
 
+splash_url: http://splash.edusharing.svc.cluster.local:8050
 splash_helm_chart_version: "1.0.2"
 splash_helm_chart_values:
   service:
@@ -20,7 +21,7 @@ splash_helm_chart_values:
   # github deployments kubeconfig has no right to create a serviceAccount
   serviceAccount:
     create: false
-    splash_url: http://splash.edusharing.svc.cluster.local:8050
+
 edusharing_crawler_list:
 - name: hello-world
   enabled: true
@@ -30,7 +31,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: hello_world
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -46,7 +47,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -93,7 +94,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: merlin_spider
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -140,7 +141,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_spider
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -187,7 +188,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_permissions
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: SODIX_BLACKLIST_PATH
@@ -222,7 +223,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: h5p_upload
   - name: SCHEDULE
-    value: "*-*-15:33"
+    value: "*-*-15:34"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
