@@ -6,12 +6,9 @@
   # roles:
   #   - kubeconfig
 
-  tasks:
-  - name: Run command 
-    ansible.builtin.command: ls -la 
-
+  # tasks:
   # - name: Run command 
-  #   ansible.builtin.command:
+  #   ansible.builtin.command: ls -la 
 
   - name: Add Helm Chart Repo dbildungscloud
     kubernetes.core.helm_repository:
