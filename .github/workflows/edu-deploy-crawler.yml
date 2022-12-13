@@ -37,9 +37,6 @@ jobs:
         shell: bash
         run: |
           tree
-          apt-get install tree
-          tree
-          ls  -la
           python3 -m pip install kubernetes
 
       - name: Install requirements ansible-galaxy
