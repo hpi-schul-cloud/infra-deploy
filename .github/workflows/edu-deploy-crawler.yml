@@ -30,12 +30,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v1
         with:
-            repository: hpi-schul-cloud/infra-deploy
-            path: repo/infra-deploy
+          path: repo/infra-deploy
 
       - name: Install requirements python3
         shell: bash
         run: |
+          apt-get update
+          sudo apt-get install tree
+          tree
+          ls  -la
           python3 -m pip install kubernetes
 
       - name: Install requirements ansible-galaxy
