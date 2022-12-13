@@ -28,9 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
         with:
-          path: repo/infra-deploy
+          path: "repo/infra-deploy"
+          repository: hpi-schul-cloud/infra-deploy
 
       - name: Install requirements python3
         shell: bash
