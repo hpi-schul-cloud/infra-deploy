@@ -35,8 +35,8 @@ jobs:
       - name: Install requirements python3
         shell: bash
         run: |
-          apt-get update
-          sudo apt-get install tree
+          tree
+          apt-get install tree
           tree
           ls  -la
           python3 -m pip install kubernetes
