@@ -5,7 +5,14 @@
   connection: local
   # roles:
   #   - kubeconfig
+
   tasks:
+  - name: Run command 
+    ansible.builtin.command: ls -la 
+
+  # - name: Run command 
+  #   ansible.builtin.command:
+
   - name: Add Helm Chart Repo dbildungscloud
     kubernetes.core.helm_repository:
       name: dbildungscloud
