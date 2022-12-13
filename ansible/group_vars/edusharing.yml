@@ -132,7 +132,7 @@ edusharing_crawler_list:
       cpu: 1200m
       memory: 1024Mi
     requests:
-      cpu: 800m
+      cpu: 300m
       memory: 512Mi
   enabled: true
   image:
@@ -215,7 +215,7 @@ edusharing_crawler_list:
       memory: 1024Mi
     requests:
       cpu: 1000m
-      memory: 512Mi
+      memory: 1024Mi
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"

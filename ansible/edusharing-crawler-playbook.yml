@@ -3,8 +3,8 @@
   hosts:
     - edusharing
   connection: local
-  roles:
-    - kubeconfig
+  # roles:
+  #   - kubeconfig
   tasks:
   - name: Add Helm Chart Repo dbildungscloud
     kubernetes.core.helm_repository:

@@ -14,3 +14,12 @@
 
 # Mac/OSX
 .DS_Store
+
+# secrets
+**/secrets/*
+secrets*.yml
+secrets*.yaml
+
+# kubernetes kubeconfigs
+kubeconfig.*
+kubeconfig

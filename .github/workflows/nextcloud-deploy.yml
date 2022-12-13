@@ -48,6 +48,7 @@ jobs:
         run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file in config folder
+      # here
         working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
         run: |
           mkdir files

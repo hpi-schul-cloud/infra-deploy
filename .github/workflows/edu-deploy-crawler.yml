@@ -29,6 +29,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
+        with:
+            repository: hpi-schul-cloud/infra-deploy
+            path: repo/infra-deploy
 
       - name: Install requirements python3
         shell: bash
@@ -36,16 +39,17 @@ jobs:
           python3 -m pip install kubernetes
 
       - name: Install requirements ansible-galaxy
-        run: ansible-galaxy install -r ansible/collections/requirements.yml
+        run: ansible-galaxy install -r /repo/infra-deploy/ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file in config folder
-        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+      # here
+        working-directory: ${{ github.workspace }}/
         run: |
-          mkdir files
-          echo "${{ secrets.KUBECONFIG }}" > files/config
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          ls -la
 
       - name: Set ENVs in config.yml file
-        working-directory: ${{ github.workspace }}/ansible/group_vars
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible/group_vars
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "edusharing_crawler_helm_chart_version: ${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}" >> config.yml
@@ -53,13 +57,16 @@ jobs:
           cat config.yml
 
       - name: Execute Ansible Edusharing Crawler Playbook
-        working-directory: ${{ github.workspace }}/ansible
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible
         run: ansible-playbook ./edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Delete config files
         if: always()
-        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
-        run: rm -rf /config
+      # here
+        working-directory: ${{ github.workspace }}/kubeconfig
+        run: |
+          rm -rf /config
+          ls -la
 
 
 

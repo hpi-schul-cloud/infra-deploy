@@ -1,4 +1,4 @@
-kubeconfig: ~/.kube/config
+kubeconfig: ~/kubeconfig
 project: sc
 
 kubernetes_version: 1.22.16
