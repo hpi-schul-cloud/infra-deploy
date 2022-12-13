@@ -25,41 +25,13 @@ jobs:
   #   steps:
   #     - run: echo "Approval from authorized approve_edusharing Group has been given!"
 
-
-# not working yet
-  set_namespace:
-      # needs:
-      # - approve_edusharing
-    runs-on: ubuntu-latest
-    env:
-      CLUSTER: ${{ inputs.CLUSTER }}
-    outputs:
-      namespace: ${{ steps.set_namespace.outputs.namespace }}
-    steps:
-      - name: Set namespace
-        shell: bash
-        run: |
-          # on sc-staging-edusharing cluster we have to use the dev-edusharing-namespace
-          echo "Set namespace..."
-          if [ ${{ env.CLUSTER }} == sc-staging-edusharing ]
-          then
-            namespace_name=$(echo "namespace=dev-edusharing")
-            echo "namespace=dev-edusharing" >> $GITHUB_ENV
-            echo "$namespace_name" >> $GITHUB_OUTPUT
-          else
-            namespace_name=$(echo "namespace=edusharing")
-            echo "namespace=edusharing" >> $GITHUB_ENV
-            echo "$namespace_name" >> $GITHUB_OUTPUT
-          fi
-        id: set_namespace
-
   deploy_edusharing_crawlers:
     uses: ./.github/workflows/edu-deploy-crawler.yml
-    needs:
-      - set_namespace
+    # needs:
+    #   - approve_edusharing
     with:
       CLUSTER: "${{ inputs.CLUSTER }}"
-      NAMESPACE: ${{ needs.set_namespace.outputs.namespace }}
+      NAMESPACE: edusharing
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:
