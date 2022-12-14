@@ -251,8 +251,8 @@ edusharing_crawler_list:
         name: "{{ h5p_s3_bucket }}"
         key: s3_access_secret
   - name: S3_ENDPOINT_URL
-    value: "http://s3-eu-central-1.ionoscloud.com/"
-  - name: "S3_BUCKET_NAME"
+    value: "{{ s3_url_frankfurt }}"
+  - name: S3_BUCKET_NAME
     value: "lernstore-content"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
