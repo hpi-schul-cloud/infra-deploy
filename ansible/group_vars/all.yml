@@ -1,4 +1,4 @@
-kubeconfig: kubeconfig
+kubeconfig: /home/runner/work/infra-deploy/infra-deploy/kubeconfig
 project: sc
 
 kubernetes_version: 1.22.16
