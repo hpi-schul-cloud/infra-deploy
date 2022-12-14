@@ -6,7 +6,7 @@
   # roles:
   #   - kubeconfig
 
-  # tasks:
+  tasks:
   # - name: Run command 
   #   ansible.builtin.command: ls -la 
 
