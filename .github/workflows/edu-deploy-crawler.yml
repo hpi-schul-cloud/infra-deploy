@@ -60,9 +60,9 @@ jobs:
 
       - name: Delete kubeconfig files
         if: always()
-        working-directory: ${{ github.workspace }}/kubeconfig
+        working-directory: ${{ github.workspace }}
         run: |
-          rm -f /kubeconfig
+          rm -f kubeconfig
 
 
 
