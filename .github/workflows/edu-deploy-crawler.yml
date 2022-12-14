@@ -48,6 +48,7 @@ jobs:
         run: |
           echo "${{ secrets.KUBECONFIG }}" > kubeconfig
           ls -la
+          pwd
 
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible/group_vars
