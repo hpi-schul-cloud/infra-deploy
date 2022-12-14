@@ -57,6 +57,16 @@ edusharing_crawler_list:
     value: "False"
   - name: OEH_IMPORT_SOURCES
     value: "oeh,wirlernenonline_spider,serlo_spider,youtube_spider"
+  - name: SODIX_USER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: username
+  - name: SODIX_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ sodix_secret_name }}"
+        key: password
   - name: EDU_SHARING_BASE_URL
     valueFrom:
       secretKeyRef:
