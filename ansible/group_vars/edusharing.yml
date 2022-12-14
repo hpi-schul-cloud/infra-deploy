@@ -31,7 +31,7 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-2:00"
-- name: oeh_spider
+- name: oeh-spider
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
