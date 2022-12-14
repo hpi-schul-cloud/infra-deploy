@@ -41,7 +41,7 @@ jobs:
       - name: Install requirements ansible-galaxy
         run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
 
-      - name: Create Kubeconfig file in config folder
+      - name: Create Kubeconfig file
         working-directory: ${{ github.workspace }}/
         run: |
           echo "${{ secrets.KUBECONFIG }}" > kubeconfig
@@ -58,11 +58,11 @@ jobs:
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
         run: ansible-playbook ansible/edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
-      - name: Delete config files
+      - name: Delete kubeconfig files
         if: always()
         working-directory: ${{ github.workspace }}/kubeconfig
         run: |
-          rm -rf /kubeconfig
+          rm -f /kubeconfig
 
 
 
