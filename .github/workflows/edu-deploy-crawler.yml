@@ -59,7 +59,7 @@ jobs:
 
       - name: Execute Ansible Edusharing Crawler Playbook
         working-directory: ${{ github.workspace }}/
-        run: ansible-playbook repo/infra-deploy/ansible/edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
+        run: ansible-playbook repo/infra-deploy/ansible/edusharing-crawler-playbook.yml --inventory-file repo/infra-deploy/hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Delete config files
         if: always()
