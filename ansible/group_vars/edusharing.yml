@@ -18,7 +18,6 @@ splash_helm_chart_values:
     requests:
       cpu: 500m
       memory: 1024Mi
-  # github deployments kubeconfig has no right to create a serviceAccount
   serviceAccount:
     create: false
 
