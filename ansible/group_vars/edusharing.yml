@@ -31,6 +31,47 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-2:00"
+- name: oeh_spider
+  enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  env:
+  - name: CRAWLER
+    value: mediothek_pixiothek_spider
+  - name: SCHEDULE
+    value: "*-*-2:10"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: SPLASH_URL
+    value: "{{ splash_url }}"
+  - name: DRY_RUN
+    value: "False"
+  - name: EDU_SHARING_BASE_URL
+    value: "False"
+  - name: OEH_IMPORT_SOURCES
+    value: "oeh,wirlernenonline_spider,serlo_spider,youtube_spider"
+  - name: EDU_SHARING_BASE_URL
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: url
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
