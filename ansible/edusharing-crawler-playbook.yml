@@ -14,7 +14,7 @@
       name: ntppool
       repo_url: "https://charts.ntppool.org/"
 
-  - name: Create edusharing-instance secret
+  - name: Create secrets for edusharing
     kubernetes.core.k8s:
       state: present
       kubeconfig: "{{ kubeconfig }}"
@@ -22,36 +22,11 @@
         apiVersion: onepassword.com/v1
         kind: OnePasswordItem
         metadata:
-          name: "{{ edusharing_instance_secret_name }}"
+          name: "{{ item.name }}"
           namespace: "{{ namespace }}"
         spec:
-          itemPath: "vaults/{{ vault }}/items/{{ edusharing_instance_secret_name }}"
-
-  - name: Create sodix secret
-    kubernetes.core.k8s:
-      state: present
-      kubeconfig: "{{ kubeconfig }}"
-      definition:
-        apiVersion: onepassword.com/v1
-        kind: OnePasswordItem
-        metadata:
-          name: "{{ sodix_secret_name }}"
-          namespace: "{{ namespace }}"
-        spec:
-          itemPath: "vaults/{{ vault }}/items/{{ sodix_secret_name }}"
-
-  - name: Create h5p s3 bucket secret
-    kubernetes.core.k8s:
-      state: present
-      kubeconfig: "{{ kubeconfig }}"
-      definition:
-        apiVersion: onepassword.com/v1
-        kind: OnePasswordItem
-        metadata:
-          name: "{{ h5p_s3_bucket }}"
-          namespace: "{{ namespace }}"
-        spec:
-          itemPath: "vaults/{{ vault }}/items/{{ h5p_s3_bucket }}"
+          itemPath: "vaults/{{ vault }}/items/{{ item.name }}"
+    loop: "{{ edusharing_secrets }}"
 
   - name: Install Splash - Javascript rendering engine
     kubernetes.core.helm:

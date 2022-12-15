@@ -6,6 +6,11 @@ edusharing_instance_secret_name: edusharing-instance
 sodix_secret_name: sodix-secret
 h5p_s3_bucket: s3-web-bucket
 
+edusharing_secrets:
+- name: "{{ edusharing_instance_secret_name }}"
+- name: "{{ sodix_secret_name }}"
+- name: "{{ h5p_s3_bucket }}"
+
 splash_url: http://splash.edusharing.svc.cluster.local:8050
 splash_helm_chart_version: "1.0.2"
 splash_helm_chart_values:
@@ -44,7 +49,7 @@ edusharing_crawler_list:
       memory: 512Mi
   env:
   - name: CRAWLER
-    value: mediothek_pixiothek_spider
+    value: oeh_spider
   - name: SCHEDULE
     value: "*-*-2:10"
   - name: LOG_LEVEL
