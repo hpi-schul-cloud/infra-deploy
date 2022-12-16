@@ -94,15 +94,15 @@ edusharing_crawler_list:
   resources:
     limits:
       cpu: 1000m
-      memory: 1024Mi
+      memory: 4Gi
     requests:
-      cpu: 500m
-      memory: 512Mi
+      cpu: 750m
+      memory: 2Gi
   env:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
   - name: SCHEDULE
-    value: "*-*-2:10"
+    value: "*-*-5:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -149,7 +149,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: merlin_spider
   - name: SCHEDULE
-    value: "*-*-2:20"
+    value: "*-*-4:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -185,10 +185,10 @@ edusharing_crawler_list:
   resources:
     limits:
       cpu: 1200m
-      memory: 1024Mi
+      memory: 2Gi
     requests:
       cpu: 300m
-      memory: 512Mi
+      memory: 1Gi
   enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
@@ -196,7 +196,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_spider
   - name: SCHEDULE
-    value: "*-*-2:30"
+    value: "*-*-3:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -243,7 +243,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: sodix_permissions
   - name: SCHEDULE
-    value: "*-*-2:40"
+    value: "*-*-22:40"
   - name: LOG_LEVEL
     value: "INFO"
   - name: SODIX_BLACKLIST_PATH
@@ -278,7 +278,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: h5p_upload
   - name: SCHEDULE
-    value: "*-*-2:50"
+    value: "*-*-2:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
