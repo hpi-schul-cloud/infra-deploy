@@ -1,4 +1,4 @@
-kubeconfig: ~/.kube/config
+kubeconfig: /home/runner/work/infra-deploy/infra-deploy/kubeconfig
 project: sc
 
 kubernetes_version: 1.22.16
@@ -10,6 +10,7 @@ get_kubectl_command: |
 
 s3_region_berlin: eu-central-2
 s3_url_berlin: https://s3-eu-central-2.ionoscloud.com
+s3_url_frankfurt: http://s3-eu-central-1.ionoscloud.com
 
 nextcloud_chart_version: 2.13.2
 nextcloud_secret_name: nextcloud

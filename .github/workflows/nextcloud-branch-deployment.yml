@@ -28,7 +28,7 @@ jobs:
         id: extract_branch
 
   deploy_nextcloud_from_branch:
-    if: ${{ needs.get_branch_name.outputs.branch }} != 'main' && ${{ needs.get_branch_name.outputs.branch }} != 'nbc-main'
+    if: ${{ needs.get_branch_name.outputs.branch }} != 'main'
     needs:
       - get_branch_name
     uses: ./.github/workflows/nextcloud-deploy.yml

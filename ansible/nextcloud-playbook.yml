@@ -3,8 +3,6 @@
   hosts:
     - sc-dev-nextcloud
   connection: local
-  roles:
-  - kubeconfig
   tasks:
   - name: Add nextcloud chart repo
     kubernetes.core.helm_repository:

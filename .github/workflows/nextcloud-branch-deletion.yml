@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       NAMESPACE_NAME:
-        description: "Select namespace to delete"
+        description: "Select namespace to delete from sc-dev-nextcloud"
         required: true
 
 jobs:

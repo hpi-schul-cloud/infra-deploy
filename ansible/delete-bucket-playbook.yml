@@ -3,8 +3,6 @@
   hosts:
     - nextcloud
   connection: local
-  roles:
-  - kubeconfig
   tasks:
   - name: Delete s3 bucket
     amazon.aws.aws_s3:

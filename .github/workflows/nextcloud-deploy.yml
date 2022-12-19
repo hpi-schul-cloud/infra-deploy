@@ -45,16 +45,15 @@ jobs:
           python3 -m pip install -r requirements.txt
 
       - name: Install requirements ansible-galaxy
-        run: ansible-galaxy install -r ansible/collections/requirements.yml
+        run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
 
-      - name: Create Kubeconfig file in config folder
-        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
+      - name: Create Kubeconfig file
+        working-directory: ${{ github.workspace }}/
         run: |
-          mkdir files
-          echo "${{ secrets.KUBECONFIG }}" > files/config
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
 
       - name: Set ENVs in config.yml file
-        working-directory: ${{ github.workspace }}/ansible/group_vars
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible/group_vars
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "schulcloud_namespace: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
@@ -66,10 +65,10 @@ jobs:
           cat config.yml
 
       - name: Execute Ansible Nextcloud Playbook
-        working-directory: ${{ github.workspace }}/ansible
-        run: ansible-playbook ./nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
+        working-directory: ${{ github.workspace }}/ansible/repo/infra-deploy/
+        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 
-      - name: Delete config files
+      - name: Delete kubeconfig file
         if: always()
-        working-directory: ${{ github.workspace }}/ansible/roles/kubeconfig
-        run: rm -rf /config
+        working-directory: ${{ github.workspace }}
+        run: rm -f kubeconfig
