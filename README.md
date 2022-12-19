@@ -8,6 +8,7 @@ Crawlers:
 - hello_world
 - mediothek_pixiothek_spider
 - merlin_spider
+- oeh_spider
 - sodix_spider
 - sodix_permissions
 - h5p_upload
