@@ -11,11 +11,12 @@ on:
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
         description: "Select Edusharing crawler Helm Chart version"
         required: true
-        default: "0.0.02"
+        default: "0.1.0"
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.0.17"
+        # h5p needs a fix, likely to increase
+        default: "0.1.2"
 
 jobs:
   approve_edusharing:

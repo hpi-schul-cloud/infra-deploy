@@ -3,6 +3,7 @@
 # edusharing_crawler_image_tag:
 
 edusharing_instance_secret_name: edusharing-instance
+edusharing_kubernetes_service_name: http://edusharing-repository-service.edusharing.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
 h5p_s3_bucket: s3-web-bucket
 
@@ -34,6 +35,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: hello_world
+    # set smart schedule values
   - name: SCHEDULE
     value: "*-*-2:00"
 - name: oeh-spider
@@ -50,6 +52,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: oeh_spider
+    # set smart schedule values
   - name: SCHEDULE
     value: "*-*-2:10"
   - name: LOG_LEVEL
@@ -59,7 +62,7 @@ edusharing_crawler_list:
   - name: DRY_RUN
     value: "False"
   - name: EDU_SHARING_BASE_URL
-    value: "False"
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: OEH_IMPORT_SOURCES
     value: "oeh,wirlernenonline_spider,serlo_spider,youtube_spider"
   - name: SODIX_USER
@@ -73,10 +76,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -101,6 +101,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
+     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-5:00"
   - name: SPLASH_URL
@@ -120,10 +121,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -148,6 +146,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: merlin_spider
+ # set smart schedule values
   - name: SCHEDULE
     value: "*-*-4:00"
   - name: SPLASH_URL
@@ -167,10 +166,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -195,6 +191,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: sodix_spider
+     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-3:00"
   - name: SPLASH_URL
@@ -204,10 +201,7 @@ edusharing_crawler_list:
   - name: DRY_RUN
     value: "False"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -242,6 +236,7 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: sodix_permissions
+     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-22:40"
   - name: LOG_LEVEL
@@ -249,10 +244,7 @@ edusharing_crawler_list:
   - name: SODIX_BLACKLIST_PATH
     value: "/oeh-search-etl/schulcloud/sodix/blacklist.json"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -277,15 +269,13 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: h5p_upload
+     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-2:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
