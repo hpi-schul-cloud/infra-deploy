@@ -7,7 +7,7 @@ on:
       CLUSTER:
         description: "Select Edusharing cluster"
         required: true
-        default: infra-dev-edusharing-1
+        default: sc-dev-edusharing
       EDUSHARING_CRAWLER_HELM_CHART_VERSION:
         description: "Select Edusharing crawler Helm Chart version"
         required: true
