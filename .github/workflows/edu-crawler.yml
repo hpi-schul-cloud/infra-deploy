@@ -15,7 +15,6 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        # h5p needs a fix, likely to increase
         default: "0.1.2"
 
 jobs:

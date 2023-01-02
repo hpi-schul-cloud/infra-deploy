@@ -262,7 +262,7 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
-  enabled: true
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
