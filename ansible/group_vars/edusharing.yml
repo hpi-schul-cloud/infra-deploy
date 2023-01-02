@@ -63,8 +63,6 @@ edusharing_crawler_list:
     value: "False"
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
-  - name: OEH_IMPORT_SOURCES
-    value: "oeh,wirlernenonline_spider,serlo_spider,youtube_spider"
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
