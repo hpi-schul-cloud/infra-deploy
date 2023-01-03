@@ -35,7 +35,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: hello_world
-    # set smart schedule values
   - name: SCHEDULE
     value: "*-*-2:00"
 - name: oeh-spider
@@ -52,7 +51,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: oeh_spider
-    # set smart schedule values
   - name: SCHEDULE
     value: "*-*-20:00"
   - name: LOG_LEVEL
@@ -99,7 +97,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
-     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-21:00"
   - name: SPLASH_URL
@@ -144,7 +141,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: merlin_spider
- # set smart schedule values
   - name: SCHEDULE
     value: "*-*-22:00"
   - name: SPLASH_URL
@@ -189,8 +185,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: sodix_spider
-     # set smart schedule values, nur jeden 2. Tag?
-     # https://github.com/hpi-schul-cloud/oeh-search-etl/blob/BRB-38_H5P/run.py
   - name: SCHEDULE
     value: "*-*-3:00"
   - name: SPLASH_URL
@@ -235,7 +229,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: sodix_permissions
-     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-22:40"
   - name: LOG_LEVEL
@@ -268,7 +261,6 @@ edusharing_crawler_list:
   env:
   - name: CRAWLER
     value: h5p_upload
-     # set smart schedule values
   - name: SCHEDULE
     value: "*-*-00:00"
   - name: LOG_LEVEL
