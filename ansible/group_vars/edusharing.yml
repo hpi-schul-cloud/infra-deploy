@@ -3,6 +3,7 @@
 # edusharing_crawler_image_tag:
 
 edusharing_instance_secret_name: edusharing-instance
+edusharing_kubernetes_service_name: http://edusharing-repository-service.edusharing.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
 h5p_s3_bucket: s3-web-bucket
 
@@ -51,7 +52,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: oeh_spider
   - name: SCHEDULE
-    value: "*-*-2:10"
+    value: "*-*-20:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: SPLASH_URL
@@ -59,9 +60,7 @@ edusharing_crawler_list:
   - name: DRY_RUN
     value: "False"
   - name: EDU_SHARING_BASE_URL
-    value: "False"
-  - name: OEH_IMPORT_SOURCES
-    value: "oeh,wirlernenonline_spider,serlo_spider,youtube_spider"
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
@@ -73,10 +72,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -102,7 +98,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: mediothek_pixiothek_spider
   - name: SCHEDULE
-    value: "*-*-5:00"
+    value: "*-*-21:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -120,10 +116,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -149,7 +142,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: merlin_spider
   - name: SCHEDULE
-    value: "*-*-4:00"
+    value: "*-*-22:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: LOG_LEVEL
@@ -167,10 +160,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -204,10 +194,7 @@ edusharing_crawler_list:
   - name: DRY_RUN
     value: "False"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -249,10 +236,7 @@ edusharing_crawler_list:
   - name: SODIX_BLACKLIST_PATH
     value: "/oeh-search-etl/schulcloud/sodix/blacklist.json"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
@@ -271,21 +255,18 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
-  enabled: true
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: h5p_upload
   - name: SCHEDULE
-    value: "*-*-2:00"
+    value: "*-*-00:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: url
+    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
