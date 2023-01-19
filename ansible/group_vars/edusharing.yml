@@ -3,9 +3,11 @@
 # edusharing_crawler_image_tag:
 
 edusharing_instance_secret_name: edusharing-instance
-edusharing_kubernetes_service_name: http://edusharing-repository-service.edusharing.svc.cluster.local:8081/edu-sharing/
+edusharing_kubernetes_service_name: http://edusharing-repository-service.{{ namespace }}.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
+# alter this
 h5p_s3_bucket: s3-web-bucket
+# fwu_s3_bucket: s3-web-bucket
 
 edusharing_secrets:
 - name: "{{ edusharing_instance_secret_name }}"
@@ -172,6 +174,7 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: sodix-spider
+  enabled: true
   resources:
     limits:
       cpu: 1200m
@@ -179,7 +182,6 @@ edusharing_crawler_list:
     requests:
       cpu: 300m
       memory: 1Gi
-  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -216,6 +218,7 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
 - name: sodix-permissions
+  enabled: true
   resources:
     limits:
       cpu: 1000m
@@ -223,7 +226,6 @@ edusharing_crawler_list:
     requests:
       cpu: 250m
       memory: 512Mi
-  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -248,6 +250,7 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: h5p-upload
+  enabled: false
   resources:
     limits:
       cpu: 1500m
@@ -255,7 +258,6 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
-  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -293,3 +295,51 @@ edusharing_crawler_list:
     value: "lernstore-content"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
+
+edusharing_2_crawler_list: []
+# - name: fwu-upload
+#   enabled: true
+#   resources:
+#     limits:
+#       cpu: 1500m
+#       memory: 1024Mi
+#     requests:
+#       cpu: 1000m
+#       memory: 1024Mi
+#   image:
+#     tag: "{{ edusharing_crawler_image_tag }}"
+#   env:
+#   - name: CRAWLER
+#     value: fwu_upload
+#   - name: SCHEDULE
+#     value: "*-*-00:00"
+#   - name: LOG_LEVEL
+#     value: "INFO"
+#   - name: EDU_SHARING_BASE_URL
+#     value: "{{ edusharing_kubernetes_service_name }}"
+#   - name: EDU_SHARING_USERNAME
+#     valueFrom:
+#       secretKeyRef:
+#         name: "{{ edusharing_instance_secret_name }}"
+#         key: username
+#   - name: EDU_SHARING_PASSWORD
+#     valueFrom:
+#       secretKeyRef:
+#         name: "{{ edusharing_instance_secret_name }}"
+#         key: password
+  # - name: S3_ACCESS_KEY
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: "{{ h5p_s3_bucket }}"
+  #       key: s3_access_key
+  # - name: S3_SECRET_KEY
+  #   valueFrom:
+  #     secretKeyRef:
+  #       name: "{{ h5p_s3_bucket }}"
+  #       key: s3_access_secret
+  # - name: S3_ENDPOINT_URL
+  #   value: "{{ s3_url_frankfurt }}"
+  # - name: S3_BUCKET_NAME
+  #   value: "fwu-content"
+  # - name: S3_DOWNLOAD_DIRECTORY
+  #   value: "s3_download"
