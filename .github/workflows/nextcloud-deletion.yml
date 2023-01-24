@@ -35,8 +35,10 @@ jobs:
         shell: bash
         run: |
           python3 -m pip install -r requirements.txt
+          ls -la
 
       - name: Install requirements ansible-galaxy
+        working-directory: ${{ github.workspace }}/ansible/repo/infra-deploy/
         run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file
