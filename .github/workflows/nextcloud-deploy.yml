@@ -46,7 +46,11 @@ jobs:
           tree
 
       - name: Install requirements ansible-galaxy
-        run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
+        run: |
+          python3 -m pip install kubernetes
+          python3 -m pip install boto3
+        # run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
+        # run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file
         working-directory: ${{ github.workspace }}/
