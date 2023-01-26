@@ -39,7 +39,8 @@ jobs:
           python3 -m pip install kubernetes
 
       - name: Install requirements ansible-galaxy
-        run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
+        run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file
         working-directory: ${{ github.workspace }}/
