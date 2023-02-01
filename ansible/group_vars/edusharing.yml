@@ -215,7 +215,7 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ sodix_secret_name }}"
         key: password
-- name: sodix-permissions
+- name: permission-updater
   resources:
     limits:
       cpu: 1000m
@@ -228,13 +228,11 @@ edusharing_crawler_list:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
-    value: sodix_permissions
+    value: permission_updater
   - name: SCHEDULE
     value: "*-*-22:40"
   - name: LOG_LEVEL
     value: "INFO"
-  - name: SODIX_BLACKLIST_PATH
-    value: "/oeh-search-etl/schulcloud/sodix/blacklist.json"
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
