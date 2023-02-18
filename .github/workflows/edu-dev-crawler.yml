@@ -13,7 +13,7 @@ on:
         required: true
         default: "0.1.2"
       EDUSHARING_NAMESPACE:
-        description: "Select valid namespace: 'edusharing', 'edusharing-2'"
+        description: "Select valid namespace: 'edusharing', 'edu-2'"
         required: true
 
 jobs:
