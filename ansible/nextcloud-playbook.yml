@@ -32,7 +32,7 @@
     include_tasks: multi-instance-nextcloud.yml
     vars:
       instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
-    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) | selectattr('item.name', 'equalto', instance_name)}}"
+    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) | selectattr('name', 'equalto', instance_name)}}"
     when:  instance_name != 'all'
     tags:
       - nextcloud
