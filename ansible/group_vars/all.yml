@@ -61,11 +61,11 @@ nextcloud_values:
       passwordKey: password
     extraEnv:
     - name: INSTALL_PLUGINS
-      value: "{{ nextcloud_install_plugins }}"
+      value: "{{ nextcloud[item.name].plugins.install }}"
     - name: ENABLE_PLUGINS
-      value: "{{ nextcloud_enable_plugins }}"
+      value: "{{ nextcloud[item.name].plugins.enabled }}"
     - name: DISABLE_PLUGINS
-      value: "{{ nextcloud_disable_plugins }}"
+      value: "{{ nextcloud[item.name].plugins.disabled }}"
     - name: RUN_CONFIGURATION
       value: "{%if run_nextcloud_configuration is defined%}{{ run_nextcloud_configuration | string}}{%else%}false{%endif%}"
     - name: EXTERNAL_GIT_PLUGINS
@@ -103,11 +103,11 @@ nextcloud_values:
     - name: THEMING_URL
       value: https://{{ item.nextcloud_hostname  }}/
     - name: THEMING_SLOGAN
-      value: "{{ item.nextcloud_theming_slogan }}"
+      value: "{{ nextcloud[ item.name ].theming.slogan | default('') }}"
     - name: THEMING_COLOR
-      value:  "{{ item.nextcloud_theming_color }}"
+      value: "{{nextcloud[ item.name ].theming.theming_color | default('#0082C9') }}"
     - name: THEMING_LOGO_URL
-      value:  "{{ item.nextcloud_theming_logo_url }}"
+      value: "{{ nextcloud[ item.name ].theming.logo_url  | default('') }}"
   metrics:
     enabled: true
     https: true
