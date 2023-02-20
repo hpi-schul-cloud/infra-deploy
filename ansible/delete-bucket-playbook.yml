@@ -8,7 +8,7 @@
     amazon.aws.s3_bucket:
       access_key: "{{ s3_access_key }}"
       secret_key: "{{ s3_access_secret }}"
-      namet: "{{ s3_bucket_name }}"
+      name: "{{ s3_bucket_name }}"
       state: absent
       endpoint_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
