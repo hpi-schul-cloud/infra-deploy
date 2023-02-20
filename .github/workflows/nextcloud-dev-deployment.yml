@@ -1,7 +1,7 @@
 name: NC Deploy to Dev (nbc-main, brb-main, thr-main)
-on:
   # cd schulcloud-nextcloud
   # gh workflow run nextcloud-dev-deployment.yml -f INSTANCE_NAME=<myvalue>
+on:
   workflow_dispatch:
     inputs:
       INSTANCE_NAME:
