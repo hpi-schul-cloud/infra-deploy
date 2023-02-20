@@ -58,6 +58,7 @@ jobs:
         working-directory: ${{ github.workspace }}/
         run: |
           echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          chmod 600 kubeconfig
 
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible/group_vars
@@ -74,7 +75,7 @@ jobs:
 
       - name: Execute Ansible Nextcloud Playbook
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
-        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }} -C -vv
+        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }} -vv
 
       - name: Delete kubeconfig file
         if: always()
