@@ -1,27 +1,70 @@
 stage: dev
-
 nextcloud_image_tag: latest
-nbc_authorizeUrl: "oauth-{{ schulcloud_namespace}}.cd.dbildungscloud.dev"
-nbc_hydraUrl: "oauth-{{ schulcloud_namespace }}.cd.dbildungscloud.dev"
-nbc_logoutUrl: "{{ schulcloud_namespace }}.cd.dbildungscloud.dev"
-nbc_nextcloud_hostname: nextcloud-nbc.dbildungscloud.dev
+nextcloud:
+  nbc:
+    urls:
+      authorizeUrl: oauth-nbc-main.cd.dbildungscloud.dev
+      hydraUrl: oauth-nbc-main.cd.dbildungscloud.dev
+      logoutUrl: nbc-main.cd.dbildungscloud.dev
+      nextcloud_hostname: nextcloud-nbc.dbildungscloud.dev
+      collabora: collabora.niedersachsen.dbildungscloud.dev
+    plugins:
+      install: "{{ nextcloud_install_plugins_default }}"
+      enabled: "{{ nextcloud_enable_plugins_default }}"
+      disabled: "{{ nextcloud_disable_plugins_default }}"
+    theming:
+      "{{ nbc_nextcloud_theming }}"
+  brb:
+    urls:
+      authorizeUrl: oauth-brb-main.cd.dbildungscloud.dev
+      hydraUrl: oauth-brb-main.cd.dbildungscloud.dev
+      logoutUrl: brb-main.cd.dbildungscloud.dev
+      nextcloud_hostname: nextcloud-brb.dbildungscloud.dev
+      collabora: collabora.brandenburg.dbildungscloud.dev
+    plugins:
+      install: "{{ nextcloud_install_plugins_default }}"
+      enabled: "{{ nextcloud_enable_plugins_default }}"
+      disabled: "{{ nextcloud_disable_plugins_default }}"
+  thr:
+    urls:
+      authorizeUrl: oauth-thr-main.cd.dbildungscloud.dev
+      hydraUrl: oauth-thr-main.cd.dbildungscloud.dev
+      logoutUrl: thr-main.cd.dbildungscloud.dev
+      nextcloud_hostname: nextcloud-thr.dbildungscloud.dev
+      collabora: collabora.thueringen.dbildungscloud.dev
+    plugins:
+      install: "schulcloud extract theming"
+      enabled: "{{ nextcloud_enable_plugins_default }}"
+      disabled: "{{ nextcloud_disable_plugins_default }}"
+
 nextcloud_instances:
-- name: cd
-  namespace: "{{ namespace }}"
+- name: nbc
+  namespace: nbc-main
   vault: "{{project}}-{{stage}}-cd"
   nextcloud_enabled: true
   # set this var to true in order for the configure.sh script to be run
   # run_nextcloud_configuration: false
-  authorizeUrl: "{{ nbc_authorizeUrl }}"
-  hydraUrl: "{{ nbc_hydraUrl }}"
-  logoutUrl: "{{ nbc_logoutUrl }}"
-  nextcloud_hostname: "{%if namespace == 'nbc-main'%}{{ nbc_nextcloud_hostname }}{%else%}{{ namespace + '.sc-dev-nextcloud.dbildungscloud.dev'}}{%endif%}"
-  nextcloud_theming_slogan: Niedersächsische Bildungscloud
-  nextcloud_theming_color: '#5083C7'
-  nextcloud_theming_logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
-  # info: By disabling collabora an earlier config does NOT get deleted
-  collabora_enabled: true
-  collabora_url: collabora.niedersachsen.dbildungscloud.dev
+  authorizeUrl: "{{ nextcloud.nbc.urls.authorizeUrl }}"
+  hydraUrl: "{{ nextcloud.nbc.urls.hydraUrl }}"
+  logoutUrl: "{{ nextcloud.nbc.urls.logoutUrl }}"
+  nextcloud_hostname: "{{ nextcloud.nbc.urls.nextcloud_hostname }}"
+- name: brb
+  namespace: brb-main
+  vault: "{{project}}-{{stage}}-cd"
+  nextcloud_enabled: true
+  authorizeUrl: "{{ nextcloud.brb.urls.authorizeUrl }}"
+  hydraUrl: "{{ nextcloud.brb.urls.hydraUrl }}"
+  logoutUrl: "{{ nextcloud.brb.urls.logoutUrl }}"
+  nextcloud_hostname: "{{ nextcloud.brb.urls.nextcloud_hostname }}"
+- name: thr
+  namespace: thr-main
+  vault: "{{project}}-{{stage}}-cd"
+  nextcloud_enabled: true
+  authorizeUrl: "{{ nextcloud.thr.urls.authorizeUrl }}"
+  hydraUrl: "{{ nextcloud.thr.urls.hydraUrl }}"
+  logoutUrl: "{{ nextcloud.thr.urls.logoutUrl }}"
+  nextcloud_hostname: "{{ nextcloud.thr.urls.nextcloud_hostname }}"
+
 nextcloud_resources:
   limits:
     cpu: 1000m

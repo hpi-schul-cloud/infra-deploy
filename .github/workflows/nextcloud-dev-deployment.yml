@@ -1,11 +1,12 @@
-name: NC Deploy to Dev (nbc-main)
+name: NC Deploy to Dev (nbc-main, brb-main, thr-main)
 on:
   # cd schulcloud-nextcloud
-  # gh workflow run nextcloud-dev-deployment.yml
+  # gh workflow run nextcloud-dev-deployment.yml -f INSTANCE_NAME=<myvalue>
   workflow_dispatch:
-  push:
-    branches:
-      - main
+    inputs:
+      INSTANCE_NAME:
+      description: 'select nbc, brb, thr or all'
+      required: true
 
 jobs:
   approve_dev_nextcloud:
@@ -14,15 +15,52 @@ jobs:
     steps:
       - run: echo "Approval from authorized approve_dev_nextcloud Group has been given!"
 
-  deploy_nextcloud_from_main:
+  deploy_nextcloud_from_main_to_nbc:
+    if: inputs.INSTANCE_NAME == 'nbc' || inputs.INSTANCE_NAME == 'all'
     needs:
       - approve_dev_nextcloud
     uses: ./.github/workflows/nextcloud-deploy.yml
     with:
       CLUSTER: "sc-dev-nextcloud"
+      # change after nextcloud niedersachsen migration to "sc-dev-nbc-nextcloud-txl-bucket-0000"
       BUCKET_NAME: "sc-dev-cd-nextcloud-txl-bucket-0000"
       NAMESPACE: "nbc-main"
       NAMESPACE_SCHULCLOUD_INSTANCE: "nbc-main"
+      INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
+      SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
+
+  deploy_nextcloud_from_main_to_brb:
+    if: inputs.INSTANCE_NAME == 'brb' || inputs.INSTANCE_NAME == 'all'
+    needs:
+      - approve_dev_nextcloud
+    uses: ./.github/workflows/nextcloud-deploy.yml
+    with:
+      CLUSTER: "sc-dev-nextcloud"
+      BUCKET_NAME: "sc-dev-brb-nextcloud-txl-bucket-0000"
+      NAMESPACE: "brb-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "brb-main"
+      INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
+      SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
+
+  deploy_nextcloud_from_main_to_thr:
+    if: inputs.INSTANCE_NAME == 'thr' || inputs.INSTANCE_NAME == 'all'
+    needs:
+      - approve_dev_nextcloud
+    uses: ./.github/workflows/nextcloud-deploy.yml
+    with:
+      CLUSTER: "sc-dev-nextcloud"
+      BUCKET_NAME: "sc-dev-thr-nextcloud-txl-bucket-0000"
+      NAMESPACE: "thr-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "default-main"
+      INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}

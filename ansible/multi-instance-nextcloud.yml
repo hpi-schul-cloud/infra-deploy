@@ -12,6 +12,19 @@
           spec:
             itemPath: "vaults/{{ instance_vault }}/items/nextcloud"
 
+    - name: Create s3_credentials secret
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: onepassword.com/v1
+          kind: OnePasswordItem
+          metadata:
+            name: "ionos-s3-password"
+            namespace: "{{ item.namespace }}"
+          spec:
+            itemPath: "vaults/{{ instance_vault }}/items/ionos-s3-password"
+
     - name: Create nextcloud postgresql pvc
       kubernetes.core.k8s:
         state: present

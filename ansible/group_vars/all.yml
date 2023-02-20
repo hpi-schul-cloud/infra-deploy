@@ -65,7 +65,7 @@ nextcloud_values:
     - name: EXTERNAL_GIT_PLUGINS
       value: "{{ nextcloud_external_git_plugins }}"
     - name: CONFIG_JSON
-      value: "{{ lookup('template', './templates/nextcloud_config_values') | to_json }}"
+      value: "{{ lookup('template', './templates/nextcloud/nextcloud_config_values') }}"
     - name: PHP_MEMORY_LIMIT
       value: 8192M
     - name: OBJECTSTORE_S3_BUCKET
@@ -73,12 +73,14 @@ nextcloud_values:
     - name: OBJECTSTORE_S3_KEY
       valueFrom:
         secretKeyRef:
-          name: "{{ nextcloud_secret_name }}"
+          # change to "ionos-s3-password" after moving nextcloud niedersachsen
+          name: "{%if item.name == 'nbc'%}nextcloud{%else%}ionos-s3-password{%endif%}"
           key: s3_access_key
     - name: OBJECTSTORE_S3_SECRET
       valueFrom:
         secretKeyRef:
-          name: "{{ nextcloud_secret_name }}"
+          # change to "ionos-s3-password" after moving nextcloud niedersachsen
+          name: "{%if item.name == 'nbc'%}nextcloud{%else%}ionos-s3-password{%endif%}"
           key: s3_access_secret
     - name: OBJECTSTORE_S3_HOST
       value: "{{ nextcloud_objectstore_s3_host }}"
