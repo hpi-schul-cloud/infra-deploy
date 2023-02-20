@@ -33,7 +33,7 @@ nextcloud:
       nextcloud_hostname: nextcloud-thr.dbildungscloud.dev
       collabora: collabora.thueringen.dbildungscloud.dev
     plugins:
-      install: "schulcloud extract theming"
+      install: "{{ nextcloud_install_plugins_default }}"
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
 

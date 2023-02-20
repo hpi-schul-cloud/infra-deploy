@@ -75,7 +75,7 @@ jobs:
 
       - name: Execute Ansible Nextcloud Playbook
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
-        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }} -vv
+        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
 
       - name: Delete kubeconfig file
         if: always()
