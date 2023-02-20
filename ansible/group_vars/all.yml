@@ -65,7 +65,7 @@ nextcloud_values:
     - name: EXTERNAL_GIT_PLUGINS
       value: "{{ nextcloud_external_git_plugins }}"
     - name: CONFIG_JSON
-      value: "{{ lookup('template', './templates/nextcloud/nextcloud_config_values') }}"
+      value: "{{ lookup('template', './templates/nextcloud/nextcloud_config_values_' + item.name) }}"
     - name: PHP_MEMORY_LIMIT
       value: 8192M
     - name: OBJECTSTORE_S3_BUCKET
