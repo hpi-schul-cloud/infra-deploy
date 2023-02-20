@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
     inputs:
       INSTANCE_NAME:
-      description: 'select nbc, brb, thr or all'
-      required: true
+        description: 'select nbc, brb, thr or all'
+        required: true
 
 jobs:
   approve_dev_nextcloud:
