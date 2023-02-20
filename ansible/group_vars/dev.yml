@@ -27,9 +27,9 @@ nextcloud:
       disabled: "{{ nextcloud_disable_plugins_default }}"
   thr:
     urls:
-      authorizeUrl: oauth-thr-main.cd.dbildungscloud.dev
-      hydraUrl: oauth-thr-main.cd.dbildungscloud.dev
-      logoutUrl: thr-main.cd.dbildungscloud.dev
+      authorizeUrl: oauth-default-main.cd.dbildungscloud.dev
+      hydraUrl: oauth-default-main.cd.dbildungscloud.dev
+      logoutUrl: default-main.cd.dbildungscloud.dev
       nextcloud_hostname: nextcloud-thr.dbildungscloud.dev
       collabora: collabora.thueringen.dbildungscloud.dev
     plugins:

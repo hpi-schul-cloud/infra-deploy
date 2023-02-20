@@ -5,10 +5,10 @@
   connection: local
   tasks:
   - name: Delete s3 bucket
-    amazon.aws.aws_s3:
-      aws_access_key: "{{ s3_access_key }}"
-      aws_secret_key: "{{ s3_access_secret }}"
-      bucket: "{{ s3_bucket_name }}"
-      mode: delete
-      s3_url: "{{ s3_url_berlin }}"
+    amazon.aws.s3_bucket:
+      access_key: "{{ s3_access_key }}"
+      secret_key: "{{ s3_access_secret }}"
+      namet: "{{ s3_bucket_name }}"
+      state: absent
+      endpoint_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
