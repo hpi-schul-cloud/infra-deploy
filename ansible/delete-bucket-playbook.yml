@@ -3,8 +3,6 @@
   hosts:
     - nextcloud
   connection: local
-  # Does not delete bucket
-  # Failed to check bucket presence: An error occurred (403) when calling the HeadBucket operation: Forbidden
   # change s3 access key and secret from nextloud ionos user to normal ionos user
   tasks:
   - name: Delete s3 bucket
