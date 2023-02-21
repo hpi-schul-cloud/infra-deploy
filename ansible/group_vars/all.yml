@@ -32,8 +32,8 @@ nbc_nextcloud_theming:
   logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
 brb_nextcloud_theming:
   slogan: Schul-Cloud Brandenburg
-  theming_color: '#EE2B45'
-  logo_url: https://brandenburg.cloud/images/logo/cloud-transparent-mono-long.38aa0e5.svg
+  theming_color: '#0A9396'
+  logo_url: https://brandenburg.cloud/images/logo/cloud-transparent-mono-48-48.21521f2.svg
 thr_nextcloud_theming:
   slogan: Thüringer Schulcloud
   theming_color: '#2876D0'
