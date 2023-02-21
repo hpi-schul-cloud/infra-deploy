@@ -3,7 +3,6 @@
   hosts:
     - nextcloud
   connection: local
-  # change s3 access key and secret from nextloud ionos user to normal ionos user
   tasks:
   - name: Delete s3 bucket
     amazon.aws.s3_bucket:
