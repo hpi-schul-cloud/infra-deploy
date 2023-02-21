@@ -35,6 +35,7 @@ brb_nextcloud_theming:
   theming_color: '#0A9396'
   logo_url: https://brandenburg.cloud/images/logo/cloud-transparent-mono-48-48.21521f2.svg
 thr_nextcloud_theming:
+  name: Thüringer Schulcloud Nextcloud
   slogan: Thüringer Schulcloud
   theming_color: '#2876D0'
   logo_url: https://schulcloud-thueringen.de/images/logo/cloud-transparent-mono.a6bd1e8.svg
@@ -111,7 +112,7 @@ nextcloud_values:
     - name: POST_CONFIG_COMMAND
       value: "{{ nextcloud_post_config_command }}"
     - name: THEMING_NAME
-      value: Schulcloud Nextcloud
+      value: "{{ nextcloud[ item.name ].theming.name | default('Schulcloud Nextcloud') }}"
     - name: THEMING_URL
       value: https://{{ item.nextcloud_hostname  }}/
     - name: THEMING_SLOGAN
