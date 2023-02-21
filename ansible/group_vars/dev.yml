@@ -5,7 +5,7 @@ nextcloud:
     urls:
       hydraUrl: oauth-nbc-main.cd.dbildungscloud.dev
       logoutUrl: nbc-main.cd.dbildungscloud.dev
-      nextcloud_hostname: nextcloud-nbc.dbildungscloud.dev
+      nextcloud_hostname: "{%if namespace == 'nbc-main'%}nextcloud-nbc.dbildungscloud.dev{%else%}{{ namespace + '.sc-dev-nextcloud.dbildungscloud.dev'}}{%endif%}"
       collabora: collabora.niedersachsen.dbildungscloud.dev
     plugins:
       install: "{{ nextcloud_install_plugins_default }}"
@@ -17,7 +17,7 @@ nextcloud:
     urls:
       hydraUrl: oauth-brb-main.cd.dbildungscloud.dev
       logoutUrl: brb-main.cd.dbildungscloud.dev
-      nextcloud_hostname: nextcloud-brb.dbildungscloud.dev
+      nextcloud_hostname: "{%if namespace == 'brb-main'%}nextcloud-brb.dbildungscloud.dev{%else%}{{ namespace + '.sc-dev-nextcloud.dbildungscloud.dev'}}{%endif%}"
       collabora: collabora.brandenburg.dbildungscloud.dev
     plugins:
       install: "{{ nextcloud_install_plugins_default }}"
@@ -27,7 +27,7 @@ nextcloud:
     urls:
       hydraUrl: oauth-default-main.cd.dbildungscloud.dev
       logoutUrl: default-main.cd.dbildungscloud.dev
-      nextcloud_hostname: nextcloud-thr.dbildungscloud.dev
+      nextcloud_hostname: "{%if namespace == 'thr-main'%}nextcloud-thr.dbildungscloud.dev{%else%}{{ namespace + '.sc-dev-nextcloud.dbildungscloud.dev'}}{%endif%}"
       collabora: collabora.thueringen.dbildungscloud.dev
     plugins:
       install: "{{ nextcloud_install_plugins_default }}"
