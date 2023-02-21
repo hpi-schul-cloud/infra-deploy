@@ -8,7 +8,7 @@
           kind: OnePasswordItem
           metadata:
             name: "{{ nextcloud_secret_name }}"
-            namespace: "{{ item.namespace }}"
+            namespace: "{{ namespace }}"
           spec:
             itemPath: "vaults/{{ instance_vault }}/items/nextcloud"
 
@@ -21,7 +21,7 @@
           kind: OnePasswordItem
           metadata:
             name: "ionos-s3-password"
-            namespace: "{{ item.namespace }}"
+            namespace: "{{ namespace }}"
           spec:
             itemPath: "vaults/{{ instance_vault }}/items/ionos-s3-password"
 
@@ -34,7 +34,7 @@
           kind: PersistentVolumeClaim
           metadata:
             name: "{{ nextcloud_postgresql_pvc_name }}"
-            namespace: "{{ item.namespace }}"
+            namespace: "{{ namespace }}"
           spec:
             accessModes:
               - ReadWriteOnce
@@ -50,7 +50,7 @@
         wait: yes
         chart_version: "{{ nextcloud_chart_version }}"
         kubeconfig: "{{ kubeconfig }}"
-        release_namespace: "{{ item.namespace }}"
+        release_namespace: "{{ namespace }}"
         values:
           "{{ nextcloud_values }}"
 
@@ -63,7 +63,7 @@
           kind: ServiceMonitor
           metadata:
             name: nextcloud-service-monitor
-            namespace: "{{ item.namespace }}"
+            namespace: "{{ namespace }}"
           spec:
             selector:
               matchLabels:
@@ -71,7 +71,7 @@
             namespaceSelector:
               any: false
               matchNames:
-                - "{{ item.namespace }}"
+                - "{{ namespace }}"
             endpoints:
             - path: /metrics
               interval: 30s

@@ -20,10 +20,10 @@
 
   - name: Create s3 bucket
     amazon.aws.aws_s3:
-      aws_access_key: "{{ s3_access_key }}"
-      aws_secret_key: "{{ s3_access_secret }}"
-      bucket: "{{ namespace }}"
-      mode: create
+      access_key: "{{ s3_access_key }}"
+      secret_key: "{{ s3_access_secret }}"
+      name: "{{ namespace }}"
+      state: create
       s3_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
     when: namespace not in  ["nbc-main", "brb-main", "thr-main"]
