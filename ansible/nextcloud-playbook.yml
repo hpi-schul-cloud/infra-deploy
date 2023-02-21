@@ -23,7 +23,7 @@
       access_key: "{{ s3_access_key }}"
       secret_key: "{{ s3_access_secret }}"
       name: "{{ namespace }}"
-      state: create
+      state: present
       endpoint_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
     when: namespace not in  ["nbc-main", "brb-main", "thr-main"]

@@ -3,7 +3,6 @@ nextcloud_image_tag: latest
 nextcloud:
   nbc:
     urls:
-      authorizeUrl: oauth-nbc-main.cd.dbildungscloud.dev
       hydraUrl: oauth-nbc-main.cd.dbildungscloud.dev
       logoutUrl: nbc-main.cd.dbildungscloud.dev
       nextcloud_hostname: nextcloud-nbc.dbildungscloud.dev
@@ -16,7 +15,6 @@ nextcloud:
       "{{ nbc_nextcloud_theming }}"
   brb:
     urls:
-      authorizeUrl: oauth-brb-main.cd.dbildungscloud.dev
       hydraUrl: oauth-brb-main.cd.dbildungscloud.dev
       logoutUrl: brb-main.cd.dbildungscloud.dev
       nextcloud_hostname: nextcloud-brb.dbildungscloud.dev
@@ -27,7 +25,6 @@ nextcloud:
       disabled: "{{ nextcloud_disable_plugins_default }}"
   thr:
     urls:
-      authorizeUrl: oauth-default-main.cd.dbildungscloud.dev
       hydraUrl: oauth-default-main.cd.dbildungscloud.dev
       logoutUrl: default-main.cd.dbildungscloud.dev
       nextcloud_hostname: nextcloud-thr.dbildungscloud.dev
@@ -44,7 +41,6 @@ nextcloud_instances:
   nextcloud_enabled: true
   # set this var to true in order for the configure.sh script to be run
   # run_nextcloud_configuration: false
-  authorizeUrl: "{{ nextcloud.nbc.urls.authorizeUrl }}"
   hydraUrl: "{{ nextcloud.nbc.urls.hydraUrl }}"
   logoutUrl: "{{ nextcloud.nbc.urls.logoutUrl }}"
   nextcloud_hostname: "{{ nextcloud.nbc.urls.nextcloud_hostname }}"
@@ -52,7 +48,6 @@ nextcloud_instances:
   namespace: brb-main
   vault: "{{project}}-{{stage}}-cd"
   nextcloud_enabled: true
-  authorizeUrl: "{{ nextcloud.brb.urls.authorizeUrl }}"
   hydraUrl: "{{ nextcloud.brb.urls.hydraUrl }}"
   logoutUrl: "{{ nextcloud.brb.urls.logoutUrl }}"
   nextcloud_hostname: "{{ nextcloud.brb.urls.nextcloud_hostname }}"
@@ -60,7 +55,6 @@ nextcloud_instances:
   namespace: thr-main
   vault: "{{project}}-{{stage}}-cd"
   nextcloud_enabled: true
-  authorizeUrl: "{{ nextcloud.thr.urls.authorizeUrl }}"
   hydraUrl: "{{ nextcloud.thr.urls.hydraUrl }}"
   logoutUrl: "{{ nextcloud.thr.urls.logoutUrl }}"
   nextcloud_hostname: "{{ nextcloud.thr.urls.nextcloud_hostname }}"
