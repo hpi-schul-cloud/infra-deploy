@@ -130,7 +130,7 @@ nextcloud_values:
   externalDatabase:
     enabled: true
     type: postgresql
-    host: nextcloud-postgresql.{{ item.namespace }}.svc.cluster.local
+    host: nextcloud-postgresql.{{ namespace }}.svc.cluster.local
     existingSecret:
       secretName:  "{{ nextcloud_secret_name }}"
       usernameKey: nextclouddb-user
