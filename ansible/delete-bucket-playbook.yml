@@ -13,3 +13,4 @@
       endpoint_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
       force: true
+    when: namespace not in  ["nbc-main", "brb-main", "thr-main"]
