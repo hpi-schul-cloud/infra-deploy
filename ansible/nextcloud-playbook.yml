@@ -16,23 +16,34 @@
       state: present
       kubeconfig: "{{ kubeconfig }}"
       api_version: v1
-    when:  namespace !=  "nbc-main"
+    when:  namespace not in  ["nbc-main", "brb-main", "thr-main"]
 
   - name: Create s3 bucket
-    amazon.aws.aws_s3:
-      aws_access_key: "{{ s3_access_key }}"
-      aws_secret_key: "{{ s3_access_secret }}"
-      bucket: "{{ namespace }}"
-      mode: create
-      s3_url: "{{ s3_url_berlin }}"
+    amazon.aws.s3_bucket:
+      access_key: "{{ s3_access_key }}"
+      secret_key: "{{ s3_access_secret }}"
+      name: "{{ namespace }}"
+      state: present
+      endpoint_url: "{{ s3_url_berlin }}"
       region: "{{ s3_region_berlin }}"
-    when:  namespace !=  "nbc-main"
+    when: namespace not in  ["nbc-main", "brb-main", "thr-main"]
 
-  - name: Create Nextcloud instances
+  - name: Create Nextcloud instances (one instance)
     include_tasks: multi-instance-nextcloud.yml
     vars:
-      instance_vault: "{%if item.vault is defined%}{{item.vault}}{%else%}{{project}}-{{stage}}-{{item.name}}{%endif%}"
-    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true)}}"
+      instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
+    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) | selectattr('name', 'equalto', instance_name)}}"
+    when:  instance_name != 'all'
+    tags:
+      - nextcloud
+      - nextcloud-cron
+
+  - name: Create Nextcloud instances (all)
+    include_tasks: multi-instance-nextcloud.yml
+    vars:
+      instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
+    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) }}"
+    when: instance_name == 'all'
     tags:
       - nextcloud
       - nextcloud-cron

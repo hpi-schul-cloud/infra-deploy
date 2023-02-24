@@ -82,6 +82,5 @@
          "provider-1-providerBasedId": "1",
          "id4me_enabled": "0"
       }
-      {%if item.collabora_enabled is true%}{{nextcloud_collabora_config}}{%endif%}
    }
 }
