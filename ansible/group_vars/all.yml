@@ -41,7 +41,7 @@ thr_nextcloud_theming:
   name: Thüringer Schulcloud Nextcloud
   slogan: Thüringer Schulcloud
   theming_color: '#185888'
-  logo_url: https://schulcloud-thueringen.de/images/logo/app-icon-128.png
+  logo_url: https://schulcloud-thueringen.de/images/logo/logo-bild-mono.svg
 nextcloud_values:
   image:
     repository: "{{ nextcloud_image_repository }}"
