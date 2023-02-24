@@ -115,15 +115,15 @@ nextcloud_values:
     - name: POST_CONFIG_COMMAND
       value: "{{ nextcloud_post_config_command }}"
     - name: THEMING_NAME
-      value: "{{ nextcloud[item.name].theming.slogan | default('Schulcloud Nextcloud') }}"
+      value: "{{ nextcloud[ item.name ].theming.name | default('Schulcloud Nextcloud') }}"
     - name: THEMING_URL
       value: https://{{ nextcloud[item.name].urls.nextcloud_hostname }}/
     - name: THEMING_SLOGAN
       value: "{{ nextcloud[item.name].theming.slogan | default('') }}"
     - name: THEMING_COLOR
-      value: "{{nextcloud[item.name].theming.theming_color | default('#0082C9') }}"
+      value:  "{{nextcloud[item.name].theming.theming_color | default('#0082C9') }}"
     - name: THEMING_LOGO_URL
-      value: "{{ nextcloud[item.name].theming.logo_url  | default('') }}"
+      value: "{{ nextcloud[item.name].theming.logo_url | default('') }}"
   metrics:
     enabled: true
     https: true
