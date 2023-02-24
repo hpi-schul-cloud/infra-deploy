@@ -38,7 +38,7 @@ jobs:
     with:
       CLUSTER: sc-dev-nextcloud
       BUCKET_NAME: ${{ needs.get_branch_name.outputs.branch }}
-      NAMESPACE:  "${{ needs.get_branch_name.outputs.branch }}"
+      NAMESPACE:  ${{ needs.get_branch_name.outputs.branch }}
       NAMESPACE_SCHULCLOUD_INSTANCE: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}
       INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
     secrets:
