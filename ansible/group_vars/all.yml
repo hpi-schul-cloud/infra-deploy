@@ -12,6 +12,9 @@ s3_region_berlin: eu-central-2
 s3_url_berlin: https://s3-eu-central-2.ionoscloud.com
 s3_url_frankfurt: http://s3-eu-central-1.ionoscloud.com
 
+
+
+
 nextcloud_chart_version: 2.13.2
 nextcloud_image_repository: schulcloud/schulcloud-nextcloud
 nextcloud_postgresql_image_tag: 11.17.0-debian-11-r37
@@ -58,9 +61,9 @@ nextcloud_values:
     tls:
     - secretName: nextcloud-tls
       hosts:
-      - "{{ item.nextcloud_hostname }}"
+      - "{{ nextcloud[item.name].urls.nextcloud_hostname }}"
   nextcloud:
-    host: "{{ item.nextcloud_hostname }}"
+    host: "{{ nextcloud[item.name].urls.nextcloud_hostname }}"
     existingSecret:
       enabled: true
       secretName: "{{ nextcloud_secret_name }}"
@@ -114,11 +117,11 @@ nextcloud_values:
     - name: THEMING_NAME
       value: "{{ nextcloud[ item.name ].theming.name | default('Schulcloud Nextcloud') }}"
     - name: THEMING_URL
-      value: https://{{ item.nextcloud_hostname  }}/
+      value: https://{{ nextcloud[item.name].urls.nextcloud_hostname }}/
     - name: THEMING_SLOGAN
-      value: "{{ nextcloud[ item.name ].theming.slogan | default('') }}"
+      value: "{{ item.nextcloud_theming_slogan }}"
     - name: THEMING_COLOR
-      value: "{{nextcloud[ item.name ].theming.theming_color | default('#0082C9') }}"
+      value:  "{{ item.nextcloud_theming_color }}"
     - name: THEMING_LOGO_URL
       value: "{{ nextcloud[ item.name ].theming.logo_url  | default('') }}"
   metrics:

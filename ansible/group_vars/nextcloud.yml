@@ -2,35 +2,3 @@
 nextcloud_objectstore_s3_host: s3-eu-central-2.ionoscloud.com
 nextcloud_objectstore_s3_region: "{{ s3_region_berlin }}"
 run_nextcloud_configuration: false
-
-nextcloud_background_job_chart_version: 4.4.1
-nextcloud_background_job_chart_schedule: "*/5 * * * *"
-nextcloud_background_job_chart_values:
-  jobs:
-  - name: background-job-script
-    schedule: "{{ nextcloud_background_job_chart_schedule }}"
-    failedJobsHistoryLimit: 1
-    successfulJobsHistoryLimit: 1
-    command:
-      - /bin/sh
-      - -c
-    args:
-      - /scripts/cron-script
-    extraVolumeMounts:
-      - name: background-job-script
-        mountPath: /scripts/
-    extraVolumes:
-      - name: background-job-script
-        configMap:
-          name: background-job-script
-        # 711 in decimal is 457
-          defaultMode: 457
-  clusterRole:
-    create: true
-    rules:
-      - apiGroups: [""]
-        resources: [ "pods", "pods/exec"]
-        verbs: ["get", "list", "create"]
-  # added this value - so name of service account and cluster role (not namespace specific) are differnet for each branch
-  serviceAccount:
-    name: "{{ namespace }}-nextcloud-cron-cronjob"
