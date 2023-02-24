@@ -42,6 +42,7 @@
     include_tasks: multi-instance-nextcloud.yml
     vars:
       instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
+      aimee_name: "{%if item.name == 'nbc'%}nextcloud{%else%}ionos-s3-password{%endif%}"
     loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) }}"
     when: instance_name == 'all'
     tags:

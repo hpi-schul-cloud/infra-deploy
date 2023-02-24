@@ -12,6 +12,14 @@
           spec:
             itemPath: "vaults/{{ instance_vault }}/items/nextcloud"
 
+    - name: something1
+      ansible.builtin.debug:
+        msg: item name ist {{ item.name }}
+
+    - name: something2
+      ansible.builtin.debug:
+        msg: aimee name ist {{ aimee_name }}
+
     - name: Create s3_credentials secret
       kubernetes.core.k8s:
         state: present
