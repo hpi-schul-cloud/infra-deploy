@@ -21,6 +21,8 @@ nextcloud:
       install: "{{ nextcloud_install_plugins_default }}"
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
+    theming:
+      "{{ brb_nextcloud_theming }}"
   thr:
     urls:
       hydraUrl: oauth-default-main.cd.dbildungscloud.dev
@@ -30,7 +32,8 @@ nextcloud:
       install: "{{ nextcloud_install_plugins_default }}"
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
-
+    theming:
+      "{{ thr_nextcloud_theming }}"
 nextcloud_instances:
 - name: nbc
   namespace: nbc-main

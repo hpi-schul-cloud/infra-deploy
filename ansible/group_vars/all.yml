@@ -33,8 +33,15 @@ nbc_nextcloud_theming:
   slogan: Niedersächsische Bildungscloud
   theming_color: '#5083C7'
   logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
-# brb_nextcloud_theming:
-# thr_nextcloud_theming:
+brb_nextcloud_theming:
+  slogan: Schul-Cloud Brandenburg
+  theming_color: '#EE2B45'
+  logo_url: https://brandenburg.cloud/images/logo/cloud-transparent-mono-48-48.21521f2.svg
+thr_nextcloud_theming:
+  name: Thüringer Schulcloud Nextcloud
+  slogan: Thüringer Schulcloud
+  theming_color: '#185888'
+  logo_url: https://schulcloud-thueringen.de/images/logo/app-icon-128.png
 nextcloud_values:
   image:
     repository: "{{ nextcloud_image_repository }}"
@@ -108,15 +115,15 @@ nextcloud_values:
     - name: POST_CONFIG_COMMAND
       value: "{{ nextcloud_post_config_command }}"
     - name: THEMING_NAME
-      value: "{{ nextcloud[item.name].theming.slogan | default('Schulcloud Nextcloud') }}"
+      value: "{{ nextcloud[ item.name ].theming.name | default('Schulcloud Nextcloud') }}"
     - name: THEMING_URL
       value: https://{{ nextcloud[item.name].urls.nextcloud_hostname }}/
     - name: THEMING_SLOGAN
       value: "{{ nextcloud[item.name].theming.slogan | default('') }}"
     - name: THEMING_COLOR
-      value: "{{nextcloud[item.name].theming.theming_color | default('#0082C9') }}"
+      value:  "{{nextcloud[item.name].theming.theming_color | default('#0082C9') }}"
     - name: THEMING_LOGO_URL
-      value: "{{ nextcloud[item.name].theming.logo_url  | default('') }}"
+      value: "{{ nextcloud[item.name].theming.logo_url | default('') }}"
   metrics:
     enabled: true
     https: true
