@@ -36,7 +36,6 @@
     when:  instance_name != 'all'
     tags:
       - nextcloud
-      - nextcloud-cron
 
   - name: Create Nextcloud instances (all)
     include_tasks: multi-instance-nextcloud.yml
@@ -47,4 +46,3 @@
     when: instance_name == 'all'
     tags:
       - nextcloud
-      - nextcloud-cron
