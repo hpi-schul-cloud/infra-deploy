@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       INSTANCE_NAME:
-        description: 'select nbc, brb, thr or all'
+        description: 'select nbc, brb or thr'
         required: true
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
       - run: echo "Approval from authorized approve_dev_nextcloud Group has been given!"
 
   deploy_nextcloud_from_main_to_nbc:
-    if: inputs.INSTANCE_NAME == 'nbc' || inputs.INSTANCE_NAME == 'all'
+    if: inputs.INSTANCE_NAME == 'nbc'
     needs:
       - approve_dev_nextcloud
     uses: ./.github/workflows/nextcloud-deploy.yml
@@ -34,7 +34,7 @@ jobs:
       SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
 
   deploy_nextcloud_from_main_to_brb:
-    if: inputs.INSTANCE_NAME == 'brb' || inputs.INSTANCE_NAME == 'all'
+    if: inputs.INSTANCE_NAME == 'brb'
     needs:
       - approve_dev_nextcloud
     uses: ./.github/workflows/nextcloud-deploy.yml
@@ -51,7 +51,7 @@ jobs:
       SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
 
   deploy_nextcloud_from_main_to_thr:
-    if: inputs.INSTANCE_NAME == 'thr' || inputs.INSTANCE_NAME == 'all'
+    if: inputs.INSTANCE_NAME == 'thr'
     needs:
       - approve_dev_nextcloud
     uses: ./.github/workflows/nextcloud-deploy.yml
