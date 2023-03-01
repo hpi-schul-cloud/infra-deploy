@@ -12,76 +12,68 @@
           spec:
             itemPath: "vaults/{{ instance_vault }}/items/nextcloud"
 
-    - name: something1
-      ansible.builtin.debug:
-        msg: item name ist {{ item.name }}
+    - name: Create s3_credentials secret
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: onepassword.com/v1
+          kind: OnePasswordItem
+          metadata:
+            name: "ionos-s3-password"
+            namespace: "{{ namespace }}"
+          spec:
+            itemPath: "vaults/{{ instance_vault }}/items/ionos-s3-password"
 
-    - name: something2
-      ansible.builtin.debug:
-        msg: aimee name ist {{ aimee_name }}
+    - name: Create nextcloud postgresql pvc
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: "{{ nextcloud_postgresql_pvc_name }}"
+            namespace: "{{ namespace }}"
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: "{{ nextcloud_postgresql_pvc_size }}"
 
-    # - name: Create s3_credentials secret
-    #   kubernetes.core.k8s:
-    #     state: present
-    #     kubeconfig: "{{ kubeconfig }}"
-    #     definition:
-    #       apiVersion: onepassword.com/v1
-    #       kind: OnePasswordItem
-    #       metadata:
-    #         name: "ionos-s3-password"
-    #         namespace: "{{ namespace }}"
-    #       spec:
-    #         itemPath: "vaults/{{ instance_vault }}/items/ionos-s3-password"
+    - name: Install nextcloud helm chart
+      kubernetes.core.helm:
+        name: nextcloud
+        chart_ref: nextcloud/nextcloud
+        update_repo_cache: yes
+        wait: yes
+        chart_version: "{{ nextcloud_chart_version }}"
+        kubeconfig: "{{ kubeconfig }}"
+        release_namespace: "{{ namespace }}"
+        values:
+          "{{ nextcloud_values }}"
 
-    # - name: Create nextcloud postgresql pvc
-    #   kubernetes.core.k8s:
-    #     state: present
-    #     kubeconfig: "{{ kubeconfig }}"
-    #     definition:
-    #       apiVersion: v1
-    #       kind: PersistentVolumeClaim
-    #       metadata:
-    #         name: "{{ nextcloud_postgresql_pvc_name }}"
-    #         namespace: "{{ namespace }}"
-    #       spec:
-    #         accessModes:
-    #           - ReadWriteOnce
-    #         resources:
-    #           requests:
-    #             storage: "{{ nextcloud_postgresql_pvc_size }}"
-
-    # - name: Install nextcloud helm chart
-    #   kubernetes.core.helm:
-    #     name: nextcloud
-    #     chart_ref: nextcloud/nextcloud
-    #     update_repo_cache: yes
-    #     wait: yes
-    #     chart_version: "{{ nextcloud_chart_version }}"
-    #     kubeconfig: "{{ kubeconfig }}"
-    #     release_namespace: "{{ namespace }}"
-    #     values:
-    #       "{{ nextcloud_values }}"
-
-    # - name: Create nextcloud service monitor
-    #   kubernetes.core.k8s:
-    #     state: present
-    #     kubeconfig: "{{ kubeconfig }}"
-    #     definition:
-    #       apiVersion: monitoring.coreos.com/v1
-    #       kind: ServiceMonitor
-    #       metadata:
-    #         name: nextcloud-service-monitor
-    #         namespace: "{{ namespace }}"
-    #       spec:
-    #         selector:
-    #           matchLabels:
-    #             app.kubernetes.io/name: nextcloud
-    #         namespaceSelector:
-    #           any: false
-    #           matchNames:
-    #             - "{{ namespace }}"
-    #         endpoints:
-    #         - path: /metrics
-    #           interval: 30s
-    #           honorLabels: true
-    #           port: metrics
+    - name: Create nextcloud service monitor
+      kubernetes.core.k8s:
+        state: present
+        kubeconfig: "{{ kubeconfig }}"
+        definition:
+          apiVersion: monitoring.coreos.com/v1
+          kind: ServiceMonitor
+          metadata:
+            name: nextcloud-service-monitor
+            namespace: "{{ namespace }}"
+          spec:
+            selector:
+              matchLabels:
+                app.kubernetes.io/name: nextcloud
+            namespaceSelector:
+              any: false
+              matchNames:
+                - "{{ namespace }}"
+            endpoints:
+            - path: /metrics
+              interval: 30s
+              honorLabels: true
+              port: metrics
