@@ -29,15 +29,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
+        with:
+          path: "repo/infra-deploy"
+          repository: hpi-schul-cloud/infra-deploy
 
       - name: Install requirements python3
         shell: bash
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
         run: |
           python3 -m pip install -r requirements.txt
 
       - name: Install requirements ansible-galaxy
-        run: ansible-galaxy install -r repo/infra-deploy/ansible/collections/requirements.yml
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
+        run: ansible-galaxy install -r ansible/collections/requirements.yml
 
       - name: Create Kubeconfig file
         working-directory: ${{ github.workspace }}/
@@ -54,12 +59,12 @@ jobs:
           cat config.yml
 
       - name: Execute Ansible Delete Bucket
-        working-directory: ${{ github.workspace }}/ansible/repo/infra-deploy/
-        run: ansible-playbook ansible/delete-bucket-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
+        run: ansible-playbook ansible/delete-bucket-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Execute Ansible Delete Namespace
-        working-directory: ${{ github.workspace }}/ansible/repo/infra-deploy/
-        run: ansible-playbook ansible/delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
+        run: ansible-playbook ansible/delete-namespace-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Delete kubeconfig file
         if: always()
