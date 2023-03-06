@@ -11,7 +11,7 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.1.2"
+        default: "0.1.6"
 
 jobs:
   dev_deploy_edusharing_crawlers:
