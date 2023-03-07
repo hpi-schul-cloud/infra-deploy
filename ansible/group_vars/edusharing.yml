@@ -6,14 +6,8 @@ edusharing_instance_secret_name: edusharing-instance
 edusharing_kubernetes_service_name: http://edusharing-repository-service.{{ namespace }}.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
 # alter this
-# alter this
-# fwu_s3_bucket: s3-web-bucket
-# alter this
-# fwu_s3_bucket: s3-web-bucket
-# alter this
 # fwu_s3_bucket: s3-web-bucket
 h5p_s3_bucket: s3-web-bucket
-# fwu_s3_bucket: s3-web-bucket
 
 edusharing_secrets:
 - name: "{{ edusharing_instance_secret_name }}"
