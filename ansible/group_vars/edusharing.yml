@@ -341,3 +341,33 @@ edusharing_2_crawler_list:
     value: "{{ s3_url_frankfurt }}"
   - name: S3_BUCKET_NAME
     value: "fwu-content"
+- name: permission-updater
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 250m
+      memory: 512Mi
+  enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: permission_updater
+  - name: SCHEDULE
+    value: "*-*-02:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: EDU_SHARING_BASE_URL
+    value: "{{ edusharing_kubernetes_service_name }}"
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: username
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: password
