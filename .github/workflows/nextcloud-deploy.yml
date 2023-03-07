@@ -16,6 +16,9 @@ on:
       NAMESPACE_SCHULCLOUD_INSTANCE:
         required: true
         type: string
+      INSTANCE_NAME:
+        required: true
+        type: string
     secrets:
       token:
         required: true
@@ -55,12 +58,14 @@ jobs:
         working-directory: ${{ github.workspace }}/
         run: |
           echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+          chmod 600 kubeconfig
 
       - name: Set ENVs in config.yml file
         working-directory: ${{ github.workspace }}/repo/infra-deploy/ansible/group_vars
         run: |
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           echo "schulcloud_namespace: ${{ inputs.NAMESPACE_SCHULCLOUD_INSTANCE }}" >> config.yml
+          echo "instance_name: ${{ inputs.INSTANCE_NAME }}" >> config.yml
           echo "socialloginClientId: ${{ secrets.SOCIALLOGINCLIENTID }}" >> config.yml
           echo "socialloginSecret: ${{ secrets.SOCIALLOGINSECRET }}" >> config.yml
           echo "s3_bucket_name: ${{ inputs.BUCKET_NAME }}" >> config.yml
@@ -70,7 +75,7 @@ jobs:
 
       - name: Execute Ansible Nextcloud Playbook
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
-        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -v -l ${{ inputs.CLUSTER }}
+        run: ansible-playbook ansible/nextcloud-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Delete kubeconfig file
         if: always()
