@@ -217,11 +217,6 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ sodix_secret_name }}"
         key: password
-  - name: SODIX_DOWNLOAD_DELAY
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: download_delay
 - name: permission-updater
   resources:
     limits:
