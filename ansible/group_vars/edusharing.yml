@@ -79,12 +79,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -123,12 +123,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: merlin-spider
   enabled: true
   resources:
@@ -167,12 +167,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: sodix-spider
   resources:
     limits:
@@ -201,12 +201,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
@@ -241,12 +241,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: technicalusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: technicaluserpassword
 - name: h5p-upload
   resources:
     limits:
@@ -271,12 +271,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
