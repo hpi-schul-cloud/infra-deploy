@@ -295,6 +295,8 @@ edusharing_crawler_list:
     value: "lernstore-content"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
+
+edusharing_2_crawler_list:
 - name: fwu-upload
   enabled: true
   resources:
@@ -339,5 +341,3 @@ edusharing_crawler_list:
     value: "{{ s3_url_frankfurt }}"
   - name: S3_BUCKET_NAME
     value: "fwu-content"
-
-edusharing_2_crawler_list: ['fwu-upload']
