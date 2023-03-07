@@ -181,11 +181,15 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
+- name: sodix-spider
   resources:
+    limits:
       cpu: 1200m
       memory: 2Gi
+    requests:
       cpu: 300m
       memory: 1Gi
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -222,13 +226,14 @@ edusharing_crawler_list:
         name: "{{ sodix_secret_name }}"
         key: password
 - name: permission-updater
-  enabled: true
   resources:
     limits:
       cpu: 1000m
       memory: 1024Mi
     requests:
+      cpu: 250m
       memory: 512Mi
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -251,7 +256,6 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
 - name: h5p-upload
-  enabled: false
   resources:
     limits:
       cpu: 1500m
@@ -259,6 +263,7 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
+  enabled: false
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
