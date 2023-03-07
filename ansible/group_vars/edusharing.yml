@@ -313,7 +313,7 @@ edusharing_crawler_list:
   - name: CRAWLER
     value: fwu_upload
   - name: SCHEDULE
-    value: "*-*-00:00"
+    value: "*-*-01:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
