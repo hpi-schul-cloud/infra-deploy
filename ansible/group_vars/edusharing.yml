@@ -296,6 +296,7 @@ edusharing_crawler_list:
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
 - name: fwu-upload
+  enabled: true
   resources:
     limits:
       cpu: 1500m
@@ -303,7 +304,6 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
-  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
