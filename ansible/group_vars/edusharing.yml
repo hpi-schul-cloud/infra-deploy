@@ -296,7 +296,6 @@ edusharing_crawler_list:
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
 - name: fwu-upload
-  enabled: true
   resources:
     limits:
       cpu: 1500m
@@ -304,13 +303,14 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
+  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
   - name: CRAWLER
     value: fwu_upload
   - name: SCHEDULE
-    value: "*-*-00:00"
+    value: "*-*-01:00"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
@@ -339,5 +339,5 @@ edusharing_crawler_list:
     value: "{{ s3_url_frankfurt }}"
   - name: S3_BUCKET_NAME
     value: "fwu-content"
-  - name: S3_DOWNLOAD_DIRECTORY
-    value: "s3_download"
+
+edusharing_2_crawler_list: ['fwu-upload']
