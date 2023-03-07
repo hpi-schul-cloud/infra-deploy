@@ -11,7 +11,9 @@ nextcloud:
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
     theming:
-      "{{ nbc_nextcloud_theming }}"
+      slogan: Niedersächsische Bildungscloud
+      theming_color: '#5083C7'
+      logo_url: https://niedersachsen.cloud/images/logo/logo-wt.png
   brb:
     urls:
       hydraUrl: oauth-brb-main.cd.dbildungscloud.dev
@@ -22,7 +24,9 @@ nextcloud:
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
     theming:
-      "{{ brb_nextcloud_theming }}"
+      slogan: Schul-Cloud Brandenburg
+      theming_color: '#EE2B45'
+      logo_url: https://brandenburg.cloud/images/logo/logo-only.png
   thr:
     urls:
       hydraUrl: oauth-default-main.cd.dbildungscloud.dev
@@ -33,7 +37,11 @@ nextcloud:
       enabled: "{{ nextcloud_enable_plugins_default }}"
       disabled: "{{ nextcloud_disable_plugins_default }}"
     theming:
-      "{{ thr_nextcloud_theming }}"
+      name: Thüringer Schulcloud Nextcloud
+      slogan: Thüringer Schulcloud
+      theming_color: '#185888'
+      logo_url: https://schulcloud-thueringen.de/images/logo/logo-bild-mono.svg
+
 nextcloud_instances:
 - name: nbc
   namespace: nbc-main

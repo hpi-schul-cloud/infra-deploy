@@ -28,7 +28,7 @@
       region: "{{ s3_region_berlin }}"
     when: namespace not in  ["nbc-main", "brb-main", "thr-main"]
 
-  - name: Create Nextcloud instances (one instance)
+  - name: Create/Update Nextcloud instance
     include_tasks: multi-instance-nextcloud.yml
     vars:
       instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
@@ -36,14 +36,3 @@
     when:  instance_name != 'all'
     tags:
       - nextcloud
-      - nextcloud-cron
-
-  - name: Create Nextcloud instances (all)
-    include_tasks: multi-instance-nextcloud.yml
-    vars:
-      instance_vault: "{{ item.vault | default( project + '-' + stage + '-' + item.name) }}"
-    loop: "{{ nextcloud_instances | selectattr('nextcloud_enabled', 'defined' ) | selectattr('nextcloud_enabled', 'equalto', true) }}"
-    when: instance_name == 'all'
-    tags:
-      - nextcloud
-      - nextcloud-cron
