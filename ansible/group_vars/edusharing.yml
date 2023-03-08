@@ -86,7 +86,7 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -130,7 +130,7 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
 - name: merlin-spider
   enabled: true
   resources:
@@ -174,7 +174,7 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
 - name: sodix-spider
   resources:
     limits:
@@ -208,7 +208,7 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
@@ -278,7 +278,7 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
@@ -370,4 +370,4 @@ edusharing_2_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerpassword
+        key: crawleruserpassword
