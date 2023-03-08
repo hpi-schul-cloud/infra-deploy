@@ -37,7 +37,6 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-2:00"
-# TODO: remove SODIX_USER/SODIX_PASSWORD from non-sodix spider env vars
 # TODO: once oeh spider is fixed, change back to oeh spider
 - name: oeh-importer
   enabled: true
@@ -61,18 +60,6 @@ edusharing_crawler_list:
     value: "{{ splash_url }}"
   - name: DRY_RUN
     value: "False"
-  - name: EDU_SHARING_BASE_URL
-    value: "{{ edusharing_kubernetes_service_name }}"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
@@ -107,16 +94,6 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
@@ -151,16 +128,6 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
