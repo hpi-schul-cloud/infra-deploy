@@ -37,7 +37,6 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-2:00"
-# TODO: remove SODIX_USER/SODIX_PASSWORD from non-sodix spider env vars
 # TODO: once oeh spider is fixed, change back to oeh spider
 - name: oeh-importer
   enabled: true
@@ -63,28 +62,16 @@ edusharing_crawler_list:
     value: "False"
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
-  - name: EDU_SHARING_BASE_URL
-    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -107,28 +94,18 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: merlin-spider
   enabled: true
   resources:
@@ -151,28 +128,18 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: sodix-spider
   resources:
     limits:
@@ -201,12 +168,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
@@ -241,12 +208,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: technicalusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: technicaluserpassword
 - name: h5p-upload
   resources:
     limits:
@@ -271,12 +238,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
