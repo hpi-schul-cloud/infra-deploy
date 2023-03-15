@@ -1,13 +1,6 @@
 kubeconfig: /home/runner/work/infra-deploy/infra-deploy/kubeconfig
 project: sc
 
-kubernetes_version: 1.22.16
-kubectl_version: "{{ kubernetes_version }}"
-get_kubectl_command: |
-  curl -LO https://dl.k8s.io/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl
-  chmod +x kubectl
-  mv ./kubectl /usr/local/bin/kubectl
-
 s3_region_berlin: eu-central-2
 s3_url_berlin: https://s3-eu-central-2.ionoscloud.com
 s3_url_frankfurt: http://s3-eu-central-1.ionoscloud.com
