@@ -26,7 +26,7 @@ nextcloud:
     theming:
       slogan: Schul-Cloud Brandenburg
       theming_color: '#EE2B45'
-      logo_url: https://brandenburg.cloud/images/logo/logo-only.png
+      logo_url: https://s3.hidrive.strato.com/cloud-instances/brb/images/logo-only.png
   thr:
     urls:
       hydraUrl: oauth-default-main.cd.dbildungscloud.dev
@@ -40,7 +40,7 @@ nextcloud:
       name: Thüringer Schulcloud Nextcloud
       slogan: Thüringer Schulcloud
       theming_color: '#185888'
-      logo_url: https://schulcloud-thueringen.de/images/logo/logo-bild-mono.svg
+      logo_url: https://s3.hidrive.strato.com/cloud-instances/thr/images/nextcloud-logo-tansparent-mono.svg
 
 nextcloud_instances:
 - name: nbc
