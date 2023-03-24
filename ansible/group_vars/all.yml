@@ -88,7 +88,7 @@ nextcloud_values:
     - name: OBJECTSTORE_S3_LEGACYAUTH
       value: "true"
     - name: EXTERNAL_ARCHIVE_PLUGINS
-      value: "{{ nextcloud_external_archive_plugins }}"
+      value: "{{ nextcloud_external_archive_plugins | default('') }}"
     - name: POST_CONFIG_COMMAND
       value: "{{ nextcloud_post_config_command }}"
     - name: THEMING_NAME
