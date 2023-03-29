@@ -1,0 +1,64 @@
+---
+name: EDU Trigger Cronjob
+
+on:
+  workflow_call:
+    inputs:
+      CLUSTER:
+        required: true
+        type: string
+      NAMESPACE:
+        required: true
+        type: string
+      BUCKET:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+      KUBECONFIG:
+        required: true
+
+jobs:
+  run_ansible_playbook_edusharing:
+    environment: ${{ inputs.CLUSTER }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          path: "repo/infra-deploy"
+          repository: hpi-schul-cloud/infra-deploy
+
+      - name: Create Kubeconfig file
+        working-directory: ${{ github.workspace }}/
+        run: |
+          echo "${{ secrets.KUBECONFIG }}" > kubeconfig
+
+      - name: Install Kubectl
+        working-directory: ${{ github.workspace }}/
+        run: |
+            curl -LO https://dl.k8s.io/release/v{{ kubectl_version }}/bin/linux/amd64/kubectl
+            chmod +x kubectl
+            mv ./kubectl /usr/local/bin/kubectl
+
+      - name: Execute Kubernetes Create Job Command - H5P
+        if: ${{ inputs.BUCKET }} == 'h5p'
+        working-directory: ${{ github.workspace }}
+        run: kubectl create job --from=cronjob/h5p-s3-sync-cronjob-s3-sync h5p-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
+
+      - name: Execute Kubernetes Create Job Command - FWU
+        if: ${{ inputs.BUCKET }} == 'fwu'
+        working-directory: ${{ github.workspace }}
+        run: kubectl create job --from=cronjob/fwu-s3-sync-cronjob-s3-sync fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
+
+      - name: Delete kubeconfig files
+        if: alw#ays()
+        working-directory: ${{ github.workspace }}
+        run: |
+          rm -f kubeconfig
+
+
+
+
+

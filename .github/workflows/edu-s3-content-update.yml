@@ -1,0 +1,44 @@
+name: EDU Update S3 Content
+on:
+  workflow_dispatch:
+    inputs:
+      STAGE:
+        description: "Select stage - staging or prod"
+        default: staging
+        required: true
+      BUCKET:
+        description: "Select bucket - h5p or fwu"
+        required: true
+
+jobs:
+  approve_edu_s3_update:
+    environment: approve_edu_s3_update
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Approval from authorized approve_edu_s3_update Group has been given!"
+
+  update_content_in_staging_bucket:
+    if: ${{ inputs.STAGE }} == 'staging'
+    needs:
+     - approve_edu_s3_update
+    uses: ./.github/workflows/edu-s3-trigger-cronjob.yml
+    with:
+      CLUSTER: sc-staging-edusharing
+      NAMESPACE: "s3-sync"
+      BUCKET: ${{ inputs.BUCKET }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+  update_content_in_prod_bucket:
+    if: ${{ inputs.STAGE }} == 'prod'
+    needs:
+     - approve_edu_s3_update
+    uses: ./.github/workflows/edu-s3-trigger-cronjob.yml
+    with:
+      CLUSTER: sc-prod-edusharing
+      NAMESPACE: "s3-sync"
+      BUCKET: ${{ inputs.BUCKET }}
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
