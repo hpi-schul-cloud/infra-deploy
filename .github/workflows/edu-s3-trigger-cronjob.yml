@@ -53,7 +53,7 @@ jobs:
         run: kubectl create job --from=cronjob/fwu-s3-sync-cronjob-s3-sync fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
 
       - name: Delete kubeconfig files
-        if: alw#ays()
+        if: always()
         working-directory: ${{ github.workspace }}
         run: |
           rm -f kubeconfig

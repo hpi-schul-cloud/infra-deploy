@@ -1,6 +1,5 @@
 name: EDU Update S3 Content
 on:
-  push:
   workflow_dispatch:
     inputs:
       STAGE:
