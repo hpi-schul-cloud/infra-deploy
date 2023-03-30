@@ -17,7 +17,7 @@ jobs:
       - run: echo "Approval from authorized approve_edu_s3_update Group has been given!"
 
   update_content_in_staging_bucket:
-    if: ${{ inputs.STAGE }} == 'staging'
+    if: inputs.STAGE == 'staging'
     needs:
      - approve_edu_s3_update
     uses: ./.github/workflows/edu-s3-trigger-cronjob.yml
@@ -30,7 +30,7 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
   update_content_in_prod_bucket:
-    if: ${{ inputs.STAGE }} == 'prod'
+    if: inputs.STAGE == 'prod'
     needs:
      - approve_edu_s3_update
     uses: ./.github/workflows/edu-s3-trigger-cronjob.yml

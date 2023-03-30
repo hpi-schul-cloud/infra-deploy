@@ -42,13 +42,25 @@ jobs:
             chmod +x kubectl
             mv ./kubectl /usr/local/bin/kubectl
 
+      - name: Kubernetes Delete previous Job - H5P
+        if:  inputs.BUCKET == 'h5p'
+        working-directory: ${{ github.workspace }}
+        run: kubectl create job  h5p-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
+        continue-on-error: true
+
+      - name: Kubernetes Delete previous Job - FWU
+        if: inputs.BUCKET == 'fwu'
+        working-directory: ${{ github.workspace }}
+        run: kubectl create job fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
+        continue-on-error: true
+
       - name: Execute Kubernetes Create Job Command - H5P
-        if: ${{ inputs.BUCKET }} == 'h5p'
+        if:  inputs.BUCKET == 'h5p'
         working-directory: ${{ github.workspace }}
         run: kubectl create job --from=cronjob/h5p-s3-sync-cronjob-s3-sync h5p-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
 
       - name: Execute Kubernetes Create Job Command - FWU
-        if: ${{ inputs.BUCKET }} == 'fwu'
+        if: inputs.BUCKET == 'fwu'
         working-directory: ${{ github.workspace }}
         run: kubectl create job --from=cronjob/fwu-s3-sync-cronjob-s3-sync fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
 
