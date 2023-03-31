@@ -5,14 +5,13 @@
 edusharing_instance_secret_name: edusharing-instance
 edusharing_kubernetes_service_name: http://edusharing-repository-service.{{ namespace }}.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
-# alter this
-# fwu_s3_bucket: s3-web-bucket
-h5p_s3_bucket: s3-web-bucket
+h5p_s3_bucket_secret_name: sc-content-user
+h5p_s3_bucket_name: sc-{{ stage }}-h5p-txl-bucket
 
 edusharing_secrets:
 - name: "{{ edusharing_instance_secret_name }}"
 - name: "{{ sodix_secret_name }}"
-- name: "{{ h5p_s3_bucket }}"
+- name: "{{ h5p_s3_bucket_secret_name }}"
 
 splash_url: http://splash.edusharing.svc.cluster.local:8050
 splash_helm_chart_version: "1.0.2"
@@ -249,17 +248,17 @@ edusharing_crawler_list:
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ h5p_s3_bucket_secret_name }}"
         key: s3_access_key
   - name: S3_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ h5p_s3_bucket_secret_name }}"
         key: s3_access_secret
   - name: S3_ENDPOINT_URL
     value: "{{ s3_url_frankfurt }}"
   - name: S3_BUCKET_NAME
-    value: "lernstore-content"
+    value: "{{ h5p_s3_bucket_name }}"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
 

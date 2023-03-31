@@ -18,3 +18,9 @@ sc-prod-edusharing
 [dev]
 sc-dev-nextcloud
 sc-dev-edusharing
+
+[staging]
+sc-staging-edusharing
+
+[prod]
+sc-prod-edusharing

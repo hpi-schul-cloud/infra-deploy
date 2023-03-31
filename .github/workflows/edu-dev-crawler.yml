@@ -18,7 +18,6 @@ on:
 
 jobs:
   dev_deploy_edusharing_crawlers:
-    if: ${{ inputs.CLUSTER }} == "sc-dev-edusharing"
     uses: ./.github/workflows/edu-deploy-crawler.yml
     with:
       CLUSTER: sc-dev-edusharing
