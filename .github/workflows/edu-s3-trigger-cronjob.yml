@@ -18,6 +18,9 @@ on:
         required: true
       KUBECONFIG:
         required: true
+      KUBERNETES_VERSION:
+        required: true
+        type: string
 
 jobs:
   run_ansible_playbook_edusharing:
@@ -38,7 +41,7 @@ jobs:
       - name: Install Kubectl
         working-directory: ${{ github.workspace }}/
         run: |
-            curl -LO https://dl.k8s.io/release/v1.23.16/bin/linux/amd64/kubectl
+            curl -LO https://dl.k8s.io/release/v${{ inputs.KUBERNETES_VERSION }}/bin/linux/amd64/kubectl
             chmod +x kubectl
             mv ./kubectl /usr/local/bin/kubectl
 
