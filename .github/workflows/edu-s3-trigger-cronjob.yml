@@ -13,6 +13,9 @@ on:
       BUCKET:
         required: true
         type: string
+      KUBECTL_VERSION:
+        required: true
+        type: string
     secrets:
       token:
         required: true
@@ -20,7 +23,7 @@ on:
         required: true
 
 jobs:
-  run_ansible_playbook_edusharing:
+  run_kubectl_commands_edusharing:
     environment: ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
     steps:
@@ -38,7 +41,7 @@ jobs:
       - name: Install Kubectl
         working-directory: ${{ github.workspace }}/
         run: |
-            curl -LO https://dl.k8s.io/release/v1.23.16/bin/linux/amd64/kubectl
+            curl -LO https://dl.k8s.io/release/v${{ inputs.KUBECTL_VERSION }}/bin/linux/amd64/kubectl
             chmod +x kubectl
             mv ./kubectl /usr/local/bin/kubectl
 
