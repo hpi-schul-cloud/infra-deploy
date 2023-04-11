@@ -13,14 +13,14 @@ on:
       BUCKET:
         required: true
         type: string
+      KUBERNETES_VERSION:
+        required: true
+        type: string
     secrets:
       token:
         required: true
       KUBECONFIG:
         required: true
-      KUBERNETES_VERSION:
-        required: true
-        type: string
 
 jobs:
   run_ansible_playbook_edusharing:
