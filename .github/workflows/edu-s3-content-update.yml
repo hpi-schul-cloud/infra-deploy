@@ -9,8 +9,6 @@ on:
       BUCKET:
         description: "Select bucket - h5p or fwu"
         required: true
-env:
-  KUBECTL_VERSION: "1.23.16"
 
 jobs:
   approve_edu_s3_update:
@@ -28,7 +26,7 @@ jobs:
       CLUSTER: sc-staging-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBECTL_VERSION: $KUBECTL_VERSION
+      KUBERNETES_VERSION: "1.23.16"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
@@ -42,7 +40,7 @@ jobs:
       CLUSTER: sc-prod-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBECTL_VERSION: $KUBECTL_VERSION
+      KUBERNETES_VERSION: "1.23.16"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}

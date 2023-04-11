@@ -13,7 +13,7 @@ on:
       BUCKET:
         required: true
         type: string
-      KUBECTL_VERSION:
+      KUBERNETES_VERSION:
         required: true
         type: string
     secrets:
@@ -41,7 +41,7 @@ jobs:
       - name: Install Kubectl
         working-directory: ${{ github.workspace }}/
         run: |
-            curl -LO https://dl.k8s.io/release/v${{ inputs.KUBECTL_VERSION }}/bin/linux/amd64/kubectl
+            curl -LO https://dl.k8s.io/release/v${{ inputs.KUBERNETES_VERSION }}/bin/linux/amd64/kubectl
             chmod +x kubectl
             mv ./kubectl /usr/local/bin/kubectl
 
@@ -57,13 +57,13 @@ jobs:
         run: kubectl delete job fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
         continue-on-error: true
 
-        # The Jobs can only get started, since the underlining Cornjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
+        # The Jobs can only get started, since the underlining Cronjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
       - name: Kubernetes Create Sync Job - H5P
         if:  inputs.BUCKET == 'h5p'
         working-directory: ${{ github.workspace }}
         run: kubectl create job --from=cronjob/h5p-s3-sync-cronjob-s3-sync h5p-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
 
-        # The Jobs can only get started, since the underlining Cornjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
+        # The Jobs can only get started, since the underlining Cronjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
       - name: Kubernetes Create Sync Job - FWU
         if: inputs.BUCKET == 'fwu'
         working-directory: ${{ github.workspace }}
