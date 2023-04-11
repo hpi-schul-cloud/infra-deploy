@@ -57,13 +57,13 @@ jobs:
         run: kubectl delete job fwu-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
         continue-on-error: true
 
-        # The Jobs can only get started, since the underlining Cornjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
+        # The Jobs can only get started, since the underlining Cronjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
       - name: Kubernetes Create Sync Job - H5P
         if:  inputs.BUCKET == 'h5p'
         working-directory: ${{ github.workspace }}
         run: kubectl create job --from=cronjob/h5p-s3-sync-cronjob-s3-sync h5p-s3-sync-cronjob-s3-sync-via-infra-deploy -n s3-sync --kubeconfig ${{ github.workspace }}/kubeconfig
 
-        # The Jobs can only get started, since the underlining Cornjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
+        # The Jobs can only get started, since the underlining Cronjob is already inside the Kubernetes Cluster. The Cronjob is managed via the infra-schulcloud repository.
       - name: Kubernetes Create Sync Job - FWU
         if: inputs.BUCKET == 'fwu'
         working-directory: ${{ github.workspace }}
