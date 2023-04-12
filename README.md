@@ -19,6 +19,8 @@ Clusters
 - sc-staging-edusharing
 - sc-prod-edusharing
 
+# Edusharing Update Content S3 Bucket
+The h5p files and fwu files can get updated. See [Documentation](https://docs.dbildungscloud.de/display/PROD/Edusharing+S3+Bucket+Content+Update).
 
 # Nextcloud Development space on dev cluster
 A namespace, a bucket and a nextcloud installation can be created so that the dev team can develope on the dev nextcloud kubernetes cluster. See [Documentation](https://docs.dbildungscloud.de/display/PROD/Dev+Nextcloud+Deployment).

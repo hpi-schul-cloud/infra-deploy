@@ -11,11 +11,10 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "0.1.6"
+        default: "0.1.10"
 
 jobs:
   dev_deploy_edusharing_crawlers:
-    if: ${{ inputs.CLUSTER }} == "sc-dev-edusharing"
     uses: ./.github/workflows/edu-deploy-crawler.yml
     with:
       CLUSTER: sc-dev-edusharing

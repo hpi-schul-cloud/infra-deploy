@@ -5,12 +5,14 @@
 edusharing_instance_secret_name: edusharing-instance
 edusharing_kubernetes_service_name: http://edusharing-repository-service.edusharing.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
-h5p_s3_bucket: s3-web-bucket
+content_s3_bucket_secret_name: sc-content-user
+h5p_s3_bucket_name: sc-{{ stage }}-h5p-txl-bucket
+fwu_s3_bucket_name: sc-{{ stage }}-fwu-txl-bucket
 
 edusharing_secrets:
 - name: "{{ edusharing_instance_secret_name }}"
 - name: "{{ sodix_secret_name }}"
-- name: "{{ h5p_s3_bucket }}"
+- name: "{{ content_s3_bucket_secret_name }}"
 
 splash_url: http://splash.edusharing.svc.cluster.local:8050
 splash_helm_chart_version: "1.0.2"
@@ -37,7 +39,6 @@ edusharing_crawler_list:
     value: hello_world
   - name: SCHEDULE
     value: "*-*-2:00"
-# TODO: remove SODIX_USER/SODIX_PASSWORD from non-sodix spider env vars
 # TODO: once oeh spider is fixed, change back to oeh spider
 - name: oeh-importer
   enabled: true
@@ -63,28 +64,16 @@ edusharing_crawler_list:
     value: "False"
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
-  - name: EDU_SHARING_BASE_URL
-    value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -107,28 +96,18 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: merlin-spider
   enabled: true
   resources:
@@ -151,28 +130,18 @@ edusharing_crawler_list:
     value: "INFO"
   - name: DRY_RUN
     value: "False"
-  - name: SODIX_USER
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: username
-  - name: SODIX_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ sodix_secret_name }}"
-        key: password
   - name: EDU_SHARING_BASE_URL
     value: "{{ edusharing_kubernetes_service_name }}"
   - name: EDU_SHARING_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
 - name: sodix-spider
   resources:
     limits:
@@ -201,12 +170,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: SODIX_USER
     valueFrom:
       secretKeyRef:
@@ -241,12 +210,12 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: technicalusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: technicaluserpassword
 - name: h5p-upload
   resources:
     limits:
@@ -271,26 +240,26 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_key
   - name: S3_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_secret
   - name: S3_ENDPOINT_URL
-    value: "{{ s3_url_frankfurt }}"
+    value: "{{ s3_url_berlin }}"
   - name: S3_BUCKET_NAME
-    value: "lernstore-content"
+    value: "{{ h5p_s3_bucket_name }}"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
 - name: fwu-upload
