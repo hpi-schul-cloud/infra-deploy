@@ -263,6 +263,7 @@ edusharing_crawler_list:
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
 - name: fwu-upload
+  enabled: true
   resources:
     limits:
       cpu: 1500m
@@ -270,7 +271,6 @@ edusharing_crawler_list:
     requests:
       cpu: 1000m
       memory: 1024Mi
-  enabled: true
   image:
     tag: "{{ edusharing_crawler_image_tag }}"
   env:
@@ -286,24 +286,53 @@ edusharing_crawler_list:
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: username
+        key: crawlerusername
   - name: EDU_SHARING_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
-        key: password
+        key: crawleruserpassword
   - name: S3_ACCESS_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_key
   - name: S3_SECRET_KEY
     valueFrom:
       secretKeyRef:
-        name: "{{ h5p_s3_bucket }}"
+        name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_secret
   - name: S3_ENDPOINT_URL
-    value: "{{ s3_url_frankfurt }}"
+    value: "{{ s3_url_berlin}}"
   - name: S3_BUCKET_NAME
-    value: "fwu-content"
-
+    value: "{{ fwu_s3_bucket_name }}"
+- name: permission-updater
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1024Mi
+    requests:
+      cpu: 250m
+      memory: 512Mi
+  enabled: true
+  image:
+    tag: "{{ edusharing_crawler_image_tag }}"
+  env:
+  - name: CRAWLER
+    value: permission_updater
+  - name: SCHEDULE
+    value: "*-*-02:00"
+  - name: LOG_LEVEL
+    value: "INFO"
+  - name: EDU_SHARING_BASE_URL
+    value: "{{ edusharing_kubernetes_service_name }}"
+  - name: EDU_SHARING_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: crawlerusername
+  - name: EDU_SHARING_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: crawleruserpassword
