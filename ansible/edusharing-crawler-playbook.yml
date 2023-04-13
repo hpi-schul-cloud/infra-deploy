@@ -51,5 +51,19 @@
       release_namespace: "{{ namespace }}"
       values:
         "{{ item }}"
-    when: item.enabled
+    when: item.enabled and namespace == "edusharing"
     loop: "{{ edusharing_crawler_list }}"
+
+  - name: Install Crawler for edu-2 dev instance
+    kubernetes.core.helm:
+      name: "crawler-{{item.name}}"
+      chart_ref: "dbildungscloud/edusharing-crawler"
+      update_repo_cache: yes
+      wait: yes
+      chart_version: "{{ edusharing_crawler_helm_chart_version }}"
+      kubeconfig: "{{ kubeconfig }}"
+      release_namespace: "{{ namespace }}"
+      values:
+        "{{ item }}"
+    when: item.enabled and namespace == "edu-2"
+    loop: "{{ edusharing_2_crawler_list }}"

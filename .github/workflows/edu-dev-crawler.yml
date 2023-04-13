@@ -12,13 +12,16 @@ on:
         description: "Select Edusharing crawler Image Tag"
         required: true
         default: "0.1.10"
+      EDUSHARING_NAMESPACE:
+        description: "Select valid namespace: 'edusharing', 'edu-2'"
+        required: true
 
 jobs:
   dev_deploy_edusharing_crawlers:
     uses: ./.github/workflows/edu-deploy-crawler.yml
     with:
       CLUSTER: sc-dev-edusharing
-      NAMESPACE: "edusharing"
+      NAMESPACE: "${{ inputs.EDUSHARING_NAMESPACE }}"
       EDUSHARING_CRAWLER_HELM_CHART_VERSION: "${{ inputs.EDUSHARING_CRAWLER_HELM_CHART_VERSION }}"
       EDUSHARING_CRAWLER_IMAGE_TAG: "${{ inputs.EDUSHARING_CRAWLER_IMAGE_TAG }}"
     secrets:
