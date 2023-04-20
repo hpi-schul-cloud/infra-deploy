@@ -23,7 +23,7 @@ on:
         required: true
 
 jobs:
-  run_ansible_playbook_edusharing:
+  run_kubectl_commands_edusharing:
     environment: ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
     steps:

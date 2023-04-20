@@ -3,7 +3,7 @@
 # edusharing_crawler_image_tag:
 
 edusharing_instance_secret_name: edusharing-instance
-edusharing_kubernetes_service_name: http://edusharing-repository-service.edusharing.svc.cluster.local:8081/edu-sharing/
+edusharing_kubernetes_service_name: http://edusharing-repository-service.{{ namespace }}.svc.cluster.local:8081/edu-sharing/
 sodix_secret_name: sodix-secret
 content_s3_bucket_secret_name: sc-content-user
 h5p_s3_bucket_name: sc-{{ stage }}-h5p-txl-bucket
@@ -306,3 +306,5 @@ edusharing_crawler_list:
     value: "{{ s3_url_berlin}}"
   - name: S3_BUCKET_NAME
     value: "{{ fwu_s3_bucket_name }}"
+
+edusharing_2_crawler_list: []
