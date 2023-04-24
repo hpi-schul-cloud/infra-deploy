@@ -16,9 +16,9 @@ edusharing_secrets:
 - name: "{{ sodix_secret_name }}"
 - name: "{{ content_s3_bucket_secret_name }}"
 
-edusharing_setup_helm_chart_version: 0.1.0
+edusharing_setup_helm_chart_version: 0.1.8
 edusharing_setup_image_repository: ghcr.io/hpi-schul-cloud/oeh-search-etl
-edusharing_setup_image_tag: 0.1.0
+edusharing_setup_image_tag: edusharing-setup-0.1.8
 edusharing_setup_helm_chart_values:
   image:
     repository: "{{ edusharing_setup_image_repository }}"
@@ -29,8 +29,8 @@ edusharing_setup_helm_chart_values:
         secretName: "{{ edusharing_users_secret_name }}"
   volumeMounts:
     - name: "{{ edusharing_users_secret_name }}"
-      mountPath: /var/run/secrets/
-      defaultMode: 400
+      mountPath: /var/run/secrets/es_users.json
+      subPath: es_users.json
   env:
     - name: EDU_SHARING_BASE_URL
       value: "{{ edusharing_kubernetes_service_name }}"
@@ -45,7 +45,7 @@ edusharing_setup_helm_chart_values:
           name: "{{ edusharing_instance_secret_name }}"
           key: crawleruserpassword
     - name: SETUP_CONFIG_PATH
-      value: "/var/run/secrets/{{ edusharing_users_secret_name }}"
+      value: /var/run/secrets/es_users.json
 
 splash_url: http://splash.edusharing.svc.cluster.local:8050
 splash_helm_chart_version: "1.0.2"
