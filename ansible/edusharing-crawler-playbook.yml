@@ -51,7 +51,6 @@
       release_namespace: "{{ namespace }}"
       values:
         "{{ edusharing_setup_helm_chart_values }}"
-    when: namespace == "edusharing"
 
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
