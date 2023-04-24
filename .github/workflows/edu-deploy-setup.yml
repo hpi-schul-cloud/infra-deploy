@@ -47,17 +47,12 @@ jobs:
           echo -e "\nnamespace: ${{ inputs.NAMESPACE }}" >> config.yml
           cat config.yml
 
-      - name: Execute Ansible Edusharing Crawler Playbook
+      - name: Execute Ansible Edusharing Setup Playbook
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
-        run: ansible-playbook ansible/edusharing-crawler-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
+        run: ansible-playbook ansible/edusharing-setup-playbook.yml --inventory-file hosts -e 'ansible_python_interpreter=/usr/bin/python3' -l ${{ inputs.CLUSTER }}
 
       - name: Delete kubeconfig files
         if: always()
         working-directory: ${{ github.workspace }}
         run: |
           rm -f kubeconfig
-
-
-
-
-
