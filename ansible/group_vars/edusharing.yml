@@ -11,7 +11,6 @@ h5p_s3_bucket_name: sc-{{ stage }}-h5p-txl-bucket
 fwu_s3_bucket_name: sc-{{ stage }}-fwu-txl-bucket
 
 edusharing_secrets:
-- name: "{{ edusharing_users_secret_name }}"
 - name: "{{ edusharing_instance_secret_name }}"
 - name: "{{ sodix_secret_name }}"
 - name: "{{ content_s3_bucket_secret_name }}"

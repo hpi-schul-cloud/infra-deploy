@@ -40,18 +40,6 @@
       values:
         "{{ splash_helm_chart_values }}"
 
-  - name: Install Setup job for Edusharing
-    kubernetes.core.helm:
-      name: "edusharing-setup"
-      chart_ref: "dbildungscloud/edusharing-setup"
-      update_repo_cache: yes
-      wait: yes
-      chart_version: "{{ edusharing_setup_helm_chart_version }}"
-      kubeconfig: "{{ kubeconfig }}"
-      release_namespace: "{{ namespace }}"
-      values:
-        "{{ edusharing_setup_helm_chart_values }}"
-
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
       name: "crawler-{{item.name}}"
