@@ -37,12 +37,12 @@ edusharing_setup_helm_chart_values:
       valueFrom:
         secretKeyRef:
           name: "{{ edusharing_instance_secret_name }}"
-          key: crawlerusername
+          key: username
     - name: EDU_SHARING_PASSWORD
       valueFrom:
         secretKeyRef:
           name: "{{ edusharing_instance_secret_name }}"
-          key: crawleruserpassword
+          key: password
     - name: SETUP_CONFIG_PATH
       value: /var/run/secrets/es_users.json
 
