@@ -1,10 +1,11 @@
-name: EDU rerun setup for Dev
-on: push
-  # workflow_dispatch:
-  #   inputs:
-  #     EDUSHARING_NAMESPACE:
-  #       description: "Select valid namespace: 'edusharing', 'edu-2'"
-  #       required: true
+name: EDU Rerun setup for Dev
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      EDUSHARING_NAMESPACE:
+        description: "Select valid namespace: 'edusharing', 'edu-2'"
+        required: true
 
 jobs:
   dev_deploy_edusharing_setup:
