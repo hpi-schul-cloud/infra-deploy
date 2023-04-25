@@ -1,13 +1,13 @@
 name: EDU rerun setup for Dev
-on:
-  workflow_dispatch:
-    inputs:
-      EDUSHARING_NAMESPACE:
-        description: "Select valid namespace: 'edusharing', 'edu-2'"
-        required: true
+on: push
+  # workflow_dispatch:
+  #   inputs:
+  #     EDUSHARING_NAMESPACE:
+  #       description: "Select valid namespace: 'edusharing', 'edu-2'"
+  #       required: true
 
 jobs:
-  dev_deploy_edusharing_crawlers:
+  dev_deploy_edusharing_setup:
     uses: ./.github/workflows/edu-deploy-setup.yml
     with:
       CLUSTER: sc-dev-edusharing
