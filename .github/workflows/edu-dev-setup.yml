@@ -1,6 +1,5 @@
-name: EDU Rerun setup for Dev
+name: EDU Rerun Setup for Dev
 on:
-  push:
   workflow_dispatch:
     inputs:
       EDUSHARING_NAMESPACE:

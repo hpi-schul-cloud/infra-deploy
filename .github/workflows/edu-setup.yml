@@ -1,4 +1,4 @@
-name: EDU Rerun setup
+name: EDU Rerun Setup
 on:
   workflow_dispatch:
     inputs:
