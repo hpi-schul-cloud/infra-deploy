@@ -1,0 +1,26 @@
+name: EDU Rerun Setup
+on:
+  workflow_dispatch:
+    inputs:
+      CLUSTER:
+        description: "Select Edusharing cluster"
+        required: true
+        default: sc-dev-edusharing
+
+jobs:
+  approve_edusharing:
+    environment: approve_edusharing
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Approval from authorized approve_edusharing Group has been given!"
+
+  deploy_edusharing_setup:
+    uses: ./.github/workflows/edu-deploy-setup.yml
+    needs:
+      - approve_edusharing
+    with:
+      CLUSTER: "${{ inputs.CLUSTER }}"
+      NAMESPACE: edusharing
+    secrets:
+      token: ${{ secrets.GITHUB_TOKEN }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}

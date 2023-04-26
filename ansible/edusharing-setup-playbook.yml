@@ -1,0 +1,45 @@
+---
+- name: Deploy to Edusharing Clusters
+  hosts:
+    - edusharing
+  connection: local
+  tasks:
+  - name: Add Helm Chart Repo dbildungscloud
+    kubernetes.core.helm_repository:
+      name: dbildungscloud
+      repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
+
+  - name: Create secret for edusharing setup
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ edusharing_users_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ edusharing_users_secret_name }}"
+
+  - name: Remove Setup job for Edusharing
+    kubernetes.core.helm:
+      name: "edusharing-setup"
+      chart_ref: "dbildungscloud/edusharing-setup"
+      update_repo_cache: true
+      wait: true
+      kubeconfig: "{{ kubeconfig }}"
+      release_namespace: "{{ namespace }}"
+      state: absent
+
+  - name: Install Setup job for Edusharing
+    kubernetes.core.helm:
+      name: "edusharing-setup"
+      chart_ref: "dbildungscloud/edusharing-setup"
+      update_repo_cache: true
+      wait: true
+      chart_version: "{{ edusharing_setup_helm_chart_version }}"
+      kubeconfig: "{{ kubeconfig }}"
+      release_namespace: "{{ namespace }}"
+      values:
+        "{{ edusharing_setup_helm_chart_values }}"
