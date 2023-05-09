@@ -288,6 +288,8 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_secret
+  - name: S3_REGION
+    value: "{{ s3_region_berlin }}"
   - name: S3_ENDPOINT_URL
     value: "{{ s3_url_berlin }}"
   - name: S3_BUCKET_NAME
@@ -334,6 +336,8 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ content_s3_bucket_secret_name }}"
         key: s3_access_secret
+  - name: S3_REGION
+    value: "{{ s3_region_berlin }}"
   - name: S3_ENDPOINT_URL
     value: "{{ s3_url_berlin}}"
   - name: S3_BUCKET_NAME
