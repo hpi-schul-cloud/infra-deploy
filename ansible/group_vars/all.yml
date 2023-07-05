@@ -7,7 +7,7 @@ s3_url_frankfurt: http://s3-eu-central-1.ionoscloud.com
 
 nextcloud_chart_version: 2.13.2
 nextcloud_image_repository: schulcloud/schulcloud-nextcloud
-nextcloud_postgresql_image_tag: 11.17.0-debian-11-r37
+nextcloud_postgresql_image_tag: 14.8.0-debian-11-r0
 nextcloud_secret_name: nextcloud
 nextcloud_postgresql_pvc_name: nextcloud-postgresql-pvc
 nextcloud_postgresql_pvc_size: 15Gi

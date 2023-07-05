@@ -1,5 +1,5 @@
 stage: dev
-nextcloud_image_tag: latest
+nextcloud_image_tag: 1.9.0-branch-1
 nextcloud:
   nbc:
     urls:
