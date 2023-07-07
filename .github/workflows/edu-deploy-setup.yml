@@ -10,16 +10,24 @@ on:
       NAMESPACE:
         required: true
         type: string
+      PROXY_URL:
+        required: false
+        type: string
     secrets:
       token:
         required: true
       KUBECONFIG:
         required: true
+      PROXY_CREDENTIALS:
+        required: false
 
 jobs:
   run_ansible_playbook_edusharing:
     environment: ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
+    env:
+      K8S_AUTH_PROXY: ${{ inputs.PROXY_URL }}
+      K8S_AUTH_PROXY_HEADERS_PROXY_BASIC_AUTH: ${{ secrets.PROXY_CREDENTIALS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
