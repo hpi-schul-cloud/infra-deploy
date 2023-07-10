@@ -36,6 +36,7 @@ jobs:
         shell: bash
         run: |
           python3 -m pip install kubernetes
+          python3 -c "import ssl; print(ssl.OPENSSL_VERSION)"
 
       - name: Install requirements ansible-galaxy
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
