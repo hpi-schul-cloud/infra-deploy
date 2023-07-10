@@ -17,7 +17,7 @@ nextcloud_install_plugins_default: "groupfolders theming_customcss richdocuments
 nextcloud_enable_plugins_default: "schulcloud extract theming"
 nextcloud_disable_plugins_default: "accessibility activity circles comments contactsinteraction dashboard files_sharing firstrunwizard password_policy photos privacy nextcloud_announcements recommendations sharebymail support survey_client systemtags notifications updatenotification user_status weather_status"
 # nextcloud_external_archive_plugins: "https://github.com/hpi-schul-cloud/user_oidc/releases/download/v1.3.0-alpha/user_oidc-v1.3.0-alpha.tar.gz:user_oidc"
-nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.7 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.2.0"
+nextcloud_external_git_plugins: "https://github.com/hpi-schul-cloud/NextcloudExtract.git:extract:1.3.8 https://github.com/hpi-schul-cloud/schulcloud-nextcloud-app.git:schulcloud:0.2.0"
 nextcloud_post_config_command: 'sudo -u www-data PHP_MEMORY_LIMIT=512M php occ user_oidc:provider SchulcloudNextcloud --clientid="{{ socialloginClientId }}" --clientsecret="{{ socialloginSecret }}" --check-bearer="1" --unique-uid="0" --scope="openid offline profile email groups" --discoveryuri="https://{{ nextcloud[ item.name ].urls.hydraUrl }}/.well-known/openid-configuration"'
 nextcloud_values:
   image:
