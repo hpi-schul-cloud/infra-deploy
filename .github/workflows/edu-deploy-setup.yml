@@ -33,10 +33,10 @@ jobs:
           repository: hpi-schul-cloud/infra-deploy
 
       - name: Install requirements python3
+        working-directory: ${{ github.workspace }}/repo/infra-deploy/
         shell: bash
         run: |
-          python3 -m pip install kubernetes
-          python3 -m pip list
+          python3 -m pip install -r requirements.txt
 
       - name: Install requirements ansible-galaxy
         working-directory: ${{ github.workspace }}/repo/infra-deploy/
