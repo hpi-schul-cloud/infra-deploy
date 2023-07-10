@@ -22,11 +22,16 @@ on:
         required: true
       S3ACCESSSECRET:
         required: true
+      PROXY_CREDENTIALS:
+        required: false
 
 jobs:
   run_delete_ansible_playbook:
     environment:  ${{ inputs.CLUSTER }}
     runs-on: ubuntu-latest
+    env:
+      K8S_AUTH_PROXY: ${{ vars.PROXY_URL }}
+      K8S_AUTH_PROXY_HEADERS_PROXY_BASIC_AUTH: ${{ secrets.PROXY_CREDENTIALS }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
