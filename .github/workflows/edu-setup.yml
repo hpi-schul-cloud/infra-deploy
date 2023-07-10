@@ -21,7 +21,6 @@ jobs:
     with:
       CLUSTER: "${{ inputs.CLUSTER }}"
       NAMESPACE: edusharing
-      PROXY_URL: "${{ vars.PROXY_URL }}"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
