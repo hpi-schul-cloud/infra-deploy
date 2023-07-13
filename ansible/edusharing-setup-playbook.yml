@@ -9,7 +9,20 @@
       name: dbildungscloud
       repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
 
-  - name: Create secret for edusharing setup
+  - name: Create secret for edusharing setup - admin credentials
+    kubernetes.core.k8s:
+      state: present
+      kubeconfig: "{{ kubeconfig }}"
+      definition:
+        apiVersion: onepassword.com/v1
+        kind: OnePasswordItem
+        metadata:
+          name: "{{ edusharing_instance_secret_name }}"
+          namespace: "{{ namespace }}"
+        spec:
+          itemPath: "vaults/{{ vault }}/items/{{ edusharing_instance_secret_name }}"
+
+  - name: Create secret for edusharing setup - users config
     kubernetes.core.k8s:
       state: present
       kubeconfig: "{{ kubeconfig }}"
