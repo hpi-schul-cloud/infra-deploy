@@ -30,6 +30,7 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
 
   update_content_in_prod_bucket:
     if: inputs.STAGE == 'prod'
@@ -44,3 +45,4 @@ jobs:
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
