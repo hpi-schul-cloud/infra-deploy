@@ -56,7 +56,7 @@
          "types": ""
       },
       "theming_customcss": {
-         "customcss": ".app-navigation-entry__settings-quota:not(.vue) {\\n    display: none;\\n}\\n\\n[data-cy-files-navigation-item=\"recent\"]:not(.vue) {\\n    display: none;\\n}\\n\\n#contactsmenu {\\n    display: none;\\n}\\n\\n#settings-section_webdav {\\n    display: none;\\n}\\n\\n#accessibility_settings.menu-entry {\\n    display: none;\\n}\\n\\n#settings.menu-entry {\\n   display: none;\\n}\\n\\n#help.menu-entry {\\n   display: none;\\n}\\n\\n#logout.menu-entry {\\n    display: none;\\n}",
+         "customcss": ".app-navigation-entry__settings-quota:not(.vue) {\\n display: none;\\n}\\n\\n[data-cy-files-navigation-item=\"recent\"]:not(.vue) {\\n display: none;\\n}\\n\\n#contactsmenu {\\n display: none;\\n}\\n\\n#settings-section_webdav {\\n display: none;\\n}\\n\\n#accessibility_settings.menu-entry {\\n display: none;\\n}\\n\\n#settings.menu-entry {\\n display: none;\\n}\\n\\n#help.menu-entry {\\n display: none;\\n}\\n\\n#logout.menu-entry {\\n display: none;\\n}\\n\\n.action-editlocally-container:not(.vue) {\\n display: none;\\n}\\n\\n",
          "cachebuster": "1659944778759",
          "types": "",
          "enabled": "yes"
