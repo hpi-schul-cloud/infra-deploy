@@ -22,3 +22,4 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
       S3ACCESSKEY: ${{ secrets.S3ACCESSKEY }}
       S3ACCESSSECRET: ${{ secrets.S3ACCESSSECRET }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}

@@ -32,6 +32,7 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
       SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
       SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
 
   deploy_nextcloud_from_main_to_brb:
     if: inputs.INSTANCE_NAME == 'brb'
@@ -49,6 +50,7 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
       SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
       SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
 
   deploy_nextcloud_from_main_to_thr:
     if: inputs.INSTANCE_NAME == 'thr'
@@ -66,3 +68,4 @@ jobs:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
       SOCIALLOGINCLIENTID: ${{ secrets.DEV_SOCIALLOGINCLIENTID }}
       SOCIALLOGINSECRET: ${{ secrets.DEV_SOCIALLOGINSECRET }}
+      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
