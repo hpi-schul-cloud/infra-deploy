@@ -23,3 +23,5 @@ secrets*.yaml
 # kubernetes kubeconfigs
 kubeconfig.*
 kubeconfig
+
+.idea/
