@@ -259,6 +259,16 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: password
+  - name: EDU_SHARING_USERNAME_CRAWLER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: crawlerusername
+  - name: EDU_SHARING_PASSWORD_CRAWLER
+    valueFrom:
+      secretKeyRef:
+        name: "{{ edusharing_instance_secret_name }}"
+        key: crawleruserpassword
 - name: h5p-upload
   resources:
     limits:
