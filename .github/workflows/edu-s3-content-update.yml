@@ -26,7 +26,7 @@ jobs:
       CLUSTER: sc-staging-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBERNETES_VERSION: "1.23.16"
+      KUBERNETES_VERSION: "1.24.15"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
@@ -41,7 +41,7 @@ jobs:
       CLUSTER: sc-prod-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBERNETES_VERSION: "1.23.16"
+      KUBERNETES_VERSION: "1.24.15"
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
