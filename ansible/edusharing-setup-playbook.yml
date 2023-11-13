@@ -4,9 +4,9 @@
     - edusharing
   connection: local
   tasks:
-  - name: Add Helm Chart Repo helm-charts-registry
+  - name: Add Helm Chart Repo dbildungscloud
     kubernetes.core.helm_repository:
-      name: helm-charts-registry
+      name: dbildungscloud
       repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
     check_mode: false
     changed_when: false
@@ -40,7 +40,7 @@
   - name: Remove Setup job for Edusharing
     kubernetes.core.helm:
       name: "edusharing-setup"
-      chart_ref: "helm-charts-registry/edusharing-setup"
+      chart_ref: "dbildungscloud/edusharing-setup"
       update_repo_cache: true
       wait: true
       kubeconfig: "{{ kubeconfig }}"
@@ -50,7 +50,7 @@
   - name: Install Setup job for Edusharing
     kubernetes.core.helm:
       name: "edusharing-setup"
-      chart_ref: "helm-charts-registry/edusharing-setup"
+      chart_ref: "dbildungscloud/edusharing-setup"
       update_repo_cache: true
       wait: true
       chart_version: "{{ edusharing_setup_helm_chart_version }}"
