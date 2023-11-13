@@ -4,15 +4,19 @@
     - edusharing
   connection: local
   tasks:
-  - name: Add Helm Chart Repo dbildungscloud
+  - name: Add Helm Chart Repo helm-charts-registry
     kubernetes.core.helm_repository:
-      name: dbildungscloud
+      name: helm-charts-registry
       repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
+    check_mode: false
+    changed_when: false
 
   - name: Add Helm Chart Repo ntppool
     kubernetes.core.helm_repository:
       name: ntppool
       repo_url: "https://charts.ntppool.org/"
+    check_mode: false
+    changed_when: false
 
   - name: Create secrets for edusharing
     kubernetes.core.k8s:
@@ -43,7 +47,7 @@
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:
       name: "crawler-{{item.name}}"
-      chart_ref: "dbildungscloud/edusharing-crawler"
+      chart_ref: "helm-charts-registry/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
       chart_version: "{{ edusharing_crawler_helm_chart_version }}"
@@ -57,7 +61,7 @@
   - name: Install Crawler for edu-2 dev instance
     kubernetes.core.helm:
       name: "crawler-{{item.name}}"
-      chart_ref: "dbildungscloud/edusharing-crawler"
+      chart_ref: "helm-charts-registry/edusharing-crawler"
       update_repo_cache: yes
       wait: yes
       chart_version: "{{ edusharing_crawler_helm_chart_version }}"
