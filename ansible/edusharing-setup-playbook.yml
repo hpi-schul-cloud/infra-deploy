@@ -8,8 +8,8 @@
     kubernetes.core.helm_repository:
       name: dbildungscloud
       repo_url: "https://hpi-schul-cloud.github.io/helm-charts-registry"
+    # run also in check mode since later task depends on this step 
     check_mode: false
-    changed_when: false
 
   - name: Create secret for edusharing setup - admin credentials
     kubernetes.core.k8s:
