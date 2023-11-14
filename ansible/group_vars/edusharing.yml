@@ -17,7 +17,7 @@ edusharing_secrets:
 
 edusharing_setup_helm_chart_version: 0.1.8
 edusharing_setup_image_repository: ghcr.io/hpi-schul-cloud/oeh-search-etl
-edusharing_setup_image_tag: edusharing-setup-0.2.0
+edusharing_setup_image_tag: edusharing-setup-0.1.9
 edusharing_setup_helm_chart_values:
   image:
     repository: "{{ edusharing_setup_image_repository }}"
