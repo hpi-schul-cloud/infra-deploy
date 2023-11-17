@@ -11,7 +11,7 @@ on:
 
 jobs:
   delete_namespace_and_buckets:
-    if: inputs.NAMESPACE_NAME != 'nbc-main'
+    if: inputs.NAMESPACE_NAME != 'nbc-main'  && inputs.NAMESPACE_NAME != 'brb-main' && inputs.NAMESPACE_NAME != 'thr-main' 
     uses: ./.github/workflows/nextcloud-deletion.yml
     with:
       CLUSTER: sc-dev-nextcloud
