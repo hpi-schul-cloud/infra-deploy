@@ -67,13 +67,13 @@ nextcloud_values:
       valueFrom:
         secretKeyRef:
           # change to always "ionos-s3-password" after moving nextcloud niedersachsen
-          name: "{%if namespace == 'nbc_main'%}nextcloud{%else%}ionos-s3-password{%endif%}"
+          name: "{%if namespace == 'nbc-main'%}nextcloud{%else%}ionos-s3-password{%endif%}"
           key: s3_access_key
     - name: OBJECTSTORE_S3_SECRET
       valueFrom:
         secretKeyRef:
           # change to always "ionos-s3-password" after moving nextcloud niedersachsen
-          name: "{%if namespace == 'nbc_main'%}nextcloud{%else%}ionos-s3-password{%endif%}"
+          name: "{%if namespace == 'nbc-main'%}nextcloud{%else%}ionos-s3-password{%endif%}"
           key: s3_access_secret
     - name: OBJECTSTORE_S3_HOST
       value: "{{ nextcloud_objectstore_s3_host }}"
