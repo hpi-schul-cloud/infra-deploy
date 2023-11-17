@@ -45,7 +45,7 @@
       "files":{
          "types":"filesystem",
          "enabled":"yes",
-         "default_quota":"0 B"
+         "default_quota":"1 GB"
       },
       "schulcloud": {
          "enabled": "yes",
