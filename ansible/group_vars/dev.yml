@@ -1,5 +1,5 @@
 stage: dev
-nextcloud_image_tag: 26.0.5
+nextcloud_image_tag: 26.0.8
 nextcloud:
   nbc:
     urls:
