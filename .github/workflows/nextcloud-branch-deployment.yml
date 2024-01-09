@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       NAMESPACE_SCHULCLOUD_INSTANCE:
-        description: 'Namespace name of schulcloud instance in sc-dev-devcenter-1'
+        description: 'Namespace name of schulcloud instance in the sc-dev-* cluster'
         required: true
       INSTANCE_NAME:
         description: 'select nbc, brb or thr'

@@ -25,7 +25,7 @@ jobs:
       # change after nextcloud niedersachsen migration to "sc-dev-nbc-nextcloud-txl-bucket-0000"
       BUCKET_NAME: "sc-dev-cd-nextcloud-txl-bucket-0000"
       NAMESPACE: "nbc-main"
-      NAMESPACE_SCHULCLOUD_INSTANCE: "nbc-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "main"
       INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
@@ -43,7 +43,7 @@ jobs:
       CLUSTER: "sc-dev-nextcloud"
       BUCKET_NAME: "sc-dev-brb-nextcloud-txl-bucket-0000"
       NAMESPACE: "brb-main"
-      NAMESPACE_SCHULCLOUD_INSTANCE: "brb-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "main"
       INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
@@ -61,7 +61,7 @@ jobs:
       CLUSTER: "sc-dev-nextcloud"
       BUCKET_NAME: "sc-dev-thr-nextcloud-txl-bucket-0000"
       NAMESPACE: "thr-main"
-      NAMESPACE_SCHULCLOUD_INSTANCE: "default-main"
+      NAMESPACE_SCHULCLOUD_INSTANCE: "main"
       INSTANCE_NAME: ${{ inputs.INSTANCE_NAME }}
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
