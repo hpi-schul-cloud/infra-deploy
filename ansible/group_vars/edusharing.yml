@@ -85,9 +85,9 @@ edusharing_crawler_list:
       memory: 512Mi
   env:
   - name: CRAWLER
-    value: spider
+    value: oeh_spider
   - name: SCHEDULE
-    value: "*-*-20:00"
+    value: "*-*-07:25"
   - name: LOG_LEVEL
     value: "INFO"
   - name: SPLASH_URL
