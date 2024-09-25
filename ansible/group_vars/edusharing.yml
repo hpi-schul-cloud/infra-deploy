@@ -106,6 +106,10 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: crawleruserpassword
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -124,6 +128,10 @@ edusharing_crawler_list:
     value: "*-*-21:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -158,6 +166,10 @@ edusharing_crawler_list:
     value: "*-*-22:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -192,6 +204,10 @@ edusharing_crawler_list:
     value: "*-*-3:00"
   - name: SPLASH_URL
     value: "{{ splash_url }}"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -316,6 +332,10 @@ edusharing_crawler_list:
     value: "{{ h5p_s3_bucket_name }}"
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
 - name: fwu-upload
   enabled: true
   resources:
@@ -332,6 +352,10 @@ edusharing_crawler_list:
     value: fwu_upload
   - name: SCHEDULE
     value: "*-*-01:00"
+  - name: PYPPETEER_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
+  - name: PLAYWRIGHT_WS_ENDPOINT
+    value: "ws://headless_chrome:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
