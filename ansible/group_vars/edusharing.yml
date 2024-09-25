@@ -208,12 +208,12 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: crawleruserpassword
-  - name: SODIX_USER
+  - name: SODIX_SPIDER_USERNAME
     valueFrom:
       secretKeyRef:
         name: "{{ sodix_secret_name }}"
         key: username
-  - name: SODIX_PASSWORD
+  - name: SODIX_SPIDER_PASSWORD
     valueFrom:
       secretKeyRef:
         name: "{{ sodix_secret_name }}"
