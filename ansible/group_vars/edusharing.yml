@@ -107,9 +107,9 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: crawleruserpassword
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -129,9 +129,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -167,9 +167,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -205,9 +205,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -333,9 +333,9 @@ edusharing_crawler_list:
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
 - name: fwu-upload
   enabled: true
   resources:
@@ -353,9 +353,9 @@ edusharing_crawler_list:
   - name: SCHEDULE
     value: "*-*-01:00"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://headless_chrome:3000"
+    value: "ws://browserless-chromium:3000"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
