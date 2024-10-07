@@ -61,6 +61,8 @@ splash_helm_chart_values:
   serviceAccount:
     create: false
 
+edusharing_crawler_pyppeteer_ws_endpoint: ws://browserless-chromium:3000
+edusharing_crawler_playwright_ws_endpoint: ws://browserless-chromium:3000
 edusharing_crawler_list:
 - name: hello-world
   enabled: false
@@ -106,9 +108,9 @@ edusharing_crawler_list:
         name: "{{ edusharing_instance_secret_name }}"
         key: crawleruserpassword
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
 - name: mediothek-pixiothek-spider
   enabled: true
   image:
@@ -128,9 +130,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -166,9 +168,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -204,9 +206,9 @@ edusharing_crawler_list:
   - name: SPLASH_URL
     value: "{{ splash_url }}"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: DRY_RUN
@@ -332,9 +334,9 @@ edusharing_crawler_list:
   - name: S3_DOWNLOAD_DIRECTORY
     value: "s3_download"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
 - name: fwu-upload
   enabled: true
   resources:
@@ -352,9 +354,9 @@ edusharing_crawler_list:
   - name: SCHEDULE
     value: "*-*-01:00"
   - name: PYPPETEER_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
   - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "ws://browserless-chromium:3000"
+    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
   - name: LOG_LEVEL
     value: "INFO"
   - name: EDU_SHARING_BASE_URL
