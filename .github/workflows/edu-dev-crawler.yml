@@ -11,7 +11,7 @@ on:
       EDUSHARING_CRAWLER_IMAGE_TAG:
         description: "Select Edusharing crawler Image Tag"
         required: true
-        default: "edusharing-crawler-0.5.12"
+        default: "edusharing-crawler-0.5.13"
       EDUSHARING_NAMESPACE:
         description: "Select valid namespace: 'edusharing', 'edu-2'"
         required: true
