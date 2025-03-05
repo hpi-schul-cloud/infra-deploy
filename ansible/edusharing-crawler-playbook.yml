@@ -44,7 +44,7 @@
       values:
         "{{ splash_helm_chart_values }}"
         
-  - name: Install browserless chromium
+  - name: Install browserless chrome
     kubernetes.core.k8s:
       state: present
       kubeconfig: "{{ kubeconfig }}"
@@ -52,13 +52,13 @@
         apiVersion: apps/v1
         kind: Deployment
         metadata:
-          name: "browserless-chromium"
+          name: "browserless-chrome"
           namespace: "{{ namespace }}"
           labels:
-            app: browserless-chromium
+            app: browserless-chrome
             app.kubernetes.io/part-of: schulcloud-verbund
             app.kubernetes.io/version: v2.24.1
-            app.kubernetes.io/name: chromium
+            app.kubernetes.io/name: chrome
             app.kubernetes.io/component: browserless
             app.kubernetes.io/managed-by: ansible
         spec:
@@ -71,14 +71,14 @@
           paused: false
           selector:
             matchLabels:
-              app: browserless-chromium
+              app: browserless-chrome
           template:
             metadata:
               labels:
-                app: browserless-chromium
+                app: browserless-chrome
                 app.kubernetes.io/part-of: schulcloud-verbund
                 app.kubernetes.io/version: v2.24.1
-                app.kubernetes.io/name: chromium
+                app.kubernetes.io/name: chrome
                 app.kubernetes.io/component: browserless
                 app.kubernetes.io/managed-by: ansible
             spec:
@@ -88,12 +88,12 @@
                 fsGroup: 999
                 runAsNonRoot: true
               containers:
-              - name: chromium
-                image: ghcr.io/browserless/chromium:v2.24.1
+              - name: chrome
+                image: ghcr.io/browserless/chrome:v2.24.1
                 imagePullPolicy: IfNotPresent
                 ports:
                 - containerPort: 3000
-                  name: chromium
+                  name: chrome
                   protocol: TCP
                 resources:
                   limits:
@@ -106,7 +106,7 @@
                 - name: TIMEOUT
                   value: "120000"
 
-  - name: Install browserless chromium Service
+  - name: Install browserless chrome Service
     kubernetes.core.k8s:
       state: present
       kubeconfig: "{{ kubeconfig }}"
@@ -114,12 +114,12 @@
         apiVersion: v1
         kind: Service
         metadata:
-          name: "browserless-chromium"
+          name: "browserless-chrome"
           namespace: "{{ namespace }}"
           labels:
-            app: browserless-chromium
+            app: browserless-chrome
             app.kubernetes.io/part-of: schulcloud-verbund
-            app.kubernetes.io/name: chromium
+            app.kubernetes.io/name: chrome
             app.kubernetes.io/component: browserless
             app.kubernetes.io/managed-by: ansible
         spec:
@@ -129,9 +129,9 @@
             - port: 3000
               targetPort: 3000
               protocol: TCP
-              name: chromium
+              name: chrome
           selector:
-            app: browserless-chromium
+            app: browserless-chrome
 
   - name: Install Crawler for Edusharing
     kubernetes.core.helm:

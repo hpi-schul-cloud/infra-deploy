@@ -61,8 +61,8 @@ splash_helm_chart_values:
   serviceAccount:
     create: false
 
-edusharing_crawler_pyppeteer_ws_endpoint: ws://browserless-chromium:3000
-edusharing_crawler_playwright_ws_endpoint: ws://browserless-chromium:3000
+edusharing_crawler_pyppeteer_ws_endpoint: ws://browserless-chrome:3000
+edusharing_crawler_playwright_ws_endpoint: ws://browserless-chrome:3000
 edusharing_crawler_list:
 - name: hello-world
   enabled: false
