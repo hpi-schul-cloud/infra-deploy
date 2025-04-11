@@ -149,44 +149,6 @@ edusharing_crawler_list:
       secretKeyRef:
         name: "{{ edusharing_instance_secret_name }}"
         key: crawleruserpassword
-- name: merlin-spider
-  enabled: true
-  resources:
-    limits:
-      cpu: 1000m
-      memory: 1024Mi
-    requests:
-      cpu: 500m
-      memory: 512Mi
-  image:
-    tag: "{{ edusharing_crawler_image_tag }}"
-  env:
-  - name: CRAWLER
-    value: merlin_spider
-  - name: SCHEDULE
-    value: "*-*-22:00"
-  - name: SPLASH_URL
-    value: "{{ splash_url }}"
-  - name: PYPPETEER_WS_ENDPOINT
-    value: "{{ edusharing_crawler_pyppeteer_ws_endpoint }}"
-  - name: PLAYWRIGHT_WS_ENDPOINT
-    value: "{{ edusharing_crawler_playwright_ws_endpoint }}"
-  - name: LOG_LEVEL
-    value: "INFO"
-  - name: DRY_RUN
-    value: "False"
-  - name: EDU_SHARING_BASE_URL
-    value: "{{ edusharing_kubernetes_service_name }}"
-  - name: EDU_SHARING_USERNAME
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: crawlerusername
-  - name: EDU_SHARING_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: "{{ edusharing_instance_secret_name }}"
-        key: crawleruserpassword
 - name: sodix-spider
   resources:
     limits:

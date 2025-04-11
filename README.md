@@ -7,7 +7,6 @@ Rollout Edusharing Crawlers. See [Documentation](https://docs.dbildungscloud.de/
 Crawlers:
 - hello_world
 - mediothek_pixiothek_spider
-- merlin_spider
 - oeh_spider
 - sodix_spider
 - sodix_permissions
