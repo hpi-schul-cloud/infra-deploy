@@ -1,5 +1,6 @@
 stage: dev
-nextcloud_image_tag: 27.1.6
+# 29.0.1 available but not 28
+nextcloud_image_tag: 29.0.1
 nextcloud:
   nbc:
     urls:
