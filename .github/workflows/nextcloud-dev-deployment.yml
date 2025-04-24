@@ -6,7 +6,11 @@ on:
     inputs:
       INSTANCE_NAME:
         description: 'select nbc, brb or thr'
-        required: true
+        type: choice
+        options:
+        - "nbc"
+        - "brb"
+        - "thr"
 
 jobs:
   approve_dev_nextcloud:
