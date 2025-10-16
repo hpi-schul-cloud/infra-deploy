@@ -39,6 +39,6 @@ jobs:
       CLUSTER: sc-prod-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBERNETES_VERSION: "1.26.11"
+      KUBERNETES_VERSION: "1.32.6"
     secrets:
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
