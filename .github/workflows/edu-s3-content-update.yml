@@ -26,11 +26,9 @@ jobs:
       CLUSTER: sc-staging-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBERNETES_VERSION: "1.26.11"
+      KUBERNETES_VERSION: "1.32.6"
     secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
-      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
 
   update_content_in_prod_bucket:
     if: inputs.STAGE == 'prod'
@@ -41,8 +39,6 @@ jobs:
       CLUSTER: sc-prod-edusharing
       NAMESPACE: "s3-sync"
       BUCKET: ${{ inputs.BUCKET }}
-      KUBERNETES_VERSION: "1.26.11"
+      KUBERNETES_VERSION: "1.32.6"
     secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
       KUBECONFIG: ${{ secrets.KUBECONFIG }}
-      PROXY_CREDENTIALS: ${{ secrets.PROXY_CREDENTIALS }}
